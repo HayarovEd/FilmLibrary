@@ -1,4 +1,4 @@
-package com.edurda77.filmlibrary
+package com.edurda77.filmlibrary.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -6,6 +6,7 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.widget.Toolbar
 import android.content.Intent
+import com.edurda77.filmlibrary.R
 import com.edurda77.filmlibrary.ui.AboutActivity
 import com.edurda77.filmlibrary.ui.CustomActivity
 import com.edurda77.filmlibrary.ui.SearchActivity
