@@ -32,7 +32,8 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/now_playng"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="256sp"
+        android:orientation="horizontal"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         android:layout_margin="@dimen/margin_half"
         />
@@ -46,7 +47,8 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/upcoming"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="256sp"
+        android:orientation="horizontal"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         android:layout_margin="@dimen/margin_half"
         />

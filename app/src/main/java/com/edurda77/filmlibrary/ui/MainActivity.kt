@@ -6,6 +6,7 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.widget.Toolbar
 import android.content.Intent
+import androidx.recyclerview.widget.RecyclerView
 import com.edurda77.filmlibrary.R
 import com.edurda77.filmlibrary.ui.AboutActivity
 import com.edurda77.filmlibrary.ui.CustomActivity
@@ -20,6 +21,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setToolbar()
+        val recyclerView: RecyclerView = findViewById(R.id.now_playng)
+
     }
 
     fun setToolbar() {

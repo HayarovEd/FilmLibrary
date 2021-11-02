@@ -40,14 +40,5 @@
         android:background="@color/teal_700"
         android:text="Рейтинг фильма"
         />
-    <TextView
-        android:id="@+id/summary_movie"
-        android:layout_width="match_parent"
-        android:layout_height="0sp"
-        android:layout_margin="@dimen/margin_full"
-        android:textSize="8sp"
-        android:gravity="center"
-        android:background="@color/teal_700"
-        android:text="Краткое содержание фильма"
-        />
+
 </LinearLayout>
