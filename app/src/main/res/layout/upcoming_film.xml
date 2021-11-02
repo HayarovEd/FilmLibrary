@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/purple_500"
+    android:orientation="vertical"
+    android:layout_margin="@dimen/margin_half">
+    <TextView
+        android:id="@+id/title_upcoming_movie"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_full"
+        android:textSize="32sp"
+        android:gravity="center"
+        android:background="@color/teal_700"
+        android:text="Название фильма"
+        />
+    <ImageView
+        android:id="@+id/picture_upcoming_movie"
+        android:layout_width="150sp"
+        android:layout_height="150sp"
+        android:layout_gravity="center"/>
+    <TextView
+        android:id="@+id/year_upcoming_movie"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_full"
+        android:textSize="16sp"
+        android:gravity="center"
+        android:background="@color/teal_700"
+        android:text="Год"
+        />
+    <TextView
+        android:id="@+id/summary_upcoming_movie"
+        android:layout_width="match_parent"
+        android:layout_height="0sp"
+        android:layout_margin="@dimen/margin_full"
+        android:textSize="8sp"
+        android:gravity="center"
+        android:background="@color/teal_700"
+        android:text="Краткое содержание фильма"
+        />
+</LinearLayout>
