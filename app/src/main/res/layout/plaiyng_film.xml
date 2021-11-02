@@ -1,44 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:background="@color/purple_500"
     android:orientation="vertical"
     android:layout_margin="@dimen/margin_half">
     <TextView
+        style="@style/title_movie_view"
         android:id="@+id/title_movie"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/margin_full"
-        android:textSize="32sp"
-        android:gravity="center"
-        android:background="@color/teal_700"
-        android:text="Название фильма"
+        android:text="@string/ttile_movie"
         />
     <ImageView
         android:id="@+id/picture_movie"
-        android:layout_width="150sp"
-        android:layout_height="150sp"
+        android:layout_width="@dimen/picture_size"
+        android:layout_height="@dimen/picture_size"
         android:layout_gravity="center"/>
     <TextView
+        style="@style/year_movie_view"
         android:id="@+id/year_movie"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/margin_full"
-        android:textSize="16sp"
-        android:gravity="center"
-        android:background="@color/teal_700"
-        android:text="Год"
+        android:text="@string/year_movie"
         />
     <TextView
+        style="@style/year_movie_view"
         android:id="@+id/rang_movie"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/margin_full"
-        android:textSize="16sp"
-        android:gravity="center"
-        android:background="@color/teal_700"
-        android:text="Рейтинг фильма"
+        android:text="@string/rang_movie"
         />
 
 </LinearLayout>

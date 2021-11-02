@@ -17,10 +17,14 @@ import java.util.ArrayList
 private var toolbar: Toolbar? = null
 
 class MainActivity : AppCompatActivity() {
-    lateinit var movies : ArrayList<NovPlaiyngMovie>
+    private var movies = listOf<NovPlaiyngMovie>(
+        NovPlaiyngMovie("Терминатор",1984, 10.0),
+        NovPlaiyngMovie("Терминатор2",1991, 10.0)
+    )
     override fun onCreate(savedInstanceState: Bundle?) {
         var movie : NovPlaiyngMovie
         super.onCreate(savedInstanceState)
+
         setContentView(R.layout.activity_main)
         setToolbar()
         setRecycledView()
@@ -33,7 +37,7 @@ class MainActivity : AppCompatActivity() {
     }
     fun setRecycledView() {
         val recyclerView: RecyclerView = findViewById(R.id.now_playng)
-        recyclerView.layoutManager = LinearLayoutManager(this)
+        recyclerView.layoutManager = LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL, false)
         recyclerView.adapter = PlaiyngMovieAdapter(movies)
     }
 
@@ -58,3 +62,4 @@ class MainActivity : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 }
+

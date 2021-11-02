@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/purple_500"
-    tools:context=".MainActivity"
+    tools:context=".ui.AboutActivity"
     android:orientation="vertical"
     android:layout_margin="@dimen/margin_half">
     <com.google.android.material.appbar.AppBarLayout
@@ -21,7 +21,7 @@
             />
     </com.google.android.material.appbar.AppBarLayout>
     <TextView
-        style="@style/textview"
+        style="@style/text_view"
         android:text="@string/now_playing"
 
 
@@ -32,14 +32,14 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/now_playng"
         android:layout_width="match_parent"
-        android:layout_height="256sp"
+        android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         android:layout_margin="@dimen/margin_half"
         />
     <TextView
         android:text="@string/upcoming"
-        style="@style/textview"
+        style="@style/text_view"
         >
 
     </TextView>
@@ -47,7 +47,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/upcoming"
         android:layout_width="match_parent"
-        android:layout_height="256sp"
+        android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         android:layout_margin="@dimen/margin_half"

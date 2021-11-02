@@ -1,8 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">FilmLibrary</string>
-    <string name="film_finder">Найти фильм</string>
-    <string name="now_playing">Сейчас идут</string>
-    <string name="upcoming">Предстоящие</string>
     <string name="ttile_movie">Название фильма</string>
     <string name="year_movie">Год</string>
     <string name="summary_movie">Краткое содержание фильма</string>

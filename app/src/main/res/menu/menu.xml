@@ -3,15 +3,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/action_search"
-        app:showAsAction="always"
+        app:showAsAction="ifRoom"
         android:icon="@drawable/baseline_search_24"
-        android:title="Поиск" />
+        android:title="@string/menu_search" />
     <item
         android:id="@+id/custom"
-        android:title="Настройки"
+        android:title="@string/menu_custom"
         app:showAsAction="never" />
     <item
         android:id="@+id/about"
-        android:title="О приложении"
+        android:title="@string/menu_about"
         app:showAsAction="never" />
 </menu>
