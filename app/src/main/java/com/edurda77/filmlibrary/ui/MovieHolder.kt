@@ -6,9 +6,9 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.edurda77.filmlibrary.R
-import com.edurda77.filmlibrary.domain.NovPlaiyngMovie
+import com.edurda77.filmlibrary.domain.Movie
 
-class PlaiyngMovieHolder (inflater: LayoutInflater, parent: ViewGroup) :
+class MovieHolder (inflater: LayoutInflater, parent: ViewGroup) :
     RecyclerView.ViewHolder(inflater.inflate(R.layout.plaiyng_film, parent, false)) {
     private var titleMovie: TextView? = null
     private var yearMovie: TextView? = null
@@ -20,7 +20,7 @@ class PlaiyngMovieHolder (inflater: LayoutInflater, parent: ViewGroup) :
         rangMovie = itemView.findViewById(R.id.rang_movie)
         pictureMovie = itemView.findViewById(R.id.picture_movie)
     }
-    fun bind(movie: NovPlaiyngMovie) {
+    fun bind(movie: Movie) {
         titleMovie?.text = movie.movieTitle
         yearMovie?.text = movie.year.toString()
         rangMovie?.text = movie.rang.toString()

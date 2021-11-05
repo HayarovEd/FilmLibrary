@@ -20,37 +20,14 @@
             app:titleTextColor="@color/green"
             />
     </com.google.android.material.appbar.AppBarLayout>
-    <TextView
-        style="@style/text_view"
-        android:text="@string/now_playing"
-
-
-        >
-
-    </TextView>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/now_playng"
+        android:id="@+id/out_recycled_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         android:layout_margin="@dimen/margin_half"
         />
-    <TextView
-        android:text="@string/upcoming"
-        style="@style/text_view"
-        >
 
-    </TextView>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/upcoming"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        android:layout_margin="@dimen/margin_half"
-        />
 
 </LinearLayout>
