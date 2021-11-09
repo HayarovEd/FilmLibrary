@@ -67,19 +67,21 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.getItemId() == R.id.action_search) {
-            val intent = Intent(this, SearchActivity::class.java)
-            startActivity(intent)
-        }
-        if (item.getItemId() == R.id.custom) {
-            val intent = Intent(this, CustomActivity::class.java)
-            startActivity(intent)
-        }
-        if (item.getItemId() == R.id.about) {
-            val intent = Intent(this, AboutActivity::class.java)
-            startActivity(intent)
+        when (item.getItemId()){
+            R.id.action_search ->{
+                Intent(this, SearchActivity::class.java)
+                startActivity(intent)
+            }
+            R.id.custom ->{
+                val intent = Intent(this, SearchActivity::class.java)
+                startActivity(intent)}
+            R.id.about -> {
+                val intent = Intent(this, AboutActivity::class.java)
+                startActivity(intent)
+            }
         }
         return super.onOptionsItemSelected(item)
     }
+
 }
 

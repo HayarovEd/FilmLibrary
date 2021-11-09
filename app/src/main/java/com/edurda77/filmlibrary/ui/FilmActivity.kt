@@ -1,4 +1,4 @@
-package com.edurda77.filmlibrary.domain
+package com.edurda77.filmlibrary.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
