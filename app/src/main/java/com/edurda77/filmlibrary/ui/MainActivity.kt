@@ -11,6 +11,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.edurda77.filmlibrary.R
 import com.edurda77.filmlibrary.domain.FilmGenre
 import com.edurda77.filmlibrary.domain.Movie
+import android.widget.Toast
+
+
+
 
 
 private var toolbar: Toolbar? = null
@@ -37,12 +41,15 @@ class MainActivity : AppCompatActivity() {
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        //var movie : Movie
+
 
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_main)
         setToolbar()
+
+
+
 
         setOotRecycledView()
 
@@ -51,18 +58,30 @@ class MainActivity : AppCompatActivity() {
     fun setToolbar() {
         toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
+
     }
     fun setOotRecycledView() {
 
         val recyclerView: RecyclerView = findViewById(R.id.out_recycled_view)
-
+        //val onClickListener: MovieAdapter.OnStateClickListener
         recyclerView.layoutManager = LinearLayoutManager(this,LinearLayoutManager.VERTICAL, false)
-        recyclerView.adapter = OutAdapter(ganre)
+        //recyclerView.adapter = OutAdapter(ganre,onClickListener.onStateClick())
+        val stateClickListener: MovieAdapter.OnStateClickListener =
+            object : MovieAdapter.OnStateClickListener {
+                override fun onStateClick(movie: Movie, position: Int) {
+                    val intent01 = Intent(this, FilmActivity::class.java)
+                    intent01.putExtra(Movie::class.java.getSimpleName(), movie)
+                    startActivity(intent01)
+                }
+            }
 
+
+        recyclerView.adapter = OutAdapter(ganre, stateClickListener)
 
 
 
     }
+
 
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -86,6 +105,7 @@ class MainActivity : AppCompatActivity() {
         }
         return super.onOptionsItemSelected(item)
     }
+
 
 }
 

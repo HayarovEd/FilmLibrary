@@ -9,7 +9,11 @@ import com.edurda77.filmlibrary.R
 import com.edurda77.filmlibrary.domain.FilmGenre
 
 
-class OutHolder (inflater: LayoutInflater, parent: ViewGroup) :
+class OutHolder(
+    inflater: LayoutInflater,
+    parent: ViewGroup,
+    val onClickListener: MovieAdapter.OnStateClickListener
+) :
     RecyclerView.ViewHolder(inflater.inflate(R.layout.layout_out_recycled_view, parent, false)) {
     val ganreTitle: TextView
     val movieItem: RecyclerView
@@ -28,7 +32,7 @@ class OutHolder (inflater: LayoutInflater, parent: ViewGroup) :
         layoutManager.initialPrefetchItemCount = filmGanre.movieList.size
 
 
-        val subItemAdapter = MovieAdapter(filmGanre.movieList)
+        val subItemAdapter = MovieAdapter(filmGanre.movieList,onClickListener)
         movieItem.layoutManager = layoutManager
         movieItem.adapter = subItemAdapter
 
