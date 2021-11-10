@@ -14,6 +14,8 @@ class MovieHolder (inflater: LayoutInflater, parent: ViewGroup) :
     private var yearMovie: TextView? = null
     private var rangMovie: TextView? = null
     private var pictureMovie: ImageView? = null
+
+
     init {
         titleMovie = itemView.findViewById(R.id.title_movie)
         yearMovie = itemView.findViewById(R.id.year_movie)

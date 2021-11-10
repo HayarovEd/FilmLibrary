@@ -16,6 +16,7 @@ import com.edurda77.filmlibrary.domain.Movie
 private var toolbar: Toolbar? = null
 val movies: ArrayList<Movie> = ArrayList()
 
+
 class MainActivity : AppCompatActivity() {
     private var action = listOf(
         Movie("Терминатор", "action", "120 min",10.0, 1984, 1.0, 3.3, "fgfgfgfgfg"),
@@ -52,10 +53,14 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
     }
     fun setOotRecycledView() {
+
         val recyclerView: RecyclerView = findViewById(R.id.out_recycled_view)
 
         recyclerView.layoutManager = LinearLayoutManager(this,LinearLayoutManager.VERTICAL, false)
         recyclerView.adapter = OutAdapter(ganre)
+
+
+
 
     }
 

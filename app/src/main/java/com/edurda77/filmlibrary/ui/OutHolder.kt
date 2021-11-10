@@ -13,6 +13,7 @@ class OutHolder (inflater: LayoutInflater, parent: ViewGroup) :
     RecyclerView.ViewHolder(inflater.inflate(R.layout.layout_out_recycled_view, parent, false)) {
     val ganreTitle: TextView
     val movieItem: RecyclerView
+
     init {
         ganreTitle = itemView.findViewById(R.id.ganre_movie)
         movieItem = itemView.findViewById(R.id.item_movie)

@@ -12,13 +12,14 @@ import android.view.LayoutInflater
 
 class OutAdapter(
     private val itemList: List<FilmGenre>,
-    private val mContext: Context,
+    //private val mContext: Context,
+    //private val movieAdapter: MovieAdapter,
     private val onClickListener: MovieAdapter.OnStateClickListener
 
 ) :
     RecyclerView.Adapter<OutHolder>() {
     private val viewPool = RecycledViewPool()
-     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): OutHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): OutHolder {
         val inflater = LayoutInflater.from(parent.context)
         return OutHolder(inflater, parent)
     }
@@ -26,10 +27,10 @@ class OutAdapter(
     override fun onBindViewHolder(ganreViewHolder: OutHolder, position: Int) {
 
         val itemHolder = itemList[position]
-
         ganreViewHolder.bindGanre(itemHolder)
-
         ganreViewHolder.movieItem.setRecycledViewPool(viewPool)
+
+
 
     }
 
