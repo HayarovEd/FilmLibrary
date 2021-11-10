@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.edurda77.filmlibrary.R
 import com.edurda77.filmlibrary.domain.FilmGenre
 import com.edurda77.filmlibrary.domain.Movie
-import android.widget.Toast
 
 
 private var toolbar: Toolbar? = null
@@ -67,7 +66,9 @@ class MainActivity : AppCompatActivity() {
         val stateClickListener: MovieAdapter.OnStateClickListener =
             object : MovieAdapter.OnStateClickListener {
                 override fun onStateClick(movie: Movie, position: Int) {
+                    val currentMovie = initToTransfer (movie)
                     val intent = Intent(this@MainActivity, FilmActivity::class.java)
+                    intent.putExtra(Movie::class.java.getSimpleName(), currentMovie)
                     startActivity(intent)
                 }
             }
@@ -77,7 +78,17 @@ class MainActivity : AppCompatActivity() {
 
 
     }
-
+    fun initToTransfer (movie: Movie) : Movie {
+        val title : String =  movie.movieTitle
+        val ganre :String =  movie.movieGanre
+        val duration :String =  movie.movieDuration
+        val rang : Double = movie.movieRang
+        val year : Int = movie.movieYear
+        val budget: Double =movie.movieBudget
+        val evenue: Double =movie.movieRevenue
+        val summary: String =movie.movieSummary
+        return Movie(title, ganre, duration,rang,year, budget,evenue,summary)
+    }
 
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

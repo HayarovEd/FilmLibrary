@@ -24,8 +24,8 @@ class MovieHolder (inflater: LayoutInflater, parent: ViewGroup) :
     }
     fun bind(movie: Movie) {
         titleMovie?.text = movie.movieTitle
-        yearMovie?.text = movie.year.toString()
-        rangMovie?.text = movie.rang.toString()
+        yearMovie?.text = movie.movieYear.toString()
+        rangMovie?.text = movie.movieRang.toString()
         //pictureMovie?.setImageResource(23)
 
     }
