@@ -32,5 +32,6 @@ class OutHolder (inflater: LayoutInflater, parent: ViewGroup) :
         movieItem.adapter = subItemAdapter
 
 
+
     }
 }

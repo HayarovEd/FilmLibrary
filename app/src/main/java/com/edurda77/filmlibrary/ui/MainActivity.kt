@@ -11,12 +11,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.edurda77.filmlibrary.R
 import com.edurda77.filmlibrary.domain.FilmGenre
 import com.edurda77.filmlibrary.domain.Movie
-import android.widget.Toast
-import com.edurda77.filmlibrary.ui.MovieAdapter.OnStateClickListener
 
 
 private var toolbar: Toolbar? = null
 val movies: ArrayList<Movie> = ArrayList()
+
 class MainActivity : AppCompatActivity() {
     private var action = listOf(
         Movie("Терминатор", "action", "120 min",10.0, 1984, 1.0, 3.3, "fgfgfgfgfg"),
@@ -62,7 +61,7 @@ class MainActivity : AppCompatActivity() {
 
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        getMenuInflater().inflate(R.menu.menu, menu);
+        getMenuInflater().inflate(R.menu.menu, menu)
         return super.onCreateOptionsMenu(menu)
     }
 
