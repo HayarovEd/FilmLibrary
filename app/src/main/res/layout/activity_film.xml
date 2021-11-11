@@ -5,7 +5,7 @@
     android:background="@color/purple_500"
     android:orientation="vertical"
     android:layout_margin="@dimen/margin_half">
-    <TextView
+    <EditText
         style="@style/title_movie_view"
         android:id="@+id/title_movie"
         android:text="@string/ttile_movie"
@@ -15,37 +15,37 @@
         android:layout_width="@dimen/picture_size"
         android:layout_height="@dimen/picture_size"
         android:layout_gravity="center"/>
-    <TextView
+    <EditText
         style="@style/year_movie_view"
         android:id="@+id/year_movie"
         android:text="@string/year_movie"
         />
-    <TextView
+    <EditText
         style="@style/year_movie_view"
         android:id="@+id/rang_movie"
         android:text="@string/rang_movie"
         />
-    <TextView
+    <EditText
         style="@style/year_movie_view"
         android:id="@+id/ganre_movie"
         android:text="@string/ganre"
         />
-    <TextView
+    <EditText
         style="@style/year_movie_view"
         android:id="@+id/duration_movie"
         android:text="@string/duration"
         />
-    <TextView
+    <EditText
         style="@style/year_movie_view"
         android:id="@+id/budget_movie"
         android:text="@string/budget"
         />
-    <TextView
+    <EditText
         style="@style/year_movie_view"
         android:id="@+id/revenue_movie"
         android:text="@string/revenue"
         />
-    <TextView
+    <EditText
         style="@style/year_movie_view"
         android:id="@+id/summary_movie"
         android:text="@string/summary"
