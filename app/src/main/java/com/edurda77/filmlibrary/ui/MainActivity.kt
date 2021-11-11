@@ -66,9 +66,9 @@ class MainActivity : AppCompatActivity() {
         val stateClickListener: MovieAdapter.OnStateClickListener =
             object : MovieAdapter.OnStateClickListener {
                 override fun onStateClick(movie: Movie, position: Int) {
-                    val currentMovie = initToTransfer(movie)
+                    //val currentMovie = initToTransfer(movie)
                     val intent = Intent(this@MainActivity, FilmActivity::class.java)
-                    intent.putExtra(Movie::class.java.getSimpleName(), currentMovie)
+                    intent.putExtra(Movie::class.java.getSimpleName(), movie)
                     startActivity(intent)
                 }
             }
