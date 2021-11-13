@@ -9,19 +9,6 @@ public class MovieData {
     private ArrayList<Movie> allMovieInSection;
 
 
-    public MovieData() {
-    }
 
-    public MovieData(String ganreTitle, ArrayList<Movie> allMovieInSection) {
-        this.ganreTitle = ganreTitle;
-        this.allMovieInSection = allMovieInSection;
-    }
 
-    public String getGanreTitle() {
-        return ganreTitle;
-    }
-
-    public ArrayList<Movie> getAllMovieInSection() {
-        return allMovieInSection;
-    }
 }
