@@ -16,37 +16,37 @@
         android:layout_height="@dimen/picture_size"
         android:layout_gravity="center"/>
     <EditText
-        style="@style/year_movie_view"
+        style="@style/content_movie_view"
         android:id="@+id/year_movie"
         android:text="@string/year_movie"
         />
     <EditText
-        style="@style/year_movie_view"
+        style="@style/content_movie_view"
         android:id="@+id/rang_movie"
         android:text="@string/rang_movie"
         />
     <EditText
-        style="@style/year_movie_view"
+        style="@style/content_movie_view"
         android:id="@+id/ganre_movie"
         android:text="@string/ganre"
         />
     <EditText
-        style="@style/year_movie_view"
+        style="@style/content_movie_view"
         android:id="@+id/duration_movie"
         android:text="@string/duration"
         />
     <EditText
-        style="@style/year_movie_view"
+        style="@style/content_movie_view"
         android:id="@+id/budget_movie"
         android:text="@string/budget"
         />
     <EditText
-        style="@style/year_movie_view"
+        style="@style/content_movie_view"
         android:id="@+id/revenue_movie"
         android:text="@string/revenue"
         />
     <EditText
-        style="@style/year_movie_view"
+        style="@style/content_movie_view"
         android:id="@+id/summary_movie"
         android:text="@string/summary"
         />
