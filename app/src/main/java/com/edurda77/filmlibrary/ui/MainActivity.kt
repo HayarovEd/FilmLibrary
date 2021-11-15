@@ -9,8 +9,8 @@ import android.content.Intent
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.edurda77.filmlibrary.R
-import com.edurda77.filmlibrary.domain.FilmGenre
-import com.edurda77.filmlibrary.domain.Movie
+import com.edurda77.filmlibrary.data.FilmGenre
+import com.edurda77.filmlibrary.data.Movie
 
 
 private var toolbar: Toolbar? = null

@@ -3,9 +3,8 @@ package com.edurda77.filmlibrary.ui
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.EditText
-import android.widget.TextView
 import com.edurda77.filmlibrary.R
-import com.edurda77.filmlibrary.domain.Movie
+import com.edurda77.filmlibrary.data.Movie
 
 class FilmActivity : AppCompatActivity() {
 

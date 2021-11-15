@@ -6,7 +6,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.edurda77.filmlibrary.R
-import com.edurda77.filmlibrary.domain.FilmGenre
+import com.edurda77.filmlibrary.data.FilmGenre
 
 
 class OutHolder(

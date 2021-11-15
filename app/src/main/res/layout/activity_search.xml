@@ -11,7 +11,8 @@
     <EditText
         android:id="@+id/search_movie"
         style="@style/content_movie_view"
-        android:hint="@string/search_words" />
+        android:hint="@string/search_words"
+        android:textSize="@dimen/margin_twin" />
 
     <Button
         android:id="@+id/go_search_movie"
@@ -19,11 +20,21 @@
         android:layout_height="wrap_content"
         android:text="@string/search" />
 
-    <TextView
-        android:id="@+id/result_search_view"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/margin_half" />
+        android:scrollbars="vertical"
+        android:fillViewport="true">
+        <TextView
+            android:id="@+id/result_search_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_half" />
+    </ScrollView>
+
+
+
+
 
 
 </LinearLayout>

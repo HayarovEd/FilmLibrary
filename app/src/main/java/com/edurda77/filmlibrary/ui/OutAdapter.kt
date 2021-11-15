@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.RecycledViewPool
-import com.edurda77.filmlibrary.domain.FilmGenre
+import com.edurda77.filmlibrary.data.FilmGenre
 
 
 class OutAdapter (private val itemList: List<FilmGenre>, val onClickListener: MovieAdapter.OnStateClickListener) :
