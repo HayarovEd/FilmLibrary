@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FilmLibrary">
         <activity
-            android:name=".domain.FilmActivity"
+            android:name=".ui.FilmActivity"
             android:exported="false" />
         <activity
             android:name=".ui.AboutActivity"
@@ -21,6 +21,7 @@
         <activity
             android:name=".ui.SearchActivity"
             android:exported="false" />
+
         <activity
             android:name=".ui.MainActivity"
             android:exported="true">

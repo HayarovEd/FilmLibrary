@@ -1,12 +1,15 @@
 package com.edurda77.filmlibrary.domain
 
-class Movie(
+import java.io.Serializable
+
+class Movie (
     val movieTitle: String,
-    val ganre: String,
-    val duration: String,
-    val rang: Double,
-    val year: Int,
-    val budget: Double,
-    val revenue: Double,
-    val summary: String
-)
+    val movieGanre: String,
+    val movieDuration: String,
+    val movieRang: Double,
+    val movieYear: Int,
+    val movieBudget: Double,
+    val movieRevenue: Double,
+    val movieSummary: String
+) : Serializable
+

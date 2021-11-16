@@ -14,6 +14,8 @@ class MovieHolder (inflater: LayoutInflater, parent: ViewGroup) :
     private var yearMovie: TextView? = null
     private var rangMovie: TextView? = null
     private var pictureMovie: ImageView? = null
+
+
     init {
         titleMovie = itemView.findViewById(R.id.title_movie)
         yearMovie = itemView.findViewById(R.id.year_movie)
@@ -22,8 +24,8 @@ class MovieHolder (inflater: LayoutInflater, parent: ViewGroup) :
     }
     fun bind(movie: Movie) {
         titleMovie?.text = movie.movieTitle
-        yearMovie?.text = movie.year.toString()
-        rangMovie?.text = movie.rang.toString()
+        yearMovie?.text = movie.movieYear.toString()
+        rangMovie?.text = movie.movieRang.toString()
         //pictureMovie?.setImageResource(23)
 
     }

@@ -10,13 +10,11 @@ import com.edurda77.filmlibrary.ui.MovieAdapter.OnStateClickListener
 
 
 
-class MovieAdapter(private val list: List<Movie>) :
+class MovieAdapter(private val list: List<Movie>, val onClickListener: OnStateClickListener) :
     RecyclerView.Adapter<MovieHolder>() {
-    internal interface OnStateClickListener {
+    interface OnStateClickListener {
         fun onStateClick(movie: Movie, position: Int)
     }
-
-    private val onClickListener: OnStateClickListener? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -26,11 +24,8 @@ class MovieAdapter(private val list: List<Movie>) :
     override fun onBindViewHolder(holder: MovieHolder, position: Int) {
         val movie: Movie = list[position]
         holder.bind(movie)
-        holder.itemView.setOnClickListener { v: View? ->
-            onClickListener!!.onStateClick(
-                movie,
-                position
-            )
+        holder.itemView.setOnClickListener { v: View ->
+            onClickListener.onStateClick(movie, position)
         }
     }
 
