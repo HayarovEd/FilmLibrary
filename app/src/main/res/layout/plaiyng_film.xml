@@ -16,12 +16,12 @@
         android:layout_height="@dimen/picture_size"
         android:layout_gravity="center"/>
     <TextView
-        style="@style/year_movie_view"
+        style="@style/content_movie_view"
         android:id="@+id/year_movie"
         android:text="@string/year_movie"
         />
     <TextView
-        style="@style/year_movie_view"
+        style="@style/content_movie_view"
         android:id="@+id/rang_movie"
         android:text="@string/rang_movie"
         />

@@ -15,4 +15,6 @@
     <string name="budget">Бюджет</string>
     <string name="duration">Продолжительность</string>
     <string name="ganre">Жанр</string>
+    <string name="search_words">название фильма или часть названия</string>
+    <string name="search">Поиск</string>
 </resources>

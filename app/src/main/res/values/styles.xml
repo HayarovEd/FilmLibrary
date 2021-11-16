@@ -21,7 +21,7 @@
         <item name="android:gravity">center</item>
         <item name="android:background">@color/teal_700</item>
     </style>
-    <style name="year_movie_view">
+    <style name="content_movie_view">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textColor">@color/black</item>

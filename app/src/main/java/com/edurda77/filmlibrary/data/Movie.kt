@@ -1,4 +1,4 @@
-package com.edurda77.filmlibrary.domain
+package com.edurda77.filmlibrary.data
 
 import java.io.Serializable
 

@@ -6,7 +6,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.edurda77.filmlibrary.R
-import com.edurda77.filmlibrary.domain.Movie
+import com.edurda77.filmlibrary.data.Movie
 
 class MovieHolder (inflater: LayoutInflater, parent: ViewGroup) :
     RecyclerView.ViewHolder(inflater.inflate(R.layout.plaiyng_film, parent, false)) {
