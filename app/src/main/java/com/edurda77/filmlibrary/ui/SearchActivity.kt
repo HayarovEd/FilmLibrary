@@ -50,10 +50,12 @@ class SearchActivity : AppCompatActivity() {
             }
         }
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         binding = ActivitySearchBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+        toStartService("Начало поиска")
         binding.goSearchMovie.setOnClickListener {
             resultSearch.clear()
             val searchString = binding.searchMovie.text.toString()
@@ -86,11 +88,13 @@ class SearchActivity : AppCompatActivity() {
                     urlConnection?.disconnect()
                 }
             }.start()
-
+            toStartService("конец поиска")
         }
+
     }
     override fun onResume() {
         super.onResume()
+            toStartService("работа продолжена")
         registerReceiver(
             networkStateReceiver,
             IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION)
@@ -98,13 +102,19 @@ class SearchActivity : AppCompatActivity() {
     }
 
     override fun onPause() {
+        toStartService("работа приостановлена")
         unregisterReceiver(networkStateReceiver)
         super.onPause()
     }
 
     fun doOnNetworkChange(context: Context?, ni: NetworkInfo) {
         println(ni)
-        Toast.makeText(context, ni.toString(), Toast.LENGTH_SHORT).show()
+        Toast.makeText(context, ni.toString(), Toast.LENGTH_LONG).show()
+    }
+    fun toStartService(string:String) {
+        val intentMyIntentService = Intent(this, LogEvent::class.java)
+        startService(intentMyIntentService.putExtra("task",
+            string))
     }
 
 }
