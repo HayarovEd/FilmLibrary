@@ -3,7 +3,7 @@ package com.edurda77.filmlibrary.ui
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.edurda77.filmlibrary.BuildConfig.TMDB_API_KEY
-import com.edurda77.filmlibrary.data.ResultSearсhMovies
+import com.edurda77.filmlibrary.data.ResultSearchMovie
 import com.edurda77.filmlibrary.data.ResultsParsing
 import com.edurda77.filmlibrary.databinding.ActivitySearchBinding
 import com.google.android.material.snackbar.Snackbar
@@ -26,15 +26,15 @@ import android.widget.Toast
 import android.content.IntentFilter
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.edurda77.filmlibrary.data.Movie
+
 
 
 class SearchActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySearchBinding
     private val gson by lazy { Gson() }
-    private val resultSearch = emptyList<ResultSearсhMovies>().toMutableList()
+    private val resultSearch = emptyList<ResultSearchMovie>().toMutableList()
     private fun getUrl(search: String) = URL(
-        "https://api.themoviedb.org/3/search/movie?api_key=" + TMDB_API_KEY + "&language=ru-RU&query=" + search
+        "https://api.themoviedb.org/3/search/movie?api_key=$TMDB_API_KEY&language=ru-RU&query=$search"
     )
 
     private val networkStateReceiver: BroadcastReceiver = object : BroadcastReceiver() {
@@ -52,8 +52,9 @@ class SearchActivity : AppCompatActivity() {
         binding = ActivitySearchBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        toStartService("Начало поиска")
+
         binding.goSearchMovie.setOnClickListener {
+            toStartService("Начало поиска")
             resultSearch.clear()
             val searchString = binding.searchMovie.text.toString()
             Thread {
@@ -129,8 +130,38 @@ class SearchActivity : AppCompatActivity() {
 
         val stateClickListener: MovieSearchAdapter.OnStateClickListener =
             object : MovieSearchAdapter.OnStateClickListener {
-                override fun onStateClick(movie: ResultSearсhMovies, position: Int) {
+                override fun onStateClick(movie: ResultSearchMovie, position: Int) {
+                    toStartService("Начало загрузки фильма")
+                    Thread {
+                        var urlConnection: HttpsURLConnection? = null
+                        try {
+                            urlConnection = getUrl("https://api.themoviedb.org/3/movie/{"+movie.id +"}?api_key=<<"+TMDB_API_KEY+">>&language=ru-RU").openConnection() as HttpsURLConnection
+                            urlConnection.requestMethod = "GET"
+                            urlConnection.connectTimeout = 5_000
+                            val bufferedReader =
+                                BufferedReader(InputStreamReader(urlConnection.inputStream))
+                            val result = bufferedReader.readLine().toString()
+                            /*val resJson = gson.fromJson(result, ResultsParsing::class.java)
+                            val sb = StringBuilder()
+                            resJson.results.forEach {
+                                resultSearch.add(it)
+                                sb.appendLine("ID " + it.id.toString() + "  Название: " + it.title + "  Краткое содаржание: " + it.overview)
+                            }
 
+                            runOnUiThread {
+                                binding.resultSearchView.text = sb.toString()
+                            }*/
+                        } catch (e: Exception) {
+                            Snackbar.make(
+                                binding.root,
+                                "Неудачная загрузка",
+                                Snackbar.LENGTH_LONG
+                            ).show()
+                        } finally {
+                            urlConnection?.disconnect()
+                        }
+                    }.start()
+                    toStartService("конец загрузки фильма")
 
                 }
             }

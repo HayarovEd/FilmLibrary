@@ -21,16 +21,16 @@ private var toolbar: Toolbar? = null
 
 class MainActivity : AppCompatActivity() {
     private var action = listOf(
-        Movie(15, "Терминатор", "action", "120 min", 10.0, 1984, 1.0, 3.3, "fgfgfgfgfg"),
-        Movie(16, "Терминатор2", "action", "120 min", 10.0, 1992, 1.4, 10.0, "fgfgfgfgfg"),
+        Movie(15, "Терминатор", "action", 120, 10.0, "1984", 1, 3, "fgfgfgfgfg"),
+        Movie(16, "Терминатор2", "action", 120, 10.0, "1992", 1, 10, "fgfgfgfgfg"),
     )
     private var camedy = listOf(
-        Movie(17, "Амерканский пирог", "action", "120 min", 10.0, 1984, 1.0, 3.3, "fgfgfgfgfg"),
-        Movie(18, "Американский пирог2", "action", "120 min", 10.0, 1992, 1.4, 10.0, "fgfgfgfgfg"),
+        Movie(17, "Амерканский пирог", "action", 120, 10.0, "1984", 1, 3, "fgfgfgfgfg"),
+        Movie(18, "Американский пирог2", "action", 120, 10.0, "1992", 1, 10, "fgfgfgfgfg"),
     )
     private var triller = listOf(
-        Movie(19, "Цвет ночи", "action", "120 min", 10.0, 1984, 1.0, 3.3, "fgfgfgfgfg"),
-        Movie(20, "Семь", "action", "120 min", 10.0, 1992, 1.4, 10.0, "fgfgfgfgfg"),
+        Movie(19, "Цвет ночи", "action", 120, 10.0, "1984", 1, 3, "fgfgfgfgfg"),
+        Movie(20, "Семь", "action", 120, 10.0, "1992", 1, 10, "fgfgfgfgfg"),
     )
     private var ganre = listOf(
         FilmGenre("Боевик", action),

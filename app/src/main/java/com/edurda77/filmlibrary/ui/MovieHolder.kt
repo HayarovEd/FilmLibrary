@@ -23,9 +23,9 @@ class MovieHolder (inflater: LayoutInflater, parent: ViewGroup) :
         pictureMovie = itemView.findViewById(R.id.picture_movie)
     }
     fun bind(movie: Movie) {
-        titleMovie?.text = movie.movieTitle
-        idMovie?.text = movie.movieId.toString()
-        summaryMovie?.text = movie.movieSummary
+        titleMovie?.text = movie.title
+        idMovie?.text = movie.id.toString()
+        summaryMovie?.text = movie.overview
         //pictureMovie?.setImageResource(23)
 
     }

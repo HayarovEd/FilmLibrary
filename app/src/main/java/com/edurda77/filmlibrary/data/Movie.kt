@@ -3,14 +3,14 @@ package com.edurda77.filmlibrary.data
 import java.io.Serializable
 
 class Movie (
-    val movieId : Int,
-    val movieTitle: String,
+    val id : Int,
+    val title: String,
     val movieGanre: String,
-    val movieDuration: String,
-    val movieRang: Double,
-    val movieYear: Int,
-    val movieBudget: Double,
-    val movieRevenue: Double,
-    val movieSummary: String
+    val runtime: Int,
+    val popularity: Double,
+    val releaseDate: String,
+    val budget: Int,
+    val revenue: Int,
+    val overview: String
 ) : Serializable
 

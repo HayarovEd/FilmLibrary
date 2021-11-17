@@ -4,13 +4,13 @@ import android.view.LayoutInflater
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import android.view.ViewGroup
-import com.edurda77.filmlibrary.data.ResultSearсhMovies
+import com.edurda77.filmlibrary.data.ResultSearchMovie
 
 
-class MovieSearchAdapter(private val list: List<ResultSearсhMovies>, val onClickListener: OnStateClickListener) :
+class MovieSearchAdapter(private val list: List<ResultSearchMovie>, val onClickListener: OnStateClickListener) :
     RecyclerView.Adapter<MovieSearchHolder>() {
     interface OnStateClickListener {
-        fun onStateClick(movie: ResultSearсhMovies, position: Int)
+        fun onStateClick(movie: ResultSearchMovie, position: Int)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieSearchHolder {
@@ -19,7 +19,7 @@ class MovieSearchAdapter(private val list: List<ResultSearсhMovies>, val onClic
     }
 
     override fun onBindViewHolder(holder: MovieSearchHolder, position: Int) {
-        val movie: ResultSearсhMovies = list[position]
+        val movie: ResultSearchMovie = list[position]
         holder.bind(movie)
         holder.itemView.setOnClickListener { v: View ->
             onClickListener.onStateClick(movie, position)

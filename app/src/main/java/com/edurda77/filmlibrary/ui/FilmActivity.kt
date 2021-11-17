@@ -3,10 +3,8 @@ package com.edurda77.filmlibrary.ui
 import android.os.Bundle
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import com.edurda77.filmlibrary.R
 import com.edurda77.filmlibrary.data.Movie
 import com.edurda77.filmlibrary.databinding.ActivityFilmBinding
-import com.edurda77.filmlibrary.databinding.ActivitySearchBinding
 
 class FilmActivity : AppCompatActivity() {
     private lateinit var binding: ActivityFilmBinding
@@ -29,15 +27,15 @@ class FilmActivity : AppCompatActivity() {
         val movie: Movie
         if (arguments != null) {
             movie = arguments.getSerializable(Movie::class.java.getSimpleName()) as Movie
-            titlEditText.setText(movie.movieTitle)
-            idEditText.setText(movie.movieId.toString())
-            rangEditText.setText(movie.movieRang.toString())
+            titlEditText.setText(movie.title)
+            idEditText.setText(movie.id.toString())
+            rangEditText.setText(movie.popularity.toString())
             ganreEditText.setText(movie.movieGanre)
-            yearEditText.setText(movie.movieYear.toString())
-            durationEditText.setText(movie.movieDuration)
-            budgetEditText.setText(movie.movieBudget.toString())
-            revenueEditText.setText(movie.movieRevenue.toString())
-            summaryEditText.setText(movie.movieSummary)
+            yearEditText.setText(movie.releaseDate.toString())
+            durationEditText.setText(movie.runtime)
+            budgetEditText.setText(movie.budget.toString())
+            revenueEditText.setText(movie.revenue.toString())
+            summaryEditText.setText(movie.overview)
 
 
         }
