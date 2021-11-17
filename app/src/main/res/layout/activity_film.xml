@@ -2,58 +2,66 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_margin="@dimen/margin_half"
     android:background="@color/purple_500"
-    android:orientation="vertical"
-    android:layout_margin="@dimen/margin_half">
-    <TextView
-        style="@style/title_movie_view"
-        android:id="@+id/title_movie"
-        android:text="@string/ttile_movie"
-        />
-    <TextView
-        style="@style/content_movie_view"
-        android:id="@+id/id_movie"
-        android:text="@string/id_movie"
-        />
-    <ImageView
-        android:id="@+id/picture_movie"
-        android:layout_width="@dimen/picture_size"
-        android:layout_height="@dimen/picture_size"
-        android:layout_gravity="center"/>
-    <TextView
-        style="@style/content_movie_view"
-        android:id="@+id/year_movie"
-        android:text="@string/year_movie"
-        />
-    <TextView
-        style="@style/content_movie_view"
-        android:id="@+id/rang_movie"
-        android:text="@string/rang_movie"
-        />
-    <TextView
-        style="@style/content_movie_view"
-        android:id="@+id/ganre_movie"
-        android:text="@string/ganre"
-        />
-    <TextView
-        style="@style/content_movie_view"
-        android:id="@+id/duration_movie"
-        android:text="@string/duration"
-        />
-    <TextView
-        style="@style/content_movie_view"
-        android:id="@+id/budget_movie"
-        android:text="@string/budget"
-        />
-    <TextView
-        style="@style/content_movie_view"
-        android:id="@+id/revenue_movie"
-        android:text="@string/revenue"
-        />
-    <TextView
-        style="@style/content_movie_view"
-        android:id="@+id/summary_movie"
-        android:text="@string/summary"
-        />
+    android:orientation="vertical">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fillViewport="true"
+        android:scrollbars="vertical">
+
+        <TextView
+            android:id="@+id/title_movie"
+            style="@style/title_movie_view"
+            android:text="@string/ttile_movie" />
+
+        <TextView
+            android:id="@+id/id_movie"
+            style="@style/content_movie_view"
+            android:text="@string/id_movie" />
+
+        <ImageView
+            android:id="@+id/picture_movie"
+            android:layout_width="@dimen/picture_size"
+            android:layout_height="@dimen/picture_size"
+            android:layout_gravity="center" />
+
+        <TextView
+            android:id="@+id/year_movie"
+            style="@style/content_movie_view"
+            android:text="@string/year_movie" />
+
+        <TextView
+            android:id="@+id/rang_movie"
+            style="@style/content_movie_view"
+            android:text="@string/rang_movie" />
+
+        <TextView
+            android:id="@+id/ganre_movie"
+            style="@style/content_movie_view"
+            android:text="@string/ganre" />
+
+        <TextView
+            android:id="@+id/duration_movie"
+            style="@style/content_movie_view"
+            android:text="@string/duration" />
+
+        <TextView
+            android:id="@+id/budget_movie"
+            style="@style/content_movie_view"
+            android:text="@string/budget" />
+
+        <TextView
+            android:id="@+id/revenue_movie"
+            style="@style/content_movie_view"
+            android:text="@string/revenue" />
+
+        <TextView
+            android:id="@+id/summary_movie"
+            style="@style/content_movie_view"
+            android:text="@string/summary" />
+    </ScrollView>
 
 </LinearLayout>

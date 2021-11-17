@@ -70,12 +70,13 @@ class SearchActivity : AppCompatActivity() {
                     val sb = StringBuilder()
                     resJson.results.forEach {
                         resultSearch.add(it)
-                        sb.appendLine("ID " + it.id.toString() + "  Название: " + it.title + "  Краткое содаржание: " + it.overview)
+
+                        //sb.appendLine("ID " + it.id.toString() + "  Название: " + it.title + "  Краткое содаржание: " + it.overview)
                     }
 
-                    runOnUiThread {
+                   /* runOnUiThread {
                         binding.resultSearchView.text = sb.toString()
-                    }
+                    }*/
                 } catch (e: Exception) {
                     Snackbar.make(
                         binding.root,
@@ -191,6 +192,41 @@ class SearchActivity : AppCompatActivity() {
         recyclerView.adapter = MovieSearchAdapter(resultSearch, stateClickListener)
 
 
+    }
+    fun toConnectTheMDB () {
+        toStartService("Начало поиска")
+        resultSearch.clear()
+        val searchString = binding.searchMovie.text.toString()
+        Thread {
+            var urlConnection: HttpsURLConnection? = null
+            try {
+                urlConnection = getUrl(searchString).openConnection() as HttpsURLConnection
+                urlConnection.requestMethod = "GET"
+                urlConnection.connectTimeout = 5_000
+                val bufferedReader =
+                    BufferedReader(InputStreamReader(urlConnection.inputStream))
+                val result = bufferedReader.readLine().toString()
+                val resJson = gson.fromJson(result, ResultsParsing::class.java)
+                val sb = StringBuilder()
+                resJson.results.forEach {
+                    resultSearch.add(it)
+                    sb.appendLine("ID " + it.id.toString() + "  Название: " + it.title + "  Краткое содаржание: " + it.overview)
+                }
+
+                runOnUiThread {
+                    binding.resultSearchView.text = sb.toString()
+                }
+            } catch (e: Exception) {
+                Snackbar.make(
+                    binding.root,
+                    "Ни чего не найдено, попробуйте снова",
+                    Snackbar.LENGTH_LONG
+                ).show()
+            } finally {
+                urlConnection?.disconnect()
+            }
+        }.start()
+        toStartService("конец поиска")
     }
 
 }
