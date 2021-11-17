@@ -31,7 +31,7 @@ class FilmActivity : AppCompatActivity() {
             idEditText.setText(movie.id.toString())
             rangEditText.setText(movie.popularity.toString())
             ganreEditText.setText(movie.movieGanre)
-            yearEditText.setText(movie.releaseDate.toString())
+            yearEditText.setText(movie.releaseDate)
             durationEditText.setText(movie.runtime)
             budgetEditText.setText(movie.budget.toString())
             revenueEditText.setText(movie.revenue.toString())

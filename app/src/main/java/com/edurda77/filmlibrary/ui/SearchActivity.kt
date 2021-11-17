@@ -26,7 +26,7 @@ import android.widget.Toast
 import android.content.IntentFilter
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-
+import com.edurda77.filmlibrary.data.Movie
 
 
 class SearchActivity : AppCompatActivity() {
@@ -141,8 +141,29 @@ class SearchActivity : AppCompatActivity() {
                             val bufferedReader =
                                 BufferedReader(InputStreamReader(urlConnection.inputStream))
                             val result = bufferedReader.readLine().toString()
-                            /*val resJson = gson.fromJson(result, ResultsParsing::class.java)
-                            val sb = StringBuilder()
+                            val resJson = gson.fromJson(result, Movie::class.java)
+                            val movieId = resJson.id
+                            val movieTitle = resJson.title
+                            val movieRuntime = resJson.runtime
+                            val movieReleaseDate = resJson.releaseDate
+                            val movieBudget = resJson.budget
+                            val movieRevenue = resJson.revenue
+                            val movieOverview = resJson.overview
+                            val movieGanre = "released last"
+
+
+                            val intent = Intent(this@SearchActivity, FilmActivity::class.java)
+                            intent.putExtra("id", movieId)
+                            intent.putExtra("title", movieTitle)
+                            intent.putExtra("runtime", movieRuntime)
+                            intent.putExtra("releaseDate", movieReleaseDate)
+                            intent.putExtra("budget", movieBudget)
+                            intent.putExtra("revenue", movieRevenue)
+                            intent.putExtra("overview", movieOverview)
+                            intent.putExtra("ganre", movieGanre)
+
+                            /*val sb = StringBuilder()
+                            sb.append(resJson.id)
                             resJson.results.forEach {
                                 resultSearch.add(it)
                                 sb.appendLine("ID " + it.id.toString() + "  Название: " + it.title + "  Краткое содаржание: " + it.overview)
