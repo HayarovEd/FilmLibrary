@@ -1,7 +1,6 @@
 package com.edurda77.filmlibrary.ui
 
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.edurda77.filmlibrary.BuildConfig.TMDB_API_KEY
 import com.edurda77.filmlibrary.data.ResultSearсhMovies
@@ -9,13 +8,10 @@ import com.edurda77.filmlibrary.data.ResultsParsing
 import com.edurda77.filmlibrary.databinding.ActivitySearchBinding
 import com.google.android.material.snackbar.Snackbar
 import com.google.gson.Gson
-import java.io.BufferedOutputStream
 import java.io.BufferedReader
 import java.io.InputStreamReader
-import java.io.OutputStream
 import java.lang.StringBuilder
 import java.net.URL
-import java.util.*
 import javax.net.ssl.HttpsURLConnection
 import android.net.NetworkInfo
 

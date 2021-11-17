@@ -12,4 +12,5 @@
     <string name="duration">Продолжительность</string>
     <string name="ganre">Жанр</string>
     <string name="search_words">название фильма или часть названия</string>
+    <string name="id_movie">id</string>
 </resources>

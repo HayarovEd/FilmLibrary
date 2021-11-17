@@ -11,6 +11,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.edurda77.filmlibrary.R
 import com.edurda77.filmlibrary.data.FilmGenre
 import com.edurda77.filmlibrary.data.Movie
+import com.edurda77.filmlibrary.databinding.ActivityFilmBinding
+import com.edurda77.filmlibrary.databinding.ActivityMainBinding
 
 
 private var toolbar: Toolbar? = null
@@ -19,29 +21,29 @@ val movies: ArrayList<Movie> = ArrayList()
 
 class MainActivity : AppCompatActivity() {
     private var action = listOf(
-        Movie("Терминатор", "action", "120 min", 10.0, 1984, 1.0, 3.3, "fgfgfgfgfg"),
-        Movie("Терминатор2", "action", "120 min", 10.0, 1992, 1.4, 10.0, "fgfgfgfgfg"),
+        Movie(15, "Терминатор", "action", "120 min", 10.0, 1984, 1.0, 3.3, "fgfgfgfgfg"),
+        Movie(16, "Терминатор2", "action", "120 min", 10.0, 1992, 1.4, 10.0, "fgfgfgfgfg"),
     )
     private var camedy = listOf(
-        Movie("Амерканский пирог", "action", "120 min", 10.0, 1984, 1.0, 3.3, "fgfgfgfgfg"),
-        Movie("Американский пирог2", "action", "120 min", 10.0, 1992, 1.4, 10.0, "fgfgfgfgfg"),
+        Movie(17, "Амерканский пирог", "action", "120 min", 10.0, 1984, 1.0, 3.3, "fgfgfgfgfg"),
+        Movie(18, "Американский пирог2", "action", "120 min", 10.0, 1992, 1.4, 10.0, "fgfgfgfgfg"),
     )
     private var triller = listOf(
-        Movie("Цвет ночи", "action", "120 min", 10.0, 1984, 1.0, 3.3, "fgfgfgfgfg"),
-        Movie("Семь", "action", "120 min", 10.0, 1992, 1.4, 10.0, "fgfgfgfgfg"),
+        Movie(19, "Цвет ночи", "action", "120 min", 10.0, 1984, 1.0, 3.3, "fgfgfgfgfg"),
+        Movie(20, "Семь", "action", "120 min", 10.0, 1992, 1.4, 10.0, "fgfgfgfgfg"),
     )
     private var ganre = listOf(
         FilmGenre("Боевик", action),
         FilmGenre("Комедия", camedy),
         FilmGenre("Триллер", triller)
     )
-
+    private lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
-
+        binding = ActivityMainBinding.inflate(layoutInflater)
 
         super.onCreate(savedInstanceState)
 
-        setContentView(R.layout.activity_main)
+        setContentView(binding.root)
         setToolbar()
 
 
@@ -52,21 +54,21 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun setToolbar() {
-        toolbar = findViewById(R.id.toolbar)
+        toolbar = binding.toolbar
         setSupportActionBar(toolbar)
 
     }
 
     fun setOotRecycledView() {
 
-        val recyclerView: RecyclerView = findViewById(R.id.out_recycled_view)
+        val recyclerView: RecyclerView = binding.outRecycledView
 
         recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
 
         val stateClickListener: MovieAdapter.OnStateClickListener =
             object : MovieAdapter.OnStateClickListener {
                 override fun onStateClick(movie: Movie, position: Int) {
-                    //val currentMovie = initToTransfer(movie)
+
                     val intent = Intent(this@MainActivity, FilmActivity::class.java)
                     intent.putExtra(Movie::class.java.getSimpleName(), movie)
                     startActivity(intent)
@@ -77,18 +79,6 @@ class MainActivity : AppCompatActivity() {
         recyclerView.adapter = OutAdapter(ganre, stateClickListener)
 
 
-    }
-
-    fun initToTransfer(movie: Movie): Movie {
-        val title: String = movie.movieTitle
-        val ganre: String = movie.movieGanre
-        val duration: String = movie.movieDuration
-        val rang: Double = movie.movieRang
-        val year: Int = movie.movieYear
-        val budget: Double = movie.movieBudget
-        val evenue: Double = movie.movieRevenue
-        val summary: String = movie.movieSummary
-        return Movie(title, ganre, duration, rang, year, budget, evenue, summary)
     }
 
 
