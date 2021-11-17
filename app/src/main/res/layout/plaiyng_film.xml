@@ -17,13 +17,13 @@
         android:layout_gravity="center"/>
     <TextView
         style="@style/content_movie_view"
-        android:id="@+id/year_movie"
-        android:text="@string/year_movie"
+        android:id="@+id/id_movie"
+        android:text="@string/id_movie"
         />
     <TextView
         style="@style/content_movie_view"
-        android:id="@+id/rang_movie"
-        android:text="@string/rang_movie"
+        android:id="@+id/summary_movie"
+        android:text="@string/summary"
         />
 
 </LinearLayout>

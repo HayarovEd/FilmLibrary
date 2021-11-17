@@ -24,9 +24,9 @@ import android.content.Context
 import android.widget.Toast
 
 import android.content.IntentFilter
-
-
-
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.edurda77.filmlibrary.data.Movie
 
 
 class SearchActivity : AppCompatActivity() {
@@ -36,6 +36,7 @@ class SearchActivity : AppCompatActivity() {
     private fun getUrl(search: String) = URL(
         "https://api.themoviedb.org/3/search/movie?api_key=" + TMDB_API_KEY + "&language=ru-RU&query=" + search
     )
+
     private val networkStateReceiver: BroadcastReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context, intent: Intent?) {
             val manager =
@@ -86,11 +87,13 @@ class SearchActivity : AppCompatActivity() {
             }.start()
             toStartService("конец поиска")
         }
+        setOotRecycledView()
 
     }
+
     override fun onResume() {
         super.onResume()
-            toStartService("работа продолжена")
+        toStartService("работа продолжена")
         registerReceiver(
             networkStateReceiver,
             IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION)
@@ -107,10 +110,35 @@ class SearchActivity : AppCompatActivity() {
         println(ni)
         Toast.makeText(context, ni.toString(), Toast.LENGTH_LONG).show()
     }
-    fun toStartService(string:String) {
+
+    fun toStartService(string: String) {
         val intentMyIntentService = Intent(this, LogEvent::class.java)
-        startService(intentMyIntentService.putExtra("task",
-            string))
+        startService(
+            intentMyIntentService.putExtra(
+                "task",
+                string
+            )
+        )
+    }
+
+    fun setOotRecycledView() {
+
+        val recyclerView: RecyclerView = binding.itemSearchMovie
+
+        recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+
+        val stateClickListener: MovieSearchAdapter.OnStateClickListener =
+            object : MovieSearchAdapter.OnStateClickListener {
+                override fun onStateClick(movie: ResultSearсhMovies, position: Int) {
+
+
+                }
+            }
+
+
+        recyclerView.adapter = MovieSearchAdapter(resultSearch, stateClickListener)
+
+
     }
 
 }

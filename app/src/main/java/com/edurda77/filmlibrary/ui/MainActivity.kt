@@ -16,7 +16,7 @@ import com.edurda77.filmlibrary.databinding.ActivityMainBinding
 
 
 private var toolbar: Toolbar? = null
-val movies: ArrayList<Movie> = ArrayList()
+
 
 
 class MainActivity : AppCompatActivity() {

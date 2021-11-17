@@ -6,9 +6,9 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.edurda77.filmlibrary.R
-import com.edurda77.filmlibrary.data.Movie
+import com.edurda77.filmlibrary.data.ResultSearсhMovies
 
-class MovieHolder (inflater: LayoutInflater, parent: ViewGroup) :
+class MovieSearchHolder (inflater: LayoutInflater, parent: ViewGroup) :
     RecyclerView.ViewHolder(inflater.inflate(R.layout.plaiyng_film, parent, false)) {
     private var titleMovie: TextView? = null
     private var idMovie: TextView? = null
@@ -22,10 +22,10 @@ class MovieHolder (inflater: LayoutInflater, parent: ViewGroup) :
         summaryMovie = itemView.findViewById(R.id.summary_movie)
         pictureMovie = itemView.findViewById(R.id.picture_movie)
     }
-    fun bind(movie: Movie) {
-        titleMovie?.text = movie.movieTitle
-        idMovie?.text = movie.movieId.toString()
-        summaryMovie?.text = movie.movieSummary
+    fun bind(movie: ResultSearсhMovies) {
+        titleMovie?.text = movie.title
+        idMovie?.text = movie.id.toString()
+        summaryMovie?.text = movie.overview
         //pictureMovie?.setImageResource(23)
 
     }
