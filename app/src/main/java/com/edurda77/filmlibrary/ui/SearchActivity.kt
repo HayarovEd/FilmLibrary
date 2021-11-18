@@ -10,7 +10,6 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.gson.Gson
 import java.io.BufferedReader
 import java.io.InputStreamReader
-import java.lang.StringBuilder
 import java.net.URL
 import javax.net.ssl.HttpsURLConnection
 import android.net.NetworkInfo
@@ -67,16 +66,17 @@ class SearchActivity : AppCompatActivity() {
                         BufferedReader(InputStreamReader(urlConnection.inputStream))
                     val result = bufferedReader.readLine().toString()
                     val resJson = gson.fromJson(result, ResultsParsing::class.java)
-                    val sb = StringBuilder()
+                    //val sb = StringBuilder()
                     resJson.results.forEach {
                         resultSearch.add(it)
 
                         //sb.appendLine("ID " + it.id.toString() + "  Название: " + it.title + "  Краткое содаржание: " + it.overview)
                     }
 
-                   /* runOnUiThread {
-                        binding.resultSearchView.text = sb.toString()
-                    }*/
+                    runOnUiThread {
+                        setOotRecycledView()
+                        //binding.resultSearchView.text = sb.toString()
+                    }
                 } catch (e: Exception) {
                     Snackbar.make(
                         binding.root,
@@ -89,7 +89,7 @@ class SearchActivity : AppCompatActivity() {
             }.start()
             toStartService("конец поиска")
         }
-        setOotRecycledView()
+
 
     }
 
@@ -136,7 +136,9 @@ class SearchActivity : AppCompatActivity() {
                     Thread {
                         var urlConnection: HttpsURLConnection? = null
                         try {
-                            urlConnection = getUrl("https://api.themoviedb.org/3/movie/{"+movie.id +"}?api_key=<<"+TMDB_API_KEY+">>&language=ru-RU").openConnection() as HttpsURLConnection
+                            urlConnection =
+                                URL("https://api.themoviedb.org/3/movie/" + movie.id + "?api_key=$TMDB_API_KEY&language=ru-RU")
+                                    .openConnection() as HttpsURLConnection
                             urlConnection.requestMethod = "GET"
                             urlConnection.connectTimeout = 5_000
                             val bufferedReader =
@@ -146,33 +148,23 @@ class SearchActivity : AppCompatActivity() {
                             val movieId = resJson.id
                             val movieTitle = resJson.title
                             val movieRuntime = resJson.runtime
-                            val movieReleaseDate = resJson.releaseDate
+                            val movieReleaseDate = resJson.release_date
                             val movieBudget = resJson.budget
                             val movieRevenue = resJson.revenue
                             val movieOverview = resJson.overview
                             val movieGanre = "released last"
-
-
-                            val intent = Intent(this@SearchActivity, FilmActivity::class.java)
-                            intent.putExtra("id", movieId)
-                            intent.putExtra("title", movieTitle)
-                            intent.putExtra("runtime", movieRuntime)
-                            intent.putExtra("releaseDate", movieReleaseDate)
-                            intent.putExtra("budget", movieBudget)
-                            intent.putExtra("revenue", movieRevenue)
-                            intent.putExtra("overview", movieOverview)
-                            intent.putExtra("ganre", movieGanre)
-
-                            /*val sb = StringBuilder()
-                            sb.append(resJson.id)
-                            resJson.results.forEach {
-                                resultSearch.add(it)
-                                sb.appendLine("ID " + it.id.toString() + "  Название: " + it.title + "  Краткое содаржание: " + it.overview)
-                            }
-
+                            //Toast.makeText(this@SearchActivity, resJson.title, Toast.LENGTH_LONG).show()
                             runOnUiThread {
-                                binding.resultSearchView.text = sb.toString()
-                            }*/
+                                val intent = Intent(this@SearchActivity, FilmActivity::class.java)
+                                intent.putExtra("id", movieId)
+                                intent.putExtra("title", movieTitle)
+                                intent.putExtra("runtime", movieRuntime)
+                                intent.putExtra("releaseDate", movieReleaseDate)
+                                intent.putExtra("budget", movieBudget)
+                                intent.putExtra("revenue", movieRevenue)
+                                intent.putExtra("overview", movieOverview)
+                                intent.putExtra("ganre", movieGanre)
+                            }
                         } catch (e: Exception) {
                             Snackbar.make(
                                 binding.root,
@@ -193,40 +185,6 @@ class SearchActivity : AppCompatActivity() {
 
 
     }
-    fun toConnectTheMDB () {
-        toStartService("Начало поиска")
-        resultSearch.clear()
-        val searchString = binding.searchMovie.text.toString()
-        Thread {
-            var urlConnection: HttpsURLConnection? = null
-            try {
-                urlConnection = getUrl(searchString).openConnection() as HttpsURLConnection
-                urlConnection.requestMethod = "GET"
-                urlConnection.connectTimeout = 5_000
-                val bufferedReader =
-                    BufferedReader(InputStreamReader(urlConnection.inputStream))
-                val result = bufferedReader.readLine().toString()
-                val resJson = gson.fromJson(result, ResultsParsing::class.java)
-                val sb = StringBuilder()
-                resJson.results.forEach {
-                    resultSearch.add(it)
-                    sb.appendLine("ID " + it.id.toString() + "  Название: " + it.title + "  Краткое содаржание: " + it.overview)
-                }
 
-                runOnUiThread {
-                    binding.resultSearchView.text = sb.toString()
-                }
-            } catch (e: Exception) {
-                Snackbar.make(
-                    binding.root,
-                    "Ни чего не найдено, попробуйте снова",
-                    Snackbar.LENGTH_LONG
-                ).show()
-            } finally {
-                urlConnection?.disconnect()
-            }
-        }.start()
-        toStartService("конец поиска")
-    }
 
 }
