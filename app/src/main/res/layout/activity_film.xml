@@ -6,7 +6,9 @@
     android:background="@color/purple_500"
     android:orientation="vertical">
 
-
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
         <TextView
             android:id="@+id/title_movie"
@@ -55,9 +57,14 @@
             android:text="@string/revenue" />
 
         <TextView
+            android:id="@+id/populatity_movie"
+            style="@style/content_movie_view"
+            android:text="@string/popularity" />
+
+        <TextView
             android:id="@+id/summary_movie"
             style="@style/content_movie_view"
             android:text="@string/summary" />
 
-
+    </ScrollView>
 </LinearLayout>

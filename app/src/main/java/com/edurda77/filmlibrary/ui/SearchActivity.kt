@@ -83,26 +83,26 @@ class SearchActivity : AppCompatActivity() {
                             val bufferedReader =
                                 BufferedReader(InputStreamReader(urlConnection.inputStream))
                             val result = bufferedReader.readLine().toString()
+
                             val resJson = gson.fromJson(result, Movie::class.java)
+                            //Toast.makeText(this@SearchActivity, resJson.toString(), Toast.LENGTH_LONG).show()
                             val movieId = resJson.id
                             val movieTitle = resJson.title
                             val movieRuntime = resJson.runtime
                             val movieReleaseDate = resJson.release_date
+                            val moviePopularity = resJson.popularity
                             val movieBudget = resJson.budget
                             val movieRevenue = resJson.revenue
                             val movieOverview = resJson.overview
                             val movieGanre = "released last"
-                            Toast.makeText(this@SearchActivity, resJson.title, Toast.LENGTH_LONG).show()
+                            val movie = Movie(movieId,movieTitle,movieGanre,movieRuntime,
+                                moviePopularity,movieReleaseDate,movieBudget,movieRevenue, movieOverview)
+                            //Toast.makeText(this@SearchActivity, resJson.title, Toast.LENGTH_LONG).show()
                             runOnUiThread {
                                 val intent = Intent(this@SearchActivity, FilmActivity::class.java)
-                                intent.putExtra("id", movieId)
-                                intent.putExtra("title", movieTitle)
-                                intent.putExtra("runtime", movieRuntime)
-                                intent.putExtra("releaseDate", movieReleaseDate)
-                                intent.putExtra("budget", movieBudget)
-                                intent.putExtra("revenue", movieRevenue)
-                                intent.putExtra("overview", movieOverview)
-                                intent.putExtra("ganre", movieGanre)
+                                intent.putExtra(Movie::class.java.getSimpleName(), movie)
+
+                                startActivity(intent)
                             }
                         } catch (e: Exception) {
                             Snackbar.make(

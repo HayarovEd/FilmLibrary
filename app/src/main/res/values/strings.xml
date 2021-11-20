@@ -18,4 +18,5 @@
     <string name="search_words">название фильма или часть названия</string>
     <string name="search">Поиск</string>
     <string name="id_movie">id</string>
+    <string name="popularity">популярность</string>
 </resources>
