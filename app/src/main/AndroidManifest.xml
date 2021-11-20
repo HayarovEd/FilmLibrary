@@ -36,8 +36,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <service android:name=".ui.LogEvent"
-            tools:ignore="Instantiatable" />
     </application>
 
 </manifest>

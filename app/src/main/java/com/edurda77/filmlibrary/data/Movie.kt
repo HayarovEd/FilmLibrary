@@ -8,6 +8,7 @@ class Movie (
     val movieGanre: String,
     val runtime: Int,
     val popularity: Double,
+
     val release_date: String,
     val budget: Int,
     val revenue: Int,

@@ -26,26 +26,15 @@ import android.content.IntentFilter
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.edurda77.filmlibrary.data.Movie
+import com.edurda77.filmlibrary.domain.TheMDBRepoUseCace
 
 
 class SearchActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySearchBinding
-    private val gson by lazy { Gson() }
-    private val resultSearch = emptyList<ResultSearchMovie>().toMutableList()
-    private fun getUrl(search: String) = URL(
-        "https://api.themoviedb.org/3/search/movie?api_key=$TMDB_API_KEY&language=ru-RU&query=$search"
-    )
+    private val goSearchMovie: TheMDBRepoUseCace by lazy { app.theMDBRepoUseCace }
+    val resultSearch = emptyList<ResultSearchMovie>().toMutableList()
 
-    private val networkStateReceiver: BroadcastReceiver = object : BroadcastReceiver() {
-        override fun onReceive(context: Context, intent: Intent?) {
-            val manager =
-                context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-            val ni = manager.activeNetworkInfo
-            if (ni != null) {
-                doOnNetworkChange(context, ni)
-            }
-        }
-    }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         binding = ActivitySearchBinding.inflate(layoutInflater)
@@ -53,75 +42,25 @@ class SearchActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.goSearchMovie.setOnClickListener {
-            toStartService("Начало поиска")
             resultSearch.clear()
             val searchString = binding.searchMovie.text.toString()
-            Thread {
-                var urlConnection: HttpsURLConnection? = null
-                try {
-                    urlConnection = getUrl(searchString).openConnection() as HttpsURLConnection
-                    urlConnection.requestMethod = "GET"
-                    urlConnection.connectTimeout = 5_000
-                    val bufferedReader =
-                        BufferedReader(InputStreamReader(urlConnection.inputStream))
-                    val result = bufferedReader.readLine().toString()
-                    val resJson = gson.fromJson(result, ResultsParsing::class.java)
-                    //val sb = StringBuilder()
-                    resJson.results.forEach {
-                        resultSearch.add(it)
-
-                        //sb.appendLine("ID " + it.id.toString() + "  Название: " + it.title + "  Краткое содаржание: " + it.overview)
-                    }
-
-                    runOnUiThread {
-                        setOotRecycledView()
-                        //binding.resultSearchView.text = sb.toString()
-                    }
-                } catch (e: Exception) {
-                    Snackbar.make(
-                        binding.root,
-                        "Ни чего не найдено, попробуйте снова",
-                        Snackbar.LENGTH_LONG
-                    ).show()
-                } finally {
-                    urlConnection?.disconnect()
+            Thread{
+                val repos = goSearchMovie.getReposForUserSync(searchString)
+                repos.forEach {
+                    resultSearch.add(it)
+                }
+                runOnUiThread {
+                    setOotRecycledView()
+                    //binding.resultSearchView.text = sb.toString()
                 }
             }.start()
-            toStartService("конец поиска")
+
+
         }
 
 
     }
 
-    override fun onResume() {
-        super.onResume()
-        toStartService("работа продолжена")
-        registerReceiver(
-            networkStateReceiver,
-            IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION)
-        )
-    }
-
-    override fun onPause() {
-        toStartService("работа приостановлена")
-        unregisterReceiver(networkStateReceiver)
-        super.onPause()
-    }
-
-    fun doOnNetworkChange(context: Context?, ni: NetworkInfo) {
-        println(ni)
-        Toast.makeText(context, ni.toString(), Toast.LENGTH_LONG).show()
-    }
-
-    fun toStartService(string: String) {
-        val intentMyIntentService = Intent(this, LogEvent::class.java)
-        startService(
-            intentMyIntentService.putExtra(
-                "task",
-                string
-            )
-        )
-    }
 
     fun setOotRecycledView() {
 
@@ -132,7 +71,7 @@ class SearchActivity : AppCompatActivity() {
         val stateClickListener: MovieSearchAdapter.OnStateClickListener =
             object : MovieSearchAdapter.OnStateClickListener {
                 override fun onStateClick(movie: ResultSearchMovie, position: Int) {
-                    toStartService("Начало загрузки фильма")
+                    val gson by lazy { Gson() }
                     Thread {
                         var urlConnection: HttpsURLConnection? = null
                         try {
@@ -153,7 +92,7 @@ class SearchActivity : AppCompatActivity() {
                             val movieRevenue = resJson.revenue
                             val movieOverview = resJson.overview
                             val movieGanre = "released last"
-                            //Toast.makeText(this@SearchActivity, resJson.title, Toast.LENGTH_LONG).show()
+                            Toast.makeText(this@SearchActivity, resJson.title, Toast.LENGTH_LONG).show()
                             runOnUiThread {
                                 val intent = Intent(this@SearchActivity, FilmActivity::class.java)
                                 intent.putExtra("id", movieId)
@@ -175,7 +114,7 @@ class SearchActivity : AppCompatActivity() {
                             urlConnection?.disconnect()
                         }
                     }.start()
-                    toStartService("конец загрузки фильма")
+
 
                 }
             }
