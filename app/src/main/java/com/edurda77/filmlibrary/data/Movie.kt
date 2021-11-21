@@ -2,7 +2,7 @@ package com.edurda77.filmlibrary.data
 
 import java.io.Serializable
 
-class Movie (
+data class Movie (
     val id : Int,
     val title: String,
     val movieGanre: String,

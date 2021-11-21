@@ -28,7 +28,7 @@ class SearchActivity : AppCompatActivity() {
             resultSearch.clear()
             val searchString = binding.searchMovie.text.toString()
             Thread {
-                val repos = goSearchMovie.getReposForUserSync(searchString)
+                val repos = goSearchMovie.getReposForSearchMovieSync(searchString)
                 repos.forEach {
                     resultSearch.add(it)
                 }
@@ -48,7 +48,7 @@ class SearchActivity : AppCompatActivity() {
     fun setOotRecycledView() {
 
         val recyclerView: RecyclerView = binding.itemSearchMovie
-        val goIDMovie: TheMDBRepoUseCace by lazy { app.theMDBRepoSearchMovieCac }
+        val goIDMovie: TheMDBRepoUseCace by lazy { app.theMDBRepoUseCace }
         recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
 
         val stateClickListener: MovieSearchAdapter.OnStateClickListener =
@@ -56,7 +56,7 @@ class SearchActivity : AppCompatActivity() {
                 override fun onStateClick(movie: ResultSearchMovie, position: Int) {
 
                     Thread {
-                        val iDMovie  = goIDMovie.getReposForSearcheMovieSync(movie)
+                        val iDMovie  = goIDMovie.getReposForIDMovieSync(movie)
                         runOnUiThread {
                             val intent = Intent(this@SearchActivity, FilmActivity::class.java)
                             intent.putExtra(Movie::class.java.getSimpleName(), iDMovie)
