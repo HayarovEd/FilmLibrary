@@ -2,27 +2,11 @@ package com.edurda77.filmlibrary.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.edurda77.filmlibrary.BuildConfig.TMDB_API_KEY
 import com.edurda77.filmlibrary.data.ResultSearchMovie
-import com.edurda77.filmlibrary.data.ResultsParsing
 import com.edurda77.filmlibrary.databinding.ActivitySearchBinding
-import com.google.android.material.snackbar.Snackbar
-import com.google.gson.Gson
-import java.io.BufferedReader
-import java.io.InputStreamReader
-import java.net.URL
-import javax.net.ssl.HttpsURLConnection
-import android.net.NetworkInfo
-
-import android.net.ConnectivityManager
 
 import android.content.Intent
 
-import android.content.BroadcastReceiver
-import android.content.Context
-import android.widget.Toast
-
-import android.content.IntentFilter
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.edurda77.filmlibrary.data.Movie
@@ -35,7 +19,6 @@ class SearchActivity : AppCompatActivity() {
     val resultSearch = emptyList<ResultSearchMovie>().toMutableList()
 
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         binding = ActivitySearchBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
@@ -44,7 +27,7 @@ class SearchActivity : AppCompatActivity() {
         binding.goSearchMovie.setOnClickListener {
             resultSearch.clear()
             val searchString = binding.searchMovie.text.toString()
-            Thread{
+            Thread {
                 val repos = goSearchMovie.getReposForUserSync(searchString)
                 repos.forEach {
                     resultSearch.add(it)
@@ -65,54 +48,23 @@ class SearchActivity : AppCompatActivity() {
     fun setOotRecycledView() {
 
         val recyclerView: RecyclerView = binding.itemSearchMovie
-
+        val goIDMovie: TheMDBRepoUseCace by lazy { app.theMDBRepoSearchMovieCac }
         recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
 
         val stateClickListener: MovieSearchAdapter.OnStateClickListener =
             object : MovieSearchAdapter.OnStateClickListener {
                 override fun onStateClick(movie: ResultSearchMovie, position: Int) {
-                    val gson by lazy { Gson() }
+
                     Thread {
-                        var urlConnection: HttpsURLConnection? = null
-                        try {
-                            urlConnection =
-                                URL("https://api.themoviedb.org/3/movie/" + movie.id + "?api_key=$TMDB_API_KEY&language=ru-RU")
-                                    .openConnection() as HttpsURLConnection
-                            urlConnection.requestMethod = "GET"
-                            urlConnection.connectTimeout = 5_000
-                            val bufferedReader =
-                                BufferedReader(InputStreamReader(urlConnection.inputStream))
-                            val result = bufferedReader.readLine().toString()
+                        val iDMovie  = goIDMovie.getReposForSearcheMovieSync(movie)
+                        runOnUiThread {
+                            val intent = Intent(this@SearchActivity, FilmActivity::class.java)
+                            intent.putExtra(Movie::class.java.getSimpleName(), iDMovie)
 
-                            val resJson = gson.fromJson(result, Movie::class.java)
-                            //Toast.makeText(this@SearchActivity, resJson.toString(), Toast.LENGTH_LONG).show()
-                            val movieId = resJson.id
-                            val movieTitle = resJson.title
-                            val movieRuntime = resJson.runtime
-                            val movieReleaseDate = resJson.release_date
-                            val moviePopularity = resJson.popularity
-                            val movieBudget = resJson.budget
-                            val movieRevenue = resJson.revenue
-                            val movieOverview = resJson.overview
-                            val movieGanre = "released last"
-                            val movie = Movie(movieId,movieTitle,movieGanre,movieRuntime,
-                                moviePopularity,movieReleaseDate,movieBudget,movieRevenue, movieOverview)
-                            //Toast.makeText(this@SearchActivity, resJson.title, Toast.LENGTH_LONG).show()
-                            runOnUiThread {
-                                val intent = Intent(this@SearchActivity, FilmActivity::class.java)
-                                intent.putExtra(Movie::class.java.getSimpleName(), movie)
-
-                                startActivity(intent)
-                            }
-                        } catch (e: Exception) {
-                            Snackbar.make(
-                                binding.root,
-                                "Неудачная загрузка",
-                                Snackbar.LENGTH_LONG
-                            ).show()
-                        } finally {
-                            urlConnection?.disconnect()
+                            startActivity(intent)
                         }
+
+
                     }.start()
 
 

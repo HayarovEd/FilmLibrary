@@ -9,4 +9,6 @@ interface TheMDBRepoUseCace {
     @WorkerThread
     fun getReposForUserSync (userName: String): List<ResultSearchMovie>
     fun getReposForUserAsync (userName: String, callback: (List<ResultSearchMovie>)->Unit)
+    fun getReposForSearcheMovieSync (searcheMovie: ResultSearchMovie): Movie
+    fun getReposForSearcheMovieAsync (searcheMovie: ResultSearchMovie, callback: (Movie)->Unit)
 }

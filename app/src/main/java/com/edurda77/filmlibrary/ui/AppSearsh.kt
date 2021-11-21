@@ -7,7 +7,9 @@ import com.edurda77.filmlibrary.domain.TheMDBRepoUseCace
 
 class AppSearsh : Application() {
     val theMDBRepoUseCace: TheMDBRepoUseCace by lazy { WebTheMdbRepoUsecaseImpl() }
+    val theMDBRepoSearchMovieCac: TheMDBRepoUseCace by lazy { WebTheMdbRepoUsecaseImpl()}
 }
 
 val Context.app
     get() = applicationContext as AppSearsh
+
