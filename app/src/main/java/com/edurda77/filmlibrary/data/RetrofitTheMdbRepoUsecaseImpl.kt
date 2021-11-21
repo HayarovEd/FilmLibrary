@@ -1,21 +1,19 @@
 package com.edurda77.filmlibrary.data
 
 import com.edurda77.filmlibrary.BuildConfig
+import com.edurda77.filmlibrary.BuildConfig.TMDB_API_KEY
 import com.edurda77.filmlibrary.data.retrofit.TheMDBRepoApi
 import com.edurda77.filmlibrary.domain.TheMDBRepoUseCace
-import com.google.gson.Gson
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.io.BufferedReader
-import java.io.InputStreamReader
-import java.net.URL
-import javax.net.ssl.HttpsURLConnection
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 
-private const val BASE_URL = "https://api.themoviedb.org/3/"
+private const val BASE_URL = "https://api.themoviedb.org/"
+val language = "ru-RU"
+val apiKey = TMDB_API_KEY
 
 class RetrofitTheMdbRepoUsecaseImpl : TheMDBRepoUseCace {
     var retrofit = Retrofit.Builder()
@@ -23,11 +21,11 @@ class RetrofitTheMdbRepoUsecaseImpl : TheMDBRepoUseCace {
         .addConverterFactory(GsonConverterFactory.create())
         .build()
     var api: TheMDBRepoApi = retrofit.create(TheMDBRepoApi::class.java)
-    val prefixSearch = "search/movie?api_key=${BuildConfig.TMDB_API_KEY}&language=ru-RU&query="
-    val postfixIDMovie = "?api_key=${BuildConfig.TMDB_API_KEY}&language=ru-RU"
+
+
     override fun getReposForSearchMovieSync(userName: String): List<ResultSearchMovie> {
 
-         return api.getSearchMovie(prefixSearch+userName)
+         return api.getSearchMovie(userName,apiKey, language, 1, false)
             .execute().body() ?: emptyList()
     }
 
@@ -35,7 +33,7 @@ class RetrofitTheMdbRepoUsecaseImpl : TheMDBRepoUseCace {
         userName: String,
         callback: (List<ResultSearchMovie>) -> Unit
     ) {
-        api.getSearchMovie(prefixSearch+userName).enqueue(object : Callback<List<ResultSearchMovie>>{
+        api.getSearchMovie(userName,apiKey, language, 1, false).enqueue(object : Callback<List<ResultSearchMovie>>{
             override fun onResponse(
                 call: Call<List<ResultSearchMovie>>,
                 response: Response<List<ResultSearchMovie>>
@@ -53,7 +51,7 @@ class RetrofitTheMdbRepoUsecaseImpl : TheMDBRepoUseCace {
 
     override fun getReposForIDMovieSync(searcheMovie: ResultSearchMovie): Movie? {
 
-        return api.getIDMovie("movie/"+searcheMovie.id+postfixIDMovie)
+        return api.getIDMovie("movie/"+searcheMovie.id)
             .execute().body()
     }
 
@@ -61,7 +59,7 @@ class RetrofitTheMdbRepoUsecaseImpl : TheMDBRepoUseCace {
         searcheMovie: ResultSearchMovie,
         callback: (Movie) -> Unit
     ) {
-        api.getIDMovie("movie/"+searcheMovie.id+postfixIDMovie).enqueue(object : Callback<Movie>{
+        api.getIDMovie("movie/"+searcheMovie.id).enqueue(object : Callback<Movie>{
             override fun onResponse(
                 call: Call<Movie>,
                 response: Response<Movie>
