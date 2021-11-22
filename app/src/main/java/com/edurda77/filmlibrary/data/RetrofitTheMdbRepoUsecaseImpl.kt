@@ -1,9 +1,13 @@
 package com.edurda77.filmlibrary.data
 
+import android.content.Context
+import android.view.View
+import android.widget.Toast
 import com.edurda77.filmlibrary.BuildConfig
 import com.edurda77.filmlibrary.BuildConfig.TMDB_API_KEY
 import com.edurda77.filmlibrary.data.retrofit.TheMDBRepoApi
 import com.edurda77.filmlibrary.domain.TheMDBRepoUseCace
+import com.google.android.material.snackbar.Snackbar
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -24,16 +28,24 @@ class RetrofitTheMdbRepoUsecaseImpl : TheMDBRepoUseCace {
 
 
     override fun getReposForSearchMovieSync(userName: String): List<ResultSearchMovie> {
+        val resultsParsing : ResultsParsing? = api.getSearchMovie(userName,apiKey, language).execute().body()
+        val resultSearch = emptyList<ResultSearchMovie>().toMutableList()
 
-         return api.getSearchMovie(userName,apiKey, language, 1, false)
-            .execute().body() ?: emptyList()
+        if (resultsParsing != null) {
+            resultsParsing.results.forEach {
+                resultSearch.add(it)
+
+            }
+        }
+
+         return resultSearch
     }
 
     override fun getReposForSearchMovieAsync(
         userName: String,
         callback: (List<ResultSearchMovie>) -> Unit
     ) {
-        api.getSearchMovie(userName,apiKey, language, 1, false).enqueue(object : Callback<List<ResultSearchMovie>>{
+        /*api.getSearchMovie(userName,apiKey, language, 1, false).enqueue(object : Callback<List<ResultSearchMovie>>{
             override fun onResponse(
                 call: Call<List<ResultSearchMovie>>,
                 response: Response<List<ResultSearchMovie>>
@@ -46,7 +58,7 @@ class RetrofitTheMdbRepoUsecaseImpl : TheMDBRepoUseCace {
             }
 
 
-        })
+        })*/
     }
 
     override fun getReposForIDMovieSync(searcheMovie: ResultSearchMovie): Movie? {
