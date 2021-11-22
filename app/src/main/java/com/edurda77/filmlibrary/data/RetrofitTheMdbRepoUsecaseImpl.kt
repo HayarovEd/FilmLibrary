@@ -1,13 +1,8 @@
 package com.edurda77.filmlibrary.data
 
-import android.content.Context
-import android.view.View
-import android.widget.Toast
-import com.edurda77.filmlibrary.BuildConfig
 import com.edurda77.filmlibrary.BuildConfig.TMDB_API_KEY
 import com.edurda77.filmlibrary.data.retrofit.TheMDBRepoApi
 import com.edurda77.filmlibrary.domain.TheMDBRepoUseCace
-import com.google.android.material.snackbar.Snackbar
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -15,7 +10,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 
-private const val BASE_URL = "https://api.themoviedb.org/"
+private const val BASE_URL = "https://api.themoviedb.org/3/"
 val language = "ru-RU"
 val apiKey = TMDB_API_KEY
 
@@ -28,7 +23,9 @@ class RetrofitTheMdbRepoUsecaseImpl : TheMDBRepoUseCace {
 
 
     override fun getReposForSearchMovieSync(userName: String): List<ResultSearchMovie> {
-        val resultsParsing : ResultsParsing? = api.getSearchMovie(userName,apiKey, language).execute().body()
+        val resultsParsing : ResultsParsing? = api.getSearchMovie(apiKey, language,userName)
+            .execute().body()
+
         val resultSearch = emptyList<ResultSearchMovie>().toMutableList()
 
         if (resultsParsing != null) {
@@ -45,25 +42,26 @@ class RetrofitTheMdbRepoUsecaseImpl : TheMDBRepoUseCace {
         userName: String,
         callback: (List<ResultSearchMovie>) -> Unit
     ) {
-        /*api.getSearchMovie(userName,apiKey, language, 1, false).enqueue(object : Callback<List<ResultSearchMovie>>{
+        api.getSearchMovie(userName,apiKey, language).enqueue(object : Callback<ResultsParsing>{
             override fun onResponse(
-                call: Call<List<ResultSearchMovie>>,
-                response: Response<List<ResultSearchMovie>>
+                call: Call<ResultsParsing>,
+                response: Response<ResultsParsing>
             ) {
-                callback(response.body() ?: emptyList())
+
+               // callback(response.body() ?: emptyList())
             }
 
-            override fun onFailure(call: Call<List<ResultSearchMovie>>, t: Throwable) {
+            override fun onFailure(call: Call<ResultsParsing>, t: Throwable) {
                 TODO("Not yet implemented")
             }
 
 
-        })*/
+        })
     }
 
     override fun getReposForIDMovieSync(searcheMovie: ResultSearchMovie): Movie? {
 
-        return api.getIDMovie("movie/"+searcheMovie.id)
+        return api.getIDMovie(searcheMovie.id, apiKey, language)
             .execute().body()
     }
 
@@ -71,7 +69,7 @@ class RetrofitTheMdbRepoUsecaseImpl : TheMDBRepoUseCace {
         searcheMovie: ResultSearchMovie,
         callback: (Movie) -> Unit
     ) {
-        api.getIDMovie("movie/"+searcheMovie.id).enqueue(object : Callback<Movie>{
+        api.getIDMovie(searcheMovie.id, apiKey, language).enqueue(object : Callback<Movie>{
             override fun onResponse(
                 call: Call<Movie>,
                 response: Response<Movie>
@@ -84,6 +82,24 @@ class RetrofitTheMdbRepoUsecaseImpl : TheMDBRepoUseCace {
             }
 
 
+        })
+    }
+
+    override fun getReposForGenresSync(): List<Genres> {
+
+        return  api.getGenres(apiKey).execute().body()?: emptyList()
+
+    }
+
+    override fun getReposForGenresAsync(callback: (List<Genres>) -> Unit) {
+        api.getGenres(apiKey).enqueue (object : Callback<List<Genres>>{
+            override fun onResponse(call: Call<List<Genres>>, response: Response<List<Genres>>) {
+               callback(response.body()?: emptyList())
+            }
+
+            override fun onFailure(call: Call<List<Genres>>, t: Throwable) {
+                TODO("Not yet implemented")
+            }
         })
     }
 

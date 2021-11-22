@@ -95,5 +95,13 @@ class WebTheMdbRepoUsecaseImpl : TheMDBRepoUseCace {
         }.start()
     }
 
+    override fun getReposForGenresSync(): List<Genres> {
+        TODO("Not yet implemented")
+    }
+
+    override fun getReposForGenresAsync(callback: (List<Genres>) -> Unit) {
+        TODO("Not yet implemented")
+    }
+
 
 }
