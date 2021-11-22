@@ -2,5 +2,5 @@ package com.edurda77.filmlibrary.data
 
 data class ResultsParsing(
     val  page: Int,
-    val results: Array<ResultSearchMovie>
+    val results: List<ResultSearchMovie>
 )

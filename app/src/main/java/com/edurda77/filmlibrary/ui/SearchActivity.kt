@@ -29,12 +29,14 @@ class SearchActivity : AppCompatActivity() {
             val searchString = binding.searchMovie.text.toString()
             Thread {
                 val repos = goSearchMovie.getReposForSearchMovieSync(searchString)
-                repos.forEach {
-                    resultSearch.add(it)
+                if (repos != null) {
+                    repos.forEach {
+                        resultSearch.add(it)
+                    }
                 }
                 runOnUiThread {
                     setOotRecycledView()
-                    //binding.resultSearchView.text = sb.toString()
+
                 }
             }.start()
 
@@ -56,7 +58,7 @@ class SearchActivity : AppCompatActivity() {
                 override fun onStateClick(movie: ResultSearchMovie, position: Int) {
 
                     Thread {
-                        val iDMovie  = goIDMovie.getReposForIDMovieSync(movie)
+                        val iDMovie = goIDMovie.getReposForIDMovieSync(movie)
                         runOnUiThread {
                             val intent = Intent(this@SearchActivity, FilmActivity::class.java)
                             intent.putExtra(Movie::class.java.getSimpleName(), iDMovie)

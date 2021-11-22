@@ -35,6 +35,9 @@ class WebTheMdbRepoUsecaseImpl : TheMDBRepoUseCace {
             }
 
 
+        } catch (thr: Throwable) {
+            urlConnection?.disconnect()
+            throw thr
         } finally {
             urlConnection?.disconnect()
         }
@@ -43,10 +46,17 @@ class WebTheMdbRepoUsecaseImpl : TheMDBRepoUseCace {
 
     override fun getReposForSearchMovieAsync(
         userName: String,
-        callback: (List<ResultSearchMovie>) -> Unit
+        onSuccess: (List<ResultSearchMovie>) -> Unit,
+        OnError: (Throwable) -> Unit
     ) {
         Thread {
-            callback.invoke(getReposForSearchMovieSync(userName))
+            try {
+                val res = getReposForSearchMovieSync(userName)
+                onSuccess.invoke(res)
+            } catch (thr: Throwable) {
+                OnError (thr)
+            }
+
         }.start()
     }
 
@@ -56,6 +66,7 @@ class WebTheMdbRepoUsecaseImpl : TheMDBRepoUseCace {
             "https://api.themoviedb.org/3/movie/" + searcheMovie.id +
                     "?api_key=${BuildConfig.TMDB_API_KEY}&language=ru-RU"
         )
+
         var urlConnection: HttpsURLConnection? = null
         try {
             urlConnection = getUrl().openConnection() as HttpsURLConnection
@@ -70,7 +81,7 @@ class WebTheMdbRepoUsecaseImpl : TheMDBRepoUseCace {
             val movieId = resJson.id
             val movieTitle = resJson.title
             val movieRuntime = resJson.runtime
-            val movieReleaseDate = resJson.release_date
+            val movieReleaseDate = resJson.releaseDate
             val moviePopularity = resJson.popularity
             val movieBudget = resJson.budget
             val movieRevenue = resJson.revenue
@@ -81,6 +92,9 @@ class WebTheMdbRepoUsecaseImpl : TheMDBRepoUseCace {
                 moviePopularity, movieReleaseDate, movieBudget, movieRevenue, movieOverview
             )
             return movie
+        } catch (thr: Throwable) {
+            urlConnection?.disconnect()
+            throw thr
         } finally {
             urlConnection?.disconnect()
         }
@@ -88,10 +102,16 @@ class WebTheMdbRepoUsecaseImpl : TheMDBRepoUseCace {
 
     override fun getReposForIDMovieAsync(
         searcheMovie: ResultSearchMovie,
-        callback: (Movie) -> Unit
+        onSuccess: (Movie) -> Unit,
+        OnError: (Throwable) -> Unit
     ) {
         Thread {
-            callback.invoke(getReposForIDMovieSync(searcheMovie))
+            try {
+                val res = getReposForIDMovieSync(searcheMovie)
+                onSuccess.invoke(res)
+            } catch (thr: Throwable) {
+                OnError (thr)
+            }
         }.start()
     }
 
@@ -99,7 +119,10 @@ class WebTheMdbRepoUsecaseImpl : TheMDBRepoUseCace {
         TODO("Not yet implemented")
     }
 
-    override fun getReposForGenresAsync(callback: (List<Genres>) -> Unit) {
+    override fun getReposForGenresAsync(
+        onSuccess: (List<Genres>) -> Unit,
+        OnError: (Throwable) -> Unit
+    ) {
         TODO("Not yet implemented")
     }
 
