@@ -10,9 +10,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.edurda77.filmlibrary.R
 import com.edurda77.filmlibrary.data.FilmGenre
+import com.edurda77.filmlibrary.data.Genres
 import com.edurda77.filmlibrary.data.Movie
+import com.edurda77.filmlibrary.data.ResultSearchMovie
 import com.edurda77.filmlibrary.databinding.ActivityFilmBinding
 import com.edurda77.filmlibrary.databinding.ActivityMainBinding
+import com.edurda77.filmlibrary.domain.TheMDBRepoUseCace
 
 
 private var toolbar: Toolbar? = null
@@ -20,6 +23,8 @@ private var toolbar: Toolbar? = null
 
 
 class MainActivity : AppCompatActivity() {
+
+    //private val goGenres: TheMDBRepoUseCace by lazy { app.theMDBRepoUseCace }
     private var action = listOf(
         Movie(15, "Терминатор", "action", 120, 10.0, "1984", 1, 3, "fgfgfgfgfg"),
         Movie(16, "Терминатор2", "action", 120, 10.0, "1992", 1, 10, "fgfgfgfgfg"),
@@ -36,7 +41,7 @@ class MainActivity : AppCompatActivity() {
         FilmGenre("Боевик", action),
         FilmGenre("Комедия", camedy),
         FilmGenre("Триллер", triller)
-    )
+    ).toMutableList()
     private lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -45,6 +50,7 @@ class MainActivity : AppCompatActivity() {
 
         setContentView(binding.root)
         setToolbar()
+
 
 
 
