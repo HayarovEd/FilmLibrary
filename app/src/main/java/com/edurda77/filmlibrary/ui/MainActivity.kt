@@ -49,15 +49,7 @@ class MainActivity : AppCompatActivity() {
 
         setContentView(binding.root)
         setToolbar()
-
         getGroupMovies ()
-
-
-
-
-
-
-        //setOotRecycledView()
 
     }
 
@@ -96,18 +88,19 @@ class MainActivity : AppCompatActivity() {
         val goIDMovie: TheMDBRepoUseCace by lazy { app.theMDBRepoUseCace }
         recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
 
-        val stateClickListener: MovieAdapter.OnStateClickListener =
-            object : MovieAdapter.OnStateClickListener {
+        val stateClickListener: MovieSearchAdapter.OnStateClickListener =
+            object : MovieSearchAdapter.OnStateClickListener {
                 override fun onStateClick(movie: ResultSearchMovie, position: Int) {
                     Thread {
                         val iDMovie = goIDMovie.getReposForIDMovieSync(movie)
+
                         runOnUiThread {
                             val intent = Intent(this@MainActivity, FilmActivity::class.java)
                             intent.putExtra(Movie::class.java.simpleName, iDMovie)
 
                             startActivity(intent)
                         }
-                    }
+                    }.start()
                 }
             }
 

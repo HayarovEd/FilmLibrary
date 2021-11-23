@@ -8,17 +8,17 @@ import com.edurda77.filmlibrary.data.ResultSearchMovie
 
 
 class MovieAdapter(private val list: List<ResultSearchMovie>, val onClickListener: OnStateClickListener) :
-    RecyclerView.Adapter<MovieHolder>() {
+    RecyclerView.Adapter<MovieSearchHolder>() {
     interface OnStateClickListener {
         fun onStateClick(movie: ResultSearchMovie, position: Int)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieSearchHolder {
         val inflater = LayoutInflater.from(parent.context)
-        return MovieHolder(inflater, parent)
+        return MovieSearchHolder(inflater, parent)
     }
 
-    override fun onBindViewHolder(holder: MovieHolder, position: Int) {
+    override fun onBindViewHolder(holder: MovieSearchHolder, position: Int) {
         val movie: ResultSearchMovie = list[position]
         holder.bind(movie)
         holder.itemView.setOnClickListener {
