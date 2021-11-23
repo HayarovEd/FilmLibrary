@@ -151,28 +151,108 @@ class RetrofitTheMdbRepoUsecaseImpl : TheMDBRepoUseCace {
         onSuccess: (List<ResultSearchMovie>) -> Unit,
         OnError: (Throwable) -> Unit
     ) {
-        TODO("Not yet implemented")
+        api.getNowPlaying(apiKey, language).enqueue(object : Callback<ResultsParsing> {
+            override fun onResponse(
+                call: Call<ResultsParsing>,
+                response: Response<ResultsParsing>
+            ) {
+                if (response.isSuccessful) {
+                    onSuccess(
+                        response.body()?.results ?: throw IllegalStateException("Нулевой результат")
+                    )
+                } else {
+                    OnError(Throwable("Неизвестная ошибка"))
+                }
+
+            }
+
+            override fun onFailure(call: Call<ResultsParsing>, t: Throwable) {
+                OnError(t)
+            }
+
+
+        })
     }
 
     override fun getReposForPopularMovieAsync(
         onSuccess: (List<ResultSearchMovie>) -> Unit,
         OnError: (Throwable) -> Unit
     ) {
-        TODO("Not yet implemented")
+        api.getPopular(apiKey, language).enqueue(object : Callback<ResultsParsing> {
+            override fun onResponse(
+                call: Call<ResultsParsing>,
+                response: Response<ResultsParsing>
+            ) {
+                if (response.isSuccessful) {
+                    onSuccess(
+                        response.body()?.results ?: throw IllegalStateException("Нулевой результат")
+                    )
+                } else {
+                    OnError(Throwable("Неизвестная ошибка"))
+                }
+
+            }
+
+            override fun onFailure(call: Call<ResultsParsing>, t: Throwable) {
+                OnError(t)
+            }
+
+
+        })
     }
 
     override fun getReposForTopRatedMovieAsync(
         onSuccess: (List<ResultSearchMovie>) -> Unit,
         OnError: (Throwable) -> Unit
     ) {
-        TODO("Not yet implemented")
+        api.getTopRated(apiKey, language).enqueue(object : Callback<ResultsParsing> {
+            override fun onResponse(
+                call: Call<ResultsParsing>,
+                response: Response<ResultsParsing>
+            ) {
+                if (response.isSuccessful) {
+                    onSuccess(
+                        response.body()?.results ?: throw IllegalStateException("Нулевой результат")
+                    )
+                } else {
+                    OnError(Throwable("Неизвестная ошибка"))
+                }
+
+            }
+
+            override fun onFailure(call: Call<ResultsParsing>, t: Throwable) {
+                OnError(t)
+            }
+
+
+        })
     }
 
     override fun getReposForUpcomingMovieAsync(
         onSuccess: (List<ResultSearchMovie>) -> Unit,
         OnError: (Throwable) -> Unit
     ) {
-        TODO("Not yet implemented")
+        api.getUpcoming(apiKey, language).enqueue(object : Callback<ResultsParsing> {
+            override fun onResponse(
+                call: Call<ResultsParsing>,
+                response: Response<ResultsParsing>
+            ) {
+                if (response.isSuccessful) {
+                    onSuccess(
+                        response.body()?.results ?: throw IllegalStateException("Нулевой результат")
+                    )
+                } else {
+                    OnError(Throwable("Неизвестная ошибка"))
+                }
+
+            }
+
+            override fun onFailure(call: Call<ResultsParsing>, t: Throwable) {
+                OnError(t)
+            }
+
+
+        })
     }
 
     fun parsingForSync(resultsParsing: ResultsParsing?): List<ResultSearchMovie> {
