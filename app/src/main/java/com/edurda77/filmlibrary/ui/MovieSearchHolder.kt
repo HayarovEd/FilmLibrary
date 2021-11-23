@@ -28,7 +28,7 @@ class MovieSearchHolder (inflater: LayoutInflater, parent: ViewGroup) :
         titleMovie?.text = movie.title
         idMovie?.text = movie.id.toString()
         summaryMovie?.text = movie.overview
-        Glide.with(this.itemView.context).load(beginURL+movie.logoPath).into(pictureMovie)
+        Glide.with(this.itemView.context).load(beginURL+movie.posterPath).into(pictureMovie)
         //pictureMovie?.setImageResource(23)
 
     }
