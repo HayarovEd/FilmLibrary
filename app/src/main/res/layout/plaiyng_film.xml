@@ -22,8 +22,8 @@
         />
     <TextView
         style="@style/content_movie_view"
-        android:id="@+id/genre_movie"
-        android:text="@string/ganre_movie"
+        android:id="@+id/popularity_movie"
+        android:text="@string/popularity_movie"
         />
 
 </LinearLayout>

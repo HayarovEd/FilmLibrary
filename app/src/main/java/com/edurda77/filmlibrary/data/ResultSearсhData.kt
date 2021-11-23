@@ -9,5 +9,6 @@ data class ResultSearchMovie(
     @SerializedName("poster_path")
     val posterPath : String,
     @SerializedName("genre_ids")
-    val genreIds: List<Int>
+    val genreIds: List<Int>,
+    val popularity: Double
 )

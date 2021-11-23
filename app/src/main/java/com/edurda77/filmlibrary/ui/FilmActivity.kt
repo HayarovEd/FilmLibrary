@@ -6,6 +6,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
+import com.edurda77.filmlibrary.R
 import com.edurda77.filmlibrary.data.Movie
 import com.edurda77.filmlibrary.databinding.ActivityFilmBinding
 
@@ -47,7 +48,9 @@ class FilmActivity : AppCompatActivity() {
             popularityEditText?.text = popularityEditText?.text.toString() + movie.popularity.toString()
             val URL: String  = beginURL+movie.posterPath
 
-            Glide.with(this).load(URL).override(320, 480).into(picture)
+            Glide.with(this).load(URL)
+                .override(320, 480)
+                .placeholder(R.drawable.video).into(picture)
         }
 
 

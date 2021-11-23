@@ -13,21 +13,21 @@ class MovieHolder (inflater: LayoutInflater, parent: ViewGroup) :
     RecyclerView.ViewHolder(inflater.inflate(R.layout.plaiyng_film, parent, false)) {
     private var titleMovie: TextView? = null
     private var idMovie: TextView? = null
-    private var summaryMovie: TextView? = null
+    private var popularityMovie: TextView? = null
     private var pictureMovie: ImageView? = null
 
 
     init {
         titleMovie = itemView.findViewById(R.id.title_movie)
         idMovie = itemView.findViewById(R.id.id_movie)
-        summaryMovie = itemView.findViewById(R.id.genre_movie)
+        popularityMovie = itemView.findViewById(R.id.popularity_movie)
         pictureMovie = itemView.findViewById(R.id.picture_movie)
     }
     @SuppressLint("SetTextI18n")
     fun bind(movie: Movie) {
         titleMovie?.text = movie.title
         idMovie?.text = idMovie?.text.toString()+movie.id.toString()
-        summaryMovie?.text = movie.overview
+        popularityMovie?.text = popularityMovie?.text.toString() + movie.popularity
         //pictureMovie?.setImageResource(23)
 
     }
