@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.edurda77.filmlibrary.R
 import com.edurda77.filmlibrary.data.Movie
+import com.edurda77.filmlibrary.data.ResultSearchMovie
 
 class MovieHolder (inflater: LayoutInflater, parent: ViewGroup) :
     RecyclerView.ViewHolder(inflater.inflate(R.layout.plaiyng_film, parent, false)) {
@@ -24,7 +25,7 @@ class MovieHolder (inflater: LayoutInflater, parent: ViewGroup) :
         pictureMovie = itemView.findViewById(R.id.picture_movie)
     }
     @SuppressLint("SetTextI18n")
-    fun bind(movie: Movie) {
+    fun bind(movie: ResultSearchMovie) {
         titleMovie?.text = movie.title
         idMovie?.text = idMovie?.text.toString()+movie.id.toString()
         popularityMovie?.text = popularityMovie?.text.toString() + movie.popularity

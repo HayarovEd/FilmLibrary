@@ -93,16 +93,21 @@ class MainActivity : AppCompatActivity() {
     fun setOotRecycledView() {
 
         val recyclerView: RecyclerView = binding.outRecycledView
-
+        val goIDMovie: TheMDBRepoUseCace by lazy { app.theMDBRepoUseCace }
         recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
 
         val stateClickListener: MovieAdapter.OnStateClickListener =
             object : MovieAdapter.OnStateClickListener {
-                override fun onStateClick(movie: Movie, position: Int) {
+                override fun onStateClick(movie: ResultSearchMovie, position: Int) {
+                    Thread {
+                        val iDMovie = goIDMovie.getReposForIDMovieSync(movie)
+                        runOnUiThread {
+                            val intent = Intent(this@MainActivity, FilmActivity::class.java)
+                            intent.putExtra(Movie::class.java.simpleName, iDMovie)
 
-                    val intent = Intent(this@MainActivity, FilmActivity::class.java)
-                    intent.putExtra(Movie::class.java.simpleName, movie)
-                    startActivity(intent)
+                            startActivity(intent)
+                        }
+                    }
                 }
             }
 

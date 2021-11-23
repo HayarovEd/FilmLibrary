@@ -9,9 +9,9 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@drawable/Movies_folder_file"
+        android:icon="@drawable/movies_folder_file"
         android:label="@string/app_name"
-        android:roundIcon="@drawable/Movies_folder_file"
+        android:roundIcon="@drawable/movies_folder_file"
         android:supportsRtl="true"
         android:name=".ui.AppSearsh"
         android:theme="@style/Theme.FilmLibrary">

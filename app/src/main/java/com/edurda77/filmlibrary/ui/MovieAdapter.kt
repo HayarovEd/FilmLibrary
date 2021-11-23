@@ -10,7 +10,7 @@ import com.edurda77.filmlibrary.data.ResultSearchMovie
 class MovieAdapter(private val list: List<ResultSearchMovie>, val onClickListener: OnStateClickListener) :
     RecyclerView.Adapter<MovieHolder>() {
     interface OnStateClickListener {
-        fun onStateClick(movie: Movie, position: Int)
+        fun onStateClick(movie: ResultSearchMovie, position: Int)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieHolder {
@@ -19,7 +19,7 @@ class MovieAdapter(private val list: List<ResultSearchMovie>, val onClickListene
     }
 
     override fun onBindViewHolder(holder: MovieHolder, position: Int) {
-        val movie: Movie = list[position]
+        val movie: ResultSearchMovie = list[position]
         holder.bind(movie)
         holder.itemView.setOnClickListener {
             onClickListener.onStateClick(movie, position)
