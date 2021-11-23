@@ -9,6 +9,7 @@ import android.content.Intent
 
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.edurda77.filmlibrary.data.Movie
 import com.edurda77.filmlibrary.domain.TheMDBRepoUseCace
 
@@ -23,6 +24,7 @@ class SearchActivity : AppCompatActivity() {
         binding = ActivitySearchBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+
 
         binding.goSearchMovie.setOnClickListener {
             resultSearch.clear()

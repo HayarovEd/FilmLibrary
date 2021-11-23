@@ -13,6 +13,8 @@ data class Movie(
     val releaseDate: String,
     val budget: Int,
     val revenue: Int,
-    val overview: String
+    val overview: String,
+    @SerializedName("poster_path")
+    val posterPath: String
 ) : Serializable
 

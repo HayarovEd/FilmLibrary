@@ -1,13 +1,16 @@
 package com.edurda77.filmlibrary.ui
 
 import android.os.Bundle
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import com.bumptech.glide.Glide
 import com.edurda77.filmlibrary.data.Movie
 import com.edurda77.filmlibrary.databinding.ActivityFilmBinding
 
 class FilmActivity : AppCompatActivity() {
     private lateinit var binding: ActivityFilmBinding
+    private var beginURL = "https://image.tmdb.org/t/p/w500"
     override fun onCreate(savedInstanceState: Bundle?) {
         binding = ActivityFilmBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
@@ -23,7 +26,9 @@ class FilmActivity : AppCompatActivity() {
         val revenueEditText: TextView? = binding.revenueMovie
         val summaryEditText: TextView? = binding.summaryMovie
         val popularityEditText: TextView? = binding.populatityMovie
+        val picture : ImageView = binding.pictureMovie
         val arguments = intent.extras
+
 
         val movie: Movie
         if (arguments != null) {
@@ -38,10 +43,11 @@ class FilmActivity : AppCompatActivity() {
             revenueEditText?.setText(movie.revenue.toString())
             summaryEditText?.setText(movie.overview)
             popularityEditText?.setText(movie.popularity.toString())
+            val URL: String  = beginURL+movie.posterPath
 
-
-
+            Glide.with(this).load(URL).override(320, 480).into(picture)
         }
+
 
 
     }

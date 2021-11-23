@@ -19,8 +19,8 @@
 
     <ImageView
         android:id="@+id/picture_movie"
-        android:layout_width="@dimen/picture_size"
-        android:layout_height="@dimen/picture_size"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_gravity="center" />
 
     <TextView
