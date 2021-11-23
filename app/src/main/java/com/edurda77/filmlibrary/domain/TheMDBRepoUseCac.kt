@@ -21,4 +21,5 @@ interface TheMDBRepoUseCace {
     fun getReposForGenresAsync(onSuccess: (List<Genres>)->Unit,
                                OnError: (Throwable) ->Unit)
 
+
 }

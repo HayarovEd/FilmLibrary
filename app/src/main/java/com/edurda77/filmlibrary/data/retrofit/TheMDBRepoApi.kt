@@ -33,4 +33,25 @@ interface TheMDBRepoApi {
     fun getGenres(
         @Query("api_key") apiKey: String
     ): Call<List<Genres>>
+    @GET ("movie/now_playing")
+    fun getNowPlaying (
+        @Query("api_key") apiKey: String,
+        @Query("language") language: String
+    ) : Call<ResultsParsing>
+    @GET ("movie/popular")
+    fun getPopular (
+        @Query("api_key") apiKey: String,
+        @Query("language") language: String
+    ): Call<ResultsParsing>
+    @GET ("movie/top_rated")
+    fun getTopRated (
+        @Query("api_key") apiKey: String,
+        @Query("language") language: String
+    ): Call<ResultsParsing>
+    @GET ("movie/upcoming")
+    fun getUpcoming (
+        @Query("api_key") apiKey: String,
+        @Query("language") language: String
+    ): Call<ResultsParsing>
+
 }
