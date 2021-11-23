@@ -1,5 +1,6 @@
 package com.edurda77.filmlibrary.ui
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -19,12 +20,13 @@ class MovieHolder (inflater: LayoutInflater, parent: ViewGroup) :
     init {
         titleMovie = itemView.findViewById(R.id.title_movie)
         idMovie = itemView.findViewById(R.id.id_movie)
-        summaryMovie = itemView.findViewById(R.id.summary_movie)
+        summaryMovie = itemView.findViewById(R.id.genre_movie)
         pictureMovie = itemView.findViewById(R.id.picture_movie)
     }
+    @SuppressLint("SetTextI18n")
     fun bind(movie: Movie) {
         titleMovie?.text = movie.title
-        idMovie?.text = movie.id.toString()
+        idMovie?.text = idMovie?.text.toString()+movie.id.toString()
         summaryMovie?.text = movie.overview
         //pictureMovie?.setImageResource(23)
 

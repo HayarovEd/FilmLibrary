@@ -19,4 +19,5 @@
     <string name="search">Поиск</string>
     <string name="id_movie">id</string>
     <string name="popularity">популярность</string>
+    <string name="ganre_movie">жанр</string>
 </resources>

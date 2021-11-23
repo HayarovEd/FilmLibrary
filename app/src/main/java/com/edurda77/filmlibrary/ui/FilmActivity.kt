@@ -1,5 +1,6 @@
 package com.edurda77.filmlibrary.ui
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.widget.ImageView
 import android.widget.TextView
@@ -11,6 +12,7 @@ import com.edurda77.filmlibrary.databinding.ActivityFilmBinding
 class FilmActivity : AppCompatActivity() {
     private lateinit var binding: ActivityFilmBinding
     private var beginURL = "https://image.tmdb.org/t/p/w500"
+    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         binding = ActivityFilmBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
@@ -32,17 +34,17 @@ class FilmActivity : AppCompatActivity() {
 
         val movie: Movie
         if (arguments != null) {
-            movie = arguments.getSerializable(Movie::class.java.getSimpleName()) as Movie
-            titlEditText?.setText(movie.title)
-            idEditText?.setText(movie.id.toString())
-            rangEditText?.setText(movie.popularity.toString())
-            ganreEditText?.setText(movie.movieGanre)
-            yearEditText?.setText(movie.releaseDate)
-            durationEditText?.setText(movie.runtime.toString())
-            budgetEditText?.setText(movie.budget.toString())
-            revenueEditText?.setText(movie.revenue.toString())
-            summaryEditText?.setText(movie.overview)
-            popularityEditText?.setText(movie.popularity.toString())
+            movie = arguments.getSerializable(Movie::class.java.simpleName) as Movie
+            titlEditText?.text = movie.title
+            idEditText?.text = idEditText?.text.toString() + movie.id.toString()
+            rangEditText?.text = rangEditText?.text.toString()+movie.popularity.toString()
+            ganreEditText?.text = ganreEditText?.text.toString() + movie.movieGanre
+            yearEditText?.text = yearEditText?.text.toString() + movie.releaseDate
+            durationEditText?.text =  durationEditText?.text.toString() + movie.runtime.toString()
+            budgetEditText?.text = budgetEditText?.text.toString() + movie.budget.toString()
+            revenueEditText?.text = revenueEditText?.text.toString() + movie.revenue.toString()
+            summaryEditText?.text = summaryEditText?.text.toString() + movie.overview
+            popularityEditText?.text = popularityEditText?.text.toString() + movie.popularity.toString()
             val URL: String  = beginURL+movie.posterPath
 
             Glide.with(this).load(URL).override(320, 480).into(picture)

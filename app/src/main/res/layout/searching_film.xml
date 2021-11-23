@@ -5,24 +5,25 @@
     android:background="@color/purple_500"
     android:orientation="vertical"
     android:layout_margin="@dimen/margin_half">
+
     <TextView
         style="@style/title_movie_view"
-        android:id="@+id/title_movie"
+        android:id="@+id/search_title_movie"
         android:text="@string/ttile_movie"
         />
     <ImageView
-        android:id="@+id/picture_movie_view"
+        android:id="@+id/search_picture_movie_view"
         android:layout_width="@dimen/picture_size"
         android:layout_height="@dimen/picture_size"
         android:layout_gravity="center"/>
     <TextView
         style="@style/content_movie_view"
-        android:id="@+id/id_movie"
+        android:id="@+id/search_id_movie"
         android:text="@string/id_movie"
         />
     <TextView
         style="@style/content_movie_view"
-        android:id="@+id/genre_movie"
+        android:id="@+id/search_genre_movie"
         android:text="@string/ganre_movie"
         />
 
