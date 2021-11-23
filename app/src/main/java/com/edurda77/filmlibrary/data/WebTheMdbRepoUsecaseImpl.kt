@@ -120,6 +120,22 @@ class WebTheMdbRepoUsecaseImpl : TheMDBRepoUseCace {
         TODO("Not yet implemented")
     }
 
+    override fun getReposForNowPlayingMovieSync(): List<ResultSearchMovie>? {
+        TODO("Not yet implemented")
+    }
+
+    override fun getReposForPopularMovieSync(): List<ResultSearchMovie>? {
+        TODO("Not yet implemented")
+    }
+
+    override fun getReposForTopRatedMovieSync(): List<ResultSearchMovie>? {
+        TODO("Not yet implemented")
+    }
+
+    override fun getReposForUpcomingMovieSync(): List<ResultSearchMovie>? {
+        TODO("Not yet implemented")
+    }
+
     override fun getReposForGenresAsync(
         onSuccess: (List<Genres>) -> Unit,
         OnError: (Throwable) -> Unit
@@ -127,6 +143,33 @@ class WebTheMdbRepoUsecaseImpl : TheMDBRepoUseCace {
         TODO("Not yet implemented")
     }
 
+    override fun getReposForNowPlayingMovieAsync(
+        onSuccess: (List<ResultSearchMovie>) -> Unit,
+        OnError: (Throwable) -> Unit
+    ) {
+        TODO("Not yet implemented")
+    }
+
+    override fun getReposForPopularMovieAsync(
+        onSuccess: (List<ResultSearchMovie>) -> Unit,
+        OnError: (Throwable) -> Unit
+    ) {
+        TODO("Not yet implemented")
+    }
+
+    override fun getReposForTopRatedMovieAsync(
+        onSuccess: (List<ResultSearchMovie>) -> Unit,
+        OnError: (Throwable) -> Unit
+    ) {
+        TODO("Not yet implemented")
+    }
+
+    override fun getReposForUpcomingMovieAsync(
+        onSuccess: (List<ResultSearchMovie>) -> Unit,
+        OnError: (Throwable) -> Unit
+    ) {
+        TODO("Not yet implemented")
+    }
 
 
 }

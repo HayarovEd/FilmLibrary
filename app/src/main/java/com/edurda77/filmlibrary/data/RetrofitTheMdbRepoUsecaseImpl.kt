@@ -24,19 +24,53 @@ class RetrofitTheMdbRepoUsecaseImpl : TheMDBRepoUseCace {
 
 
     override fun getReposForSearchMovieSync(userName: String): List<ResultSearchMovie> {
+
         val resultsParsing: ResultsParsing? = api.getSearchMovie(apiKey, language, userName)
             .execute().body()
+        return parsingForSync(resultsParsing)
 
-        val resultSearch = emptyList<ResultSearchMovie>().toMutableList()
+    }
 
-        if (resultsParsing != null) {
-            resultsParsing.results.forEach {
-                resultSearch.add(it)
 
-            }
-        }
+    override fun getReposForIDMovieSync(searcheMovie: ResultSearchMovie): Movie? {
 
-        return resultSearch
+        return api.getIDMovie(searcheMovie.id, apiKey, language)
+            .execute().body()
+    }
+
+
+    override fun getReposForGenresSync(): List<Genres> {
+
+        return api.getGenres(apiKey).execute().body() ?: emptyList()
+
+    }
+
+    override fun getReposForNowPlayingMovieSync(): List<ResultSearchMovie>? {
+        val resultsParsing: ResultsParsing? = api.getNowPlaying(apiKey, language)
+            .execute().body()
+
+        return parsingForSync(resultsParsing)
+    }
+
+    override fun getReposForPopularMovieSync(): List<ResultSearchMovie>? {
+        val resultsParsing: ResultsParsing? = api.getPopular(apiKey, language)
+            .execute().body()
+
+        return parsingForSync(resultsParsing)
+    }
+
+    override fun getReposForTopRatedMovieSync(): List<ResultSearchMovie>? {
+        val resultsParsing: ResultsParsing? = api.getTopRated(apiKey, language)
+            .execute().body()
+
+        return parsingForSync(resultsParsing)
+    }
+
+    override fun getReposForUpcomingMovieSync(): List<ResultSearchMovie>? {
+        val resultsParsing: ResultsParsing? = api.getUpcoming(apiKey, language)
+            .execute().body()
+
+        return parsingForSync(resultsParsing)
     }
 
     override fun getReposForSearchMovieAsync(
@@ -67,12 +101,6 @@ class RetrofitTheMdbRepoUsecaseImpl : TheMDBRepoUseCace {
         })
     }
 
-    override fun getReposForIDMovieSync(searcheMovie: ResultSearchMovie): Movie? {
-
-        return api.getIDMovie(searcheMovie.id, apiKey, language)
-            .execute().body()
-    }
-
     override fun getReposForIDMovieAsync(
         searcheMovie: ResultSearchMovie,
         onSuccess: (Movie) -> Unit,
@@ -99,12 +127,6 @@ class RetrofitTheMdbRepoUsecaseImpl : TheMDBRepoUseCace {
         })
     }
 
-    override fun getReposForGenresSync(): List<Genres> {
-
-        return api.getGenres(apiKey).execute().body() ?: emptyList()
-
-    }
-
     override fun getReposForGenresAsync(
         onSuccess: (List<Genres>) -> Unit,
         OnError: (Throwable) -> Unit
@@ -125,5 +147,42 @@ class RetrofitTheMdbRepoUsecaseImpl : TheMDBRepoUseCace {
         })
     }
 
+    override fun getReposForNowPlayingMovieAsync(
+        onSuccess: (List<ResultSearchMovie>) -> Unit,
+        OnError: (Throwable) -> Unit
+    ) {
+        TODO("Not yet implemented")
+    }
 
+    override fun getReposForPopularMovieAsync(
+        onSuccess: (List<ResultSearchMovie>) -> Unit,
+        OnError: (Throwable) -> Unit
+    ) {
+        TODO("Not yet implemented")
+    }
+
+    override fun getReposForTopRatedMovieAsync(
+        onSuccess: (List<ResultSearchMovie>) -> Unit,
+        OnError: (Throwable) -> Unit
+    ) {
+        TODO("Not yet implemented")
+    }
+
+    override fun getReposForUpcomingMovieAsync(
+        onSuccess: (List<ResultSearchMovie>) -> Unit,
+        OnError: (Throwable) -> Unit
+    ) {
+        TODO("Not yet implemented")
+    }
+
+    fun parsingForSync(resultsParsing: ResultsParsing?): List<ResultSearchMovie> {
+        val resultSearch = emptyList<ResultSearchMovie>().toMutableList()
+
+        if (resultsParsing != null) {
+            resultsParsing.results.forEach {
+                resultSearch.add(it)
+            }
+        }
+        return resultSearch
+    }
 }

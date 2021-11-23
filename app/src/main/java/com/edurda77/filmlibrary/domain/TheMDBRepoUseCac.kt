@@ -11,6 +11,10 @@ interface TheMDBRepoUseCace {
     fun getReposForSearchMovieSync (userName: String): List<ResultSearchMovie>?
     fun getReposForIDMovieSync (searcheMovie: ResultSearchMovie): Movie?
     fun getReposForGenresSync():List<Genres>?
+    fun getReposForNowPlayingMovieSync (): List<ResultSearchMovie>?
+    fun getReposForPopularMovieSync (): List<ResultSearchMovie>?
+    fun getReposForTopRatedMovieSync (): List<ResultSearchMovie>?
+    fun getReposForUpcomingMovieSync (): List<ResultSearchMovie>?
 
 
     fun getReposForSearchMovieAsync (userName: String, onSuccess: (List<ResultSearchMovie>)->Unit,
@@ -20,6 +24,14 @@ interface TheMDBRepoUseCace {
                                  OnError: (Throwable) ->Unit)
     fun getReposForGenresAsync(onSuccess: (List<Genres>)->Unit,
                                OnError: (Throwable) ->Unit)
+    fun getReposForNowPlayingMovieAsync (onSuccess: (List<ResultSearchMovie>)->Unit,
+                                     OnError: (Throwable) ->Unit)
+    fun getReposForPopularMovieAsync (onSuccess: (List<ResultSearchMovie>)->Unit,
+                                     OnError: (Throwable) ->Unit)
+    fun getReposForTopRatedMovieAsync (onSuccess: (List<ResultSearchMovie>)->Unit,
+                                     OnError: (Throwable) ->Unit)
+    fun getReposForUpcomingMovieAsync (onSuccess: (List<ResultSearchMovie>)->Unit,
+                                     OnError: (Throwable) ->Unit)
 
 
 }
