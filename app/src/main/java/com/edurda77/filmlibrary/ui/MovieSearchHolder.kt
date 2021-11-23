@@ -12,7 +12,7 @@ import com.edurda77.filmlibrary.data.ResultSearchMovie
 import java.lang.StringBuilder
 
 class MovieSearchHolder (inflater: LayoutInflater, parent: ViewGroup) :
-    RecyclerView.ViewHolder(inflater.inflate(R.layout.searching_film, parent, false)) {
+    RecyclerView.ViewHolder(inflater.inflate(R.layout.plaiyng_film, parent, false)) {
 
     private var titleMovie: TextView? = null
     private var idMovie: TextView? = null
@@ -22,10 +22,10 @@ class MovieSearchHolder (inflater: LayoutInflater, parent: ViewGroup) :
 
 
     init {
-        titleMovie = itemView.findViewById(R.id.search_title_movie)
-        idMovie = itemView.findViewById(R.id.search_id_movie)
-        genreMovie = itemView.findViewById(R.id.search_genre_movie)
-        pictureMovie = itemView.findViewById(R.id.search_picture_movie_view)
+        titleMovie = itemView.findViewById(R.id.title_movie)
+        idMovie = itemView.findViewById(R.id.id_movie)
+        genreMovie = itemView.findViewById(R.id.genre_movie)
+        pictureMovie = itemView.findViewById(R.id.picture_movie_view)
     }
     @SuppressLint("SetTextI18n")
     fun bind(movie: ResultSearchMovie) {
