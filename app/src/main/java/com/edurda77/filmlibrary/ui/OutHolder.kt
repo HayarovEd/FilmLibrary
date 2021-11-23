@@ -15,13 +15,9 @@ class OutHolder(
     val onClickListener: MovieAdapter.OnStateClickListener
 ) :
     RecyclerView.ViewHolder(inflater.inflate(R.layout.layout_out_recycled_view, parent, false)) {
-    val ganreTitle: TextView
-    val movieItem: RecyclerView
+    private val ganreTitle: TextView = itemView.findViewById(R.id.ganre_movie)
+    val movieItem: RecyclerView = itemView.findViewById(R.id.item_movie)
 
-    init {
-        ganreTitle = itemView.findViewById(R.id.ganre_movie)
-        movieItem = itemView.findViewById(R.id.item_movie)
-    }
     fun bindGanre(filmGanre: FilmGenre) {
         ganreTitle.text = filmGanre.genreTitle
         val layoutManager = LinearLayoutManager(

@@ -1,23 +1,20 @@
 package com.edurda77.filmlibrary.ui
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.edurda77.filmlibrary.data.ResultSearchMovie
-import com.edurda77.filmlibrary.databinding.ActivitySearchBinding
-
-import android.content.Intent
-
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.edurda77.filmlibrary.data.Movie
+import com.edurda77.filmlibrary.data.ResultSearchMovie
+import com.edurda77.filmlibrary.databinding.ActivitySearchBinding
 import com.edurda77.filmlibrary.domain.TheMDBRepoUseCace
 
 
 class SearchActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySearchBinding
     private val goSearchMovie: TheMDBRepoUseCace by lazy { app.theMDBRepoUseCace }
-    val resultSearch = emptyList<ResultSearchMovie>().toMutableList()
+    private val resultSearch = emptyList<ResultSearchMovie>().toMutableList()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,11 +27,8 @@ class SearchActivity : AppCompatActivity() {
             resultSearch.clear()
             val searchString = binding.searchMovie.text.toString()
             Thread {
-                val repos = goSearchMovie.getReposForSearchMovieSync(searchString)
-                if (repos != null) {
-                    repos.forEach {
-                        resultSearch.add(it)
-                    }
+                goSearchMovie.getReposForSearchMovieSync(searchString)?.forEach {
+                    resultSearch.add(it)
                 }
                 runOnUiThread {
                     setOotRecycledView()
@@ -63,7 +57,7 @@ class SearchActivity : AppCompatActivity() {
                         val iDMovie = goIDMovie.getReposForIDMovieSync(movie)
                         runOnUiThread {
                             val intent = Intent(this@SearchActivity, FilmActivity::class.java)
-                            intent.putExtra(Movie::class.java.getSimpleName(), iDMovie)
+                            intent.putExtra(Movie::class.java.simpleName, iDMovie)
 
                             startActivity(intent)
                         }

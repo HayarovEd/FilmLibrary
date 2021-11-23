@@ -88,11 +88,18 @@ class WebTheMdbRepoUsecaseImpl : TheMDBRepoUseCace {
             val movieOverview = resJson.overview
             val movieGanre = "released last"
             val moviePathPicture = resJson.posterPath
-            val movie = Movie(
-                movieId, movieTitle, movieGanre, movieRuntime,
-                moviePopularity, movieReleaseDate, movieBudget, movieRevenue, movieOverview,moviePathPicture
+            return Movie(
+                movieId,
+                movieTitle,
+                movieGanre,
+                movieRuntime,
+                moviePopularity,
+                movieReleaseDate,
+                movieBudget,
+                movieRevenue,
+                movieOverview,
+                moviePathPicture
             )
-            return movie
         } catch (thr: Throwable) {
             urlConnection?.disconnect()
             throw thr

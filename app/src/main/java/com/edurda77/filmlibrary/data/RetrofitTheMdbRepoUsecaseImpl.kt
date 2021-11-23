@@ -12,11 +12,11 @@ import java.lang.IllegalStateException
 
 
 private const val BASE_URL = "https://api.themoviedb.org/3/"
-val language = "ru-RU"
-val apiKey = TMDB_API_KEY
+const val language = "ru-RU"
+const val apiKey = TMDB_API_KEY
 
 class RetrofitTheMdbRepoUsecaseImpl : TheMDBRepoUseCace {
-    var retrofit = Retrofit.Builder()
+    var retrofit: Retrofit = Retrofit.Builder()
         .baseUrl(BASE_URL)
         .addConverterFactory(GsonConverterFactory.create())
         .build()

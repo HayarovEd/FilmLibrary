@@ -19,7 +19,7 @@ class FilmActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        val titlEditText: TextView? = binding.titleMovie
+        val titlEditText: TextView = binding.titleMovie
         val idEditText: TextView? = binding.idMovie
         val ganreEditText: TextView? = binding.ganreMovie
         val durationEditText: TextView? = binding.durationMovie
@@ -46,9 +46,9 @@ class FilmActivity : AppCompatActivity() {
             revenueEditText?.text = revenueEditText?.text.toString() + movie.revenue.toString()
             summaryEditText?.text = summaryEditText?.text.toString() + movie.overview
             popularityEditText?.text = popularityEditText?.text.toString() + movie.popularity.toString()
-            val URL: String  = beginURL+movie.posterPath
+            //val url: String  = beginURL+movie.posterPath
 
-            Glide.with(this).load(URL)
+            Glide.with(this).load(beginURL+movie.posterPath)
                 .override(320, 480)
                 .placeholder(R.drawable.video).into(picture)
         }
