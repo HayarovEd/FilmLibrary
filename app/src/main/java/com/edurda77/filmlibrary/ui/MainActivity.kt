@@ -10,10 +10,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.edurda77.filmlibrary.R
 import com.edurda77.filmlibrary.data.FilmGenre
-import com.edurda77.filmlibrary.data.Genres
 import com.edurda77.filmlibrary.data.Movie
 import com.edurda77.filmlibrary.data.ResultSearchMovie
-import com.edurda77.filmlibrary.databinding.ActivityFilmBinding
 import com.edurda77.filmlibrary.databinding.ActivityMainBinding
 import com.edurda77.filmlibrary.domain.TheMDBRepoUseCace
 
@@ -23,6 +21,11 @@ private var toolbar: Toolbar? = null
 
 
 class MainActivity : AppCompatActivity() {
+    private val goNowPlayingMovie: TheMDBRepoUseCace by lazy { app.theMDBRepoUseCace }
+    val resultNowPlayingMovie = emptyList<ResultSearchMovie>().toMutableList()
+    val resultPopularMovie = emptyList<ResultSearchMovie>().toMutableList()
+    val resultTopRatedMovie = emptyList<ResultSearchMovie>().toMutableList()
+    val resultUpcomingMovie = emptyList<ResultSearchMovie>().toMutableList()
 
     //private val goGenres: TheMDBRepoUseCace by lazy { app.theMDBRepoUseCace }
     private var action = listOf(
@@ -37,11 +40,7 @@ class MainActivity : AppCompatActivity() {
         Movie(19, "Цвет ночи", "action", 120, 10.0, "1984", 1, 3, "fgfgfgfgfg", ""),
         Movie(20, "Семь", "action", 120, 10.0, "1992", 1, 10, "fgfgfgfgfg", ""),
     )
-    private var ganre = listOf(
-        FilmGenre("Боевик", action),
-        FilmGenre("Комедия", camedy),
-        FilmGenre("Триллер", triller)
-    ).toMutableList()
+    private var ganre = emptyList<FilmGenre>().toMutableList()
     private lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -55,6 +54,28 @@ class MainActivity : AppCompatActivity() {
 
 
 
+
+
+        Thread {
+            val reposNowPlaying = goNowPlayingMovie.getReposForNowPlayingMovieSync()
+            if (reposNowPlaying != null) {
+                reposNowPlaying.forEach {
+                    resultNowPlayingMovie.add(it)
+                }
+            }
+            ganre.add(FilmGenre("Сейчас в кинотеатрах",resultNowPlayingMovie) )
+            val reposPopularMovie = goNowPlayingMovie.getReposForPopularMovieSync()
+            if (reposPopularMovie != null) {
+                reposPopularMovie.forEach {
+                    resultPopularMovie.add(it)
+                }
+            }
+            ganre.add(FilmGenre("Популярные фильмы",resultPopularMovie) )
+            /*runOnUiThread {
+                setOotRecycledView()
+
+            }*/
+        }.start()
         setOotRecycledView()
 
     }
@@ -64,7 +85,9 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
 
     }
+    fun getGroupMovies () {
 
+    }
     fun setOotRecycledView() {
 
         val recyclerView: RecyclerView = binding.outRecycledView
