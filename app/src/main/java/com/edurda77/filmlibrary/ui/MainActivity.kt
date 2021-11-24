@@ -27,19 +27,7 @@ class MainActivity : AppCompatActivity() {
     private val resultTopRatedMovie = emptyList<ResultSearchMovie>().toMutableList()
     private val resultUpcomingMovie = emptyList<ResultSearchMovie>().toMutableList()
 
-    //private val goGenres: TheMDBRepoUseCace by lazy { app.theMDBRepoUseCace }
-    /*private var action = listOf(
-        Movie(15, "Терминатор", "action", 120, 10.0, "1984", 1, 3, "fgfgfgfgfg", ""),
-        Movie(16, "Терминатор2", "action", 120, 10.0, "1992", 1, 10, "fgfgfgfgfg", ""),
-    )
-    private var camedy = listOf(
-        Movie(17, "Амерканский пирог", "action", 120, 10.0, "1984", 1, 3, "fgfgfgfgfg", ""),
-        Movie(18, "Американский пирог2", "action", 120, 10.0, "1992", 1, 10, "fgfgfgfgfg", ""),
-    )
-    private var triller = listOf(
-        Movie(19, "Цвет ночи", "action", 120, 10.0, "1984", 1, 3, "fgfgfgfgfg", ""),
-        Movie(20, "Семь", "action", 120, 10.0, "1992", 1, 10, "fgfgfgfgfg", ""),
-    )*/
+
     private var ganre = emptyList<FilmGenre>().toMutableList()
     private lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -53,7 +41,7 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    fun setToolbar() {
+    private fun setToolbar() {
         toolbar = binding.toolbar
         setSupportActionBar(toolbar)
 
@@ -123,7 +111,7 @@ class MainActivity : AppCompatActivity() {
                 startActivity(intent)
             }
             R.id.custom -> {
-                val intent = Intent(this, SearchActivity::class.java)
+                val intent = Intent(this, CustomActivity::class.java)
                 startActivity(intent)
             }
             R.id.about -> {

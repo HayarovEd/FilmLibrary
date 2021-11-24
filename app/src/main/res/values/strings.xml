@@ -21,4 +21,7 @@
     <string name="popularity">популярность: </string>
     <string name="ganre_movie">жанр: </string>
     <string name="popularity_movie">популярность: </string>
+    <string name="custom">Настройки</string>
+    <string name="adult">Взрослый контент</string>
+    <string name="about_project">Фильмотека Хаярова Э.В., edurda77@gmail.com</string>
 </resources>

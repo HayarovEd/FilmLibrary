@@ -14,6 +14,7 @@ import java.lang.IllegalStateException
 private const val BASE_URL = "https://api.themoviedb.org/3/"
 const val language = "ru-RU"
 const val apiKey = TMDB_API_KEY
+val includeAdult=false
 
 class RetrofitTheMdbRepoUsecaseImpl : TheMDBRepoUseCace {
     var retrofit: Retrofit = Retrofit.Builder()
@@ -25,7 +26,7 @@ class RetrofitTheMdbRepoUsecaseImpl : TheMDBRepoUseCace {
 
     override fun getReposForSearchMovieSync(userName: String): List<ResultSearchMovie> {
 
-        val resultsParsing: ResultsParsing? = api.getSearchMovie(apiKey, language, userName)
+        val resultsParsing: ResultsParsing? = api.getSearchMovie(apiKey, language, userName,includeAdult)
             .execute().body()
         return parsingForSync(resultsParsing)
 
@@ -78,7 +79,8 @@ class RetrofitTheMdbRepoUsecaseImpl : TheMDBRepoUseCace {
         onSuccess: (List<ResultSearchMovie>) -> Unit,
         OnError: (Throwable) -> Unit
     ) {
-        api.getSearchMovie(userName, apiKey, language).enqueue(object : Callback<ResultsParsing> {
+        api.getSearchMovie(apiKey, language, userName, includeAdult)
+            .enqueue(object : Callback<ResultsParsing> {
             override fun onResponse(
                 call: Call<ResultsParsing>,
                 response: Response<ResultsParsing>
