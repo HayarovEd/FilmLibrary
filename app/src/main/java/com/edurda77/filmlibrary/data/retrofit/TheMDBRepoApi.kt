@@ -17,6 +17,7 @@ interface TheMDBRepoApi {
         @Query("language") language: String,
         @Query("query") searchString: String?,
         @Query("include_adult") includeAdult: Boolean
+
          //@Query("include_adult") includeAdult: Boolean*/
 
     ): Call<ResultsParsing>

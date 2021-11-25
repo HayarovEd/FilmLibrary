@@ -2,6 +2,7 @@ package com.edurda77.filmlibrary.ui
 
 import android.content.Intent
 import android.os.Bundle
+import android.preference.PreferenceManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -17,17 +18,19 @@ class SearchActivity : AppCompatActivity() {
     private val resultSearch = emptyList<ResultSearchMovie>().toMutableList()
 
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         binding = ActivitySearchBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-
+        val preferences = PreferenceManager.getDefaultSharedPreferences(this)
+        val adult : Boolean = preferences.getBoolean("SetAdult", false)
 
         binding.goSearchMovie.setOnClickListener {
             resultSearch.clear()
             val searchString = binding.searchMovie.text.toString()
             Thread {
-                goSearchMovie.getReposForSearchMovieSync(searchString)?.forEach {
+                goSearchMovie.getReposForSearchMovieSync(searchString, adult)?.forEach {
                     resultSearch.add(it)
                 }
                 runOnUiThread {

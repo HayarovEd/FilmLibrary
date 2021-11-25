@@ -1,5 +1,8 @@
 package com.edurda77.filmlibrary.data
 
+import android.content.Context
+import android.content.Context.MODE_PRIVATE
+import android.content.SharedPreferences
 import com.edurda77.filmlibrary.BuildConfig.TMDB_API_KEY
 import com.edurda77.filmlibrary.data.retrofit.TheMDBRepoApi
 import com.edurda77.filmlibrary.domain.TheMDBRepoUseCace
@@ -9,14 +12,26 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.lang.IllegalStateException
+import android.preference.PreferenceManager
+import android.content.Context.MODE_PRIVATE
+
+
+
+
+
+
 
 
 private const val BASE_URL = "https://api.themoviedb.org/3/"
 const val language = "ru-RU"
 const val apiKey = TMDB_API_KEY
-val includeAdult=false
+//val includeAdult=false
+
 
 class RetrofitTheMdbRepoUsecaseImpl : TheMDBRepoUseCace {
+
+
+
     var retrofit: Retrofit = Retrofit.Builder()
         .baseUrl(BASE_URL)
         .addConverterFactory(GsonConverterFactory.create())
@@ -24,9 +39,9 @@ class RetrofitTheMdbRepoUsecaseImpl : TheMDBRepoUseCace {
     var api: TheMDBRepoApi = retrofit.create(TheMDBRepoApi::class.java)
 
 
-    override fun getReposForSearchMovieSync(userName: String): List<ResultSearchMovie> {
+    override fun getReposForSearchMovieSync(userName: String, adultKey:Boolean): List<ResultSearchMovie> {
 
-        val resultsParsing: ResultsParsing? = api.getSearchMovie(apiKey, language, userName,includeAdult)
+        val resultsParsing: ResultsParsing? = api.getSearchMovie(apiKey, language, userName,adultKey)
             .execute().body()
         return parsingForSync(resultsParsing)
 
@@ -76,10 +91,11 @@ class RetrofitTheMdbRepoUsecaseImpl : TheMDBRepoUseCace {
 
     override fun getReposForSearchMovieAsync(
         userName: String,
+        adultKey:Boolean,
         onSuccess: (List<ResultSearchMovie>) -> Unit,
         OnError: (Throwable) -> Unit
     ) {
-        api.getSearchMovie(apiKey, language, userName, includeAdult)
+        api.getSearchMovie(apiKey, language, userName, adultKey)
             .enqueue(object : Callback<ResultsParsing> {
             override fun onResponse(
                 call: Call<ResultsParsing>,
