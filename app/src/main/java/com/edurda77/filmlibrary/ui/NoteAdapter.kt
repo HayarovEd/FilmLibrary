@@ -3,8 +3,7 @@ package com.edurda77.filmlibrary.ui
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.edurda77.filmlibrary.data.ResultSearchMovie
-import com.edurda77.filmlibrary.data.retrofit.NotsMovie
+import com.edurda77.filmlibrary.data.NotsMovie
 
 class NoteAdapter (private val list: List<NotsMovie>, val onClickListener: OnStateClickListener) :
     RecyclerView.Adapter<NoteHolder>()
