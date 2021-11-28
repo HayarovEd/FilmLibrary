@@ -1,6 +1,8 @@
 package com.edurda77.filmlibrary.ui
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.preference.PreferenceManager
 import androidx.appcompat.app.AppCompatActivity
@@ -16,7 +18,8 @@ class SearchActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySearchBinding
     private val goSearchMovie: TheMDBRepoUseCace by lazy { app.theMDBRepoUseCace }
     private val resultSearch = emptyList<ResultSearchMovie>().toMutableList()
-
+    val APP_PREFERENCES  : String = "mysettings"
+    lateinit var mSettings: SharedPreferences
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,8 +27,8 @@ class SearchActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        val preferences = PreferenceManager.getDefaultSharedPreferences(this)
-        val adult : Boolean = preferences.getBoolean("SetAdult", false)
+        mSettings = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE)
+        val adult : Boolean = mSettings.getBoolean(APP_PREFERENCES, false)
 
         binding.goSearchMovie.setOnClickListener {
             resultSearch.clear()
