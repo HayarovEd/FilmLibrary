@@ -13,7 +13,8 @@ import android.preference.PreferenceManager
 
 
 class CustomActivity : AppCompatActivity() {
-    //var preferences = PreferenceManager.getDefaultSharedPreferences(this)
+    val APP_PREFERENCES  : String = "mysettings"
+    lateinit var mSettings: SharedPreferences
     var adult: Boolean=false
 
     private lateinit var binding: ActivityCustomBinding
@@ -21,17 +22,19 @@ class CustomActivity : AppCompatActivity() {
         binding = ActivityCustomBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        //binding.checkAdult.setOnClickListener()
+        mSettings = getSharedPreferences(APP_PREFERENCES,Context.MODE_PRIVATE)
+        SetPreferences()
+        binding.checkAdult.setOnClickListener()
     }
-    /*private fun Switch.setOnClickListener() {
+    private fun Switch.setOnClickListener() {
         adult = isChecked
         SetPreferences()
     }
     private fun SetPreferences(){
-        val editor = preferences.edit()
-        editor.putBoolean("SetAdult", adult)
+        val editor = mSettings.edit()
+        editor.putBoolean(APP_PREFERENCES, adult)
         editor.apply()
-    }*/
+    }
 }
 
 

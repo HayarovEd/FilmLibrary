@@ -23,6 +23,7 @@ class SearchActivity : AppCompatActivity() {
         binding = ActivitySearchBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+
         val preferences = PreferenceManager.getDefaultSharedPreferences(this)
         val adult : Boolean = preferences.getBoolean("SetAdult", false)
 
