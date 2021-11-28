@@ -28,10 +28,11 @@ class NotsActivity : AppCompatActivity() {
             object : NoteAdapter.OnStateClickListener {
                 override fun onStateClick(note: NotsMovie, position: Int) {
                     Thread {
+
                         //val iDMovie = goIDMovie.getReposForIDMovieSync(movie)
                         runOnUiThread {
                             val intent = Intent(this@NotsActivity, NoteActivity::class.java)
-                            intent.putExtra(Movie::class.java.simpleName, note)
+                            intent.putExtra(NotsMovie::class.java.simpleName, note)
 
                             startActivity(intent)
                         }

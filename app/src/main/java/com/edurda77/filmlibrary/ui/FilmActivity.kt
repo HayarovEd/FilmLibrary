@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.edurda77.filmlibrary.R
 import com.edurda77.filmlibrary.data.Movie
+import com.edurda77.filmlibrary.data.NotsMovie
 import com.edurda77.filmlibrary.databinding.ActivityFilmBinding
 
 class FilmActivity : AppCompatActivity() {
@@ -30,6 +31,7 @@ class FilmActivity : AppCompatActivity() {
         val summaryEditText: TextView? = binding.summaryMovie
         val popularityEditText: TextView? = binding.populatityMovie
         val picture : ImageView = binding.pictureMovie
+
         val arguments = intent.extras
 
 
@@ -51,7 +53,15 @@ class FilmActivity : AppCompatActivity() {
             Glide.with(this).load(beginURL+movie.posterPath)
                 .override(320, 480)
                 .placeholder(R.drawable.video).into(picture)
+            binding.saveNots.setOnClickListener {
+                val id = movie.id
+                val title = movie.title
+                val contentNote = binding.noteMovie.text.toString()
+                val note = NotsMovie(id, title,contentNote)
+            }
         }
+
+
 
 
 
