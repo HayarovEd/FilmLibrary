@@ -110,6 +110,10 @@ class MainActivity : AppCompatActivity() {
                 val intent = Intent(this, SearchActivity::class.java)
                 startActivity(intent)
             }
+            R.id.nots -> {
+                val intent = Intent(this, NotsActivity::class.java)
+                startActivity(intent)
+            }
             R.id.custom -> {
                 val intent = Intent(this, CustomActivity::class.java)
                 startActivity(intent)

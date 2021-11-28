@@ -24,4 +24,8 @@
     <string name="custom">Настройки</string>
     <string name="adult">Взрослый контент</string>
     <string name="about_project">Фильмотека Хаярова Э.В., edurda77@gmail.com</string>
+    <string name="add_nots">Добавить заметку</string>
+    <string name="save_nots">Сохранить заметку о фильме</string>
+    <string name="content_note">Содержимое заметки</string>
+    <string name="nots_movie">Заметки о фильмах</string>
 </resources>
