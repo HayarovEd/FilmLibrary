@@ -2,6 +2,7 @@ package com.edurda77.filmlibrary.ui
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
 import android.view.MenuItem
 import android.widget.EditText
 import android.widget.TextView
@@ -40,7 +41,7 @@ class NoteActivity : AppCompatActivity() {
             content = binding.noteChangeMovie.text.toString()
             binding.saveChangeNots.setOnClickListener {
 
-                    note.copy(id, title, content)
+
                 Thread {
                     noteDao.update(id, title, content)
                     runOnUiThread {
@@ -50,7 +51,7 @@ class NoteActivity : AppCompatActivity() {
             }
             binding.deleteNote.setOnClickListener {
 
-                    note.copy(id, title, content)
+
                 Thread {
                     noteDao.delete(id)
                     runOnUiThread {
@@ -73,6 +74,11 @@ class NoteActivity : AppCompatActivity() {
         toolbar = binding.toolbar
         setSupportActionBar(toolbar)
 
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu, menu)
+        return super.onCreateOptionsMenu(menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

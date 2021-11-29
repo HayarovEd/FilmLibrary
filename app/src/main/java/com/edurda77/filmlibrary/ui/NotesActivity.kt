@@ -2,6 +2,7 @@ package com.edurda77.filmlibrary.ui
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -49,9 +50,10 @@ class NotesActivity : AppCompatActivity() {
     }
 
     private fun initNots(): List<NoteMovie> {
+        Thread{
         noteDao.getNots().forEach {
-            notsOfMovie.add(it)
-        }
+            notsOfMovie.add(it)}
+        }.start()
 
         return notsOfMovie
     }
@@ -59,6 +61,10 @@ class NotesActivity : AppCompatActivity() {
         toolbar = binding.toolbar
         setSupportActionBar(toolbar)
 
+    }
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu, menu)
+        return super.onCreateOptionsMenu(menu)
     }
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {

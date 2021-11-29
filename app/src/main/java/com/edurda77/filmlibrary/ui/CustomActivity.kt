@@ -5,6 +5,7 @@ import android.content.Intent
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
 import android.widget.Switch
 import com.edurda77.filmlibrary.R
 import com.edurda77.filmlibrary.databinding.ActivityCustomBinding
@@ -12,43 +13,50 @@ import android.view.MenuItem
 import androidx.appcompat.widget.Toolbar
 import com.edurda77.filmlibrary.domain.NoteDao
 import com.edurda77.filmlibrary.domain.NoteRepo
-
+private const val DEFAUL_KEY = "DEFAUL_KEY"
 
 class CustomActivity : AppCompatActivity() {
     private var toolbar: Toolbar? = null
-    val APP_PREFERENCES  : String = "mysettings"
-    lateinit var mSettings: SharedPreferences
-    var adult: Boolean=false
-    private val noteDao: NoteDao by lazy { app.noteDao }
 
+    var adult: Boolean = false
+    private val noteDao: NoteDao by lazy { app.noteDao }
+    private val prefernces: SharedPreferences by lazy {getPreferences(MODE_PRIVATE)}
     private lateinit var binding: ActivityCustomBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         binding = ActivityCustomBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         setToolbar()
-        mSettings = getSharedPreferences(APP_PREFERENCES,Context.MODE_PRIVATE)
-        SetPreferences()
+
+
         binding.checkAdult.setOnClickListener()
-        binding.clearNots.setOnClickListener{
+        binding.clearNots.setOnClickListener {
             Thread {
                 noteDao.clearNots()
             }.start()
         }
     }
+
     private fun Switch.setOnClickListener() {
         adult = isChecked
-        SetPreferences()
+
     }
-    private fun SetPreferences(){
-        val editor = mSettings.edit()
-        editor.putBoolean(APP_PREFERENCES, adult)
-        editor.apply()
+
+    private fun SetPreferences() {
+        prefernces.edit().let {
+            it.putBoolean(DEFAUL_KEY,adult)
+            it.commit()
+        }
     }
+
     private fun setToolbar() {
         toolbar = binding.toolbar
         setSupportActionBar(toolbar)
 
+    }
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu, menu)
+        return super.onCreateOptionsMenu(menu)
     }
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
@@ -70,6 +78,14 @@ class CustomActivity : AppCompatActivity() {
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+    override fun onStart() {
+        super.onStart()
+        binding.checkAdult.isChecked=prefernces.getBoolean(DEFAUL_KEY, false)
+    }
+    override fun onStop() {
+        SetPreferences()
+        super.onStop()
     }
 }
 
