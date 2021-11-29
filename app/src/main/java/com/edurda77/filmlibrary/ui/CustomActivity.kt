@@ -16,12 +16,13 @@ import com.edurda77.filmlibrary.domain.NoteDao
 import com.edurda77.filmlibrary.domain.NoteRepo
 private const val DEFAUL_KEY = "DEFAUL_KEY"
 
+
 class CustomActivity : AppCompatActivity() {
     private var toolbar: Toolbar? = null
 
-    var adult: Boolean = false
+
     private val noteDao: NoteDao by lazy { app.noteDao }
-    private val prefernces: SharedPreferences by lazy {getPreferences(MODE_PRIVATE)}
+    private val prefernces: SharedPreferences by lazy {app.sharedPrefernces}
     private lateinit var binding: ActivityCustomBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         binding = ActivityCustomBinding.inflate(layoutInflater)
@@ -30,7 +31,7 @@ class CustomActivity : AppCompatActivity() {
         setToolbar()
 
 
-        binding.checkAdult.setOnClickListener()
+
         binding.clearNots.setOnClickListener {
             Thread {
                 noteDao.clearNots()
@@ -39,14 +40,11 @@ class CustomActivity : AppCompatActivity() {
         }
     }
 
-    private fun Switch.setOnClickListener() {
-        adult = isChecked
 
-    }
 
     private fun SetPreferences() {
         prefernces.edit().let {
-            it.putBoolean(DEFAUL_KEY,adult)
+            it.putBoolean(DEFAUL_KEY,binding.checkAdult.isChecked)
             it.commit()
         }
     }

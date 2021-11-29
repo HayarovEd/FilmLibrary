@@ -16,14 +16,14 @@ import com.edurda77.filmlibrary.data.ResultSearchMovie
 import com.edurda77.filmlibrary.databinding.ActivitySearchBinding
 import com.edurda77.filmlibrary.domain.TheMDBRepoUseCace
 
-
+private const val DEFAUL_KEY = "DEFAUL_KEY"
 class SearchActivity : AppCompatActivity() {
     private var toolbar: Toolbar? = null
     private lateinit var binding: ActivitySearchBinding
     private val goSearchMovie: TheMDBRepoUseCace by lazy { app.theMDBRepoUseCace }
     private val resultSearch = emptyList<ResultSearchMovie>().toMutableList()
-    val APP_PREFERENCES  : String = "mysettings"
-    lateinit var mSettings: SharedPreferences
+    private val prefernces: SharedPreferences by lazy {app.sharedPrefernces}
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,8 +31,7 @@ class SearchActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         setToolbar()
-        mSettings = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE)
-        val adult : Boolean = mSettings.getBoolean(APP_PREFERENCES, false)
+        val adult= prefernces.getBoolean(DEFAUL_KEY,false)
 
         binding.goSearchMovie.setOnClickListener {
             resultSearch.clear()
