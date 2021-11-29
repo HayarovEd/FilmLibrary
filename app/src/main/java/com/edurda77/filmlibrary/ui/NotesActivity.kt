@@ -1,24 +1,25 @@
 package com.edurda77.filmlibrary.ui
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.edurda77.filmlibrary.R
 import com.edurda77.filmlibrary.data.NoteMovie
-import com.edurda77.filmlibrary.databinding.ActivityNotsBinding
+import com.edurda77.filmlibrary.databinding.ActivityNotesBinding
+import com.edurda77.filmlibrary.domain.NoteDao
 import com.edurda77.filmlibrary.domain.NoteRepo
 
-class NotsActivity : AppCompatActivity() {
+class NotesActivity : AppCompatActivity() {
     private var toolbar: Toolbar? = null
-    private lateinit var binding: ActivityNotsBinding
-    private val noteRepo: NoteRepo by lazy { app.noteRepo }
+    private lateinit var binding: ActivityNotesBinding
+    private val noteDao: NoteDao by lazy { app.noteDao }
     val notsOfMovie = emptyList<NoteMovie>().toMutableList()
     override fun onCreate(savedInstanceState: Bundle?) {
-        binding = ActivityNotsBinding.inflate(layoutInflater)
+        binding = ActivityNotesBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         setToolbar()
@@ -36,7 +37,7 @@ class NotsActivity : AppCompatActivity() {
 
                         //val iDMovie = goIDMovie.getReposForIDMovieSync(movie)
                         runOnUiThread {
-                            val intent = Intent(this@NotsActivity, NoteActivity::class.java)
+                            val intent = Intent(this@NotesActivity, NoteActivity::class.java)
                             intent.putExtra(NoteMovie::class.java.simpleName, note)
 
                             startActivity(intent)
@@ -48,7 +49,7 @@ class NotsActivity : AppCompatActivity() {
     }
 
     private fun initNots(): List<NoteMovie> {
-        noteRepo.getNots().forEach {
+        noteDao.getNots().forEach {
             notsOfMovie.add(it)
         }
 
@@ -66,7 +67,7 @@ class NotsActivity : AppCompatActivity() {
                 startActivity(intent)
             }
             R.id.nots -> {
-                val intent = Intent(this, NotsActivity::class.java)
+                val intent = Intent(this, NotesActivity::class.java)
                 startActivity(intent)
             }
             R.id.custom -> {

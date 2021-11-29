@@ -13,13 +13,15 @@ import com.edurda77.filmlibrary.R
 import com.edurda77.filmlibrary.data.Movie
 import com.edurda77.filmlibrary.data.NoteMovie
 import com.edurda77.filmlibrary.databinding.ActivityFilmBinding
+import com.edurda77.filmlibrary.domain.NoteDao
 import com.edurda77.filmlibrary.domain.NoteRepo
 
 class FilmActivity : AppCompatActivity() {
     private var toolbar: Toolbar? = null
     private lateinit var binding: ActivityFilmBinding
     private var beginURL = "https://image.tmdb.org/t/p/w500"
-    private val noteRepo: NoteRepo by lazy { app.noteRepo }
+    private val noteDao: NoteDao by lazy { app.noteDao }
+
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         binding = ActivityFilmBinding.inflate(layoutInflater)
@@ -36,7 +38,7 @@ class FilmActivity : AppCompatActivity() {
         val revenueEditText: TextView? = binding.revenueMovie
         val summaryEditText: TextView? = binding.summaryMovie
         val popularityEditText: TextView? = binding.populatityMovie
-        val picture : ImageView = binding.pictureMovie
+        val picture: ImageView = binding.pictureMovie
 
         val arguments = intent.extras
 
@@ -49,35 +51,38 @@ class FilmActivity : AppCompatActivity() {
 
             ganreEditText?.text = ganreEditText?.text.toString() + movie.movieGanre
             yearEditText?.text = yearEditText?.text.toString() + movie.releaseDate
-            durationEditText?.text =  durationEditText?.text.toString() + movie.runtime.toString()
+            durationEditText?.text = durationEditText?.text.toString() + movie.runtime.toString()
             budgetEditText?.text = budgetEditText?.text.toString() + movie.budget.toString()
             revenueEditText?.text = revenueEditText?.text.toString() + movie.revenue.toString()
             summaryEditText?.text = summaryEditText?.text.toString() + movie.overview
-            popularityEditText?.text = popularityEditText?.text.toString() + movie.popularity.toString()
+            popularityEditText?.text =
+                popularityEditText?.text.toString() + movie.popularity.toString()
             //val url: String  = beginURL+movie.posterPath
 
-            Glide.with(this).load(beginURL+movie.posterPath)
+            Glide.with(this).load(beginURL + movie.posterPath)
                 .override(320, 480)
                 .placeholder(R.drawable.video).into(picture)
             binding.saveNots.setOnClickListener {
-                val id = movie.id
-                val title = movie.title
-                val contentNote = binding.noteMovie.text.toString()
-                val note = NoteMovie(id, title,contentNote)
-                noteRepo.add(note)
+
+                    val id = movie.id
+                    val title = movie.title
+                    val contentNote = binding.noteMovie.text.toString()
+                    val note = NoteMovie(id, title, contentNote)
+                Thread {
+                    noteDao.add(note)
+                }.start()
             }
         }
 
 
-
-
-
     }
+
     private fun setToolbar() {
         toolbar = binding.toolbar
         setSupportActionBar(toolbar)
 
     }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.action_search -> {
@@ -85,7 +90,7 @@ class FilmActivity : AppCompatActivity() {
                 startActivity(intent)
             }
             R.id.nots -> {
-                val intent = Intent(this, NotsActivity::class.java)
+                val intent = Intent(this, NotesActivity::class.java)
                 startActivity(intent)
             }
             R.id.custom -> {

@@ -111,7 +111,7 @@ class MainActivity : AppCompatActivity() {
                 startActivity(intent)
             }
             R.id.nots -> {
-                val intent = Intent(this, NotsActivity::class.java)
+                val intent = Intent(this, NotesActivity::class.java)
                 startActivity(intent)
             }
             R.id.custom -> {

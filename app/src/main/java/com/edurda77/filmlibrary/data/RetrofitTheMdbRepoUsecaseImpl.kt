@@ -1,26 +1,19 @@
 package com.edurda77.filmlibrary.data
 
-import android.content.Context
-import android.content.Context.MODE_PRIVATE
-import android.content.SharedPreferences
 import com.edurda77.filmlibrary.BuildConfig.TMDB_API_KEY
 import com.edurda77.filmlibrary.data.retrofit.TheMDBRepoApi
+import com.edurda77.filmlibrary.domain.NoteRepo
 import com.edurda77.filmlibrary.domain.TheMDBRepoUseCace
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import java.lang.IllegalStateException
-import android.preference.PreferenceManager
-import android.content.Context.MODE_PRIVATE
-import com.edurda77.filmlibrary.domain.NoteRepo
 
 
 private const val BASE_URL = "https://api.themoviedb.org/3/"
-const val language = "ru-RU"
-const val apiKey = TMDB_API_KEY
-//val includeAdult=false
+const val LANGUAGE = "ru-RU"
+
 
 
 class RetrofitTheMdbRepoUsecaseImpl : TheMDBRepoUseCace, NoteRepo {
@@ -36,7 +29,7 @@ class RetrofitTheMdbRepoUsecaseImpl : TheMDBRepoUseCace, NoteRepo {
 
     override fun getReposForSearchMovieSync(userName: String, adultKey:Boolean): List<ResultSearchMovie> {
 
-        val resultsParsing: ResultsParsing? = api.getSearchMovie(apiKey, language, userName,adultKey)
+        val resultsParsing: ResultsParsing? = api.getSearchMovie(TMDB_API_KEY, LANGUAGE, userName,adultKey)
             .execute().body()
         return parsingForSync(resultsParsing)
 
@@ -45,40 +38,40 @@ class RetrofitTheMdbRepoUsecaseImpl : TheMDBRepoUseCace, NoteRepo {
 
     override fun getReposForIDMovieSync(searcheMovie: ResultSearchMovie): Movie? {
 
-        return api.getIDMovie(searcheMovie.id, apiKey, language)
+        return api.getIDMovie(searcheMovie.id, TMDB_API_KEY, LANGUAGE)
             .execute().body()
     }
 
 
     override fun getReposForGenresSync(): List<Genres> {
 
-        return api.getGenres(apiKey).execute().body() ?: emptyList()
+        return api.getGenres(TMDB_API_KEY).execute().body() ?: emptyList()
 
     }
 
     override fun getReposForNowPlayingMovieSync(): List<ResultSearchMovie>? {
-        val resultsParsing: ResultsParsing? = api.getNowPlaying(apiKey, language)
+        val resultsParsing: ResultsParsing? = api.getNowPlaying(TMDB_API_KEY, LANGUAGE)
             .execute().body()
 
         return parsingForSync(resultsParsing)
     }
 
     override fun getReposForPopularMovieSync(): List<ResultSearchMovie>? {
-        val resultsParsing: ResultsParsing? = api.getPopular(apiKey, language)
+        val resultsParsing: ResultsParsing? = api.getPopular(TMDB_API_KEY, LANGUAGE)
             .execute().body()
 
         return parsingForSync(resultsParsing)
     }
 
     override fun getReposForTopRatedMovieSync(): List<ResultSearchMovie>? {
-        val resultsParsing: ResultsParsing? = api.getTopRated(apiKey, language)
+        val resultsParsing: ResultsParsing? = api.getTopRated(TMDB_API_KEY, LANGUAGE)
             .execute().body()
 
         return parsingForSync(resultsParsing)
     }
 
     override fun getReposForUpcomingMovieSync(): List<ResultSearchMovie>? {
-        val resultsParsing: ResultsParsing? = api.getUpcoming(apiKey, language)
+        val resultsParsing: ResultsParsing? = api.getUpcoming(TMDB_API_KEY, LANGUAGE)
             .execute().body()
 
         return parsingForSync(resultsParsing)
@@ -90,7 +83,7 @@ class RetrofitTheMdbRepoUsecaseImpl : TheMDBRepoUseCace, NoteRepo {
         onSuccess: (List<ResultSearchMovie>) -> Unit,
         OnError: (Throwable) -> Unit
     ) {
-        api.getSearchMovie(apiKey, language, userName, adultKey)
+        api.getSearchMovie(TMDB_API_KEY, LANGUAGE, userName, adultKey)
             .enqueue(object : Callback<ResultsParsing> {
             override fun onResponse(
                 call: Call<ResultsParsing>,
@@ -119,7 +112,7 @@ class RetrofitTheMdbRepoUsecaseImpl : TheMDBRepoUseCace, NoteRepo {
         onSuccess: (Movie) -> Unit,
         OnError: (Throwable) -> Unit
     ) {
-        api.getIDMovie(searcheMovie.id, apiKey, language).enqueue(object : Callback<Movie> {
+        api.getIDMovie(searcheMovie.id, TMDB_API_KEY, LANGUAGE).enqueue(object : Callback<Movie> {
             override fun onResponse(
                 call: Call<Movie>,
                 response: Response<Movie>
@@ -144,7 +137,7 @@ class RetrofitTheMdbRepoUsecaseImpl : TheMDBRepoUseCace, NoteRepo {
         onSuccess: (List<Genres>) -> Unit,
         OnError: (Throwable) -> Unit
     ) {
-        api.getGenres(apiKey).enqueue(object : Callback<List<Genres>> {
+        api.getGenres(TMDB_API_KEY).enqueue(object : Callback<List<Genres>> {
             override fun onResponse(call: Call<List<Genres>>, response: Response<List<Genres>>) {
                 if (response.isSuccessful) {
                     onSuccess(response.body() ?: throw IllegalStateException("Нулевой результат"))
@@ -164,7 +157,7 @@ class RetrofitTheMdbRepoUsecaseImpl : TheMDBRepoUseCace, NoteRepo {
         onSuccess: (List<ResultSearchMovie>) -> Unit,
         OnError: (Throwable) -> Unit
     ) {
-        api.getNowPlaying(apiKey, language).enqueue(object : Callback<ResultsParsing> {
+        api.getNowPlaying(TMDB_API_KEY, LANGUAGE).enqueue(object : Callback<ResultsParsing> {
             override fun onResponse(
                 call: Call<ResultsParsing>,
                 response: Response<ResultsParsing>
@@ -191,7 +184,7 @@ class RetrofitTheMdbRepoUsecaseImpl : TheMDBRepoUseCace, NoteRepo {
         onSuccess: (List<ResultSearchMovie>) -> Unit,
         OnError: (Throwable) -> Unit
     ) {
-        api.getPopular(apiKey, language).enqueue(object : Callback<ResultsParsing> {
+        api.getPopular(TMDB_API_KEY, LANGUAGE).enqueue(object : Callback<ResultsParsing> {
             override fun onResponse(
                 call: Call<ResultsParsing>,
                 response: Response<ResultsParsing>
@@ -218,7 +211,7 @@ class RetrofitTheMdbRepoUsecaseImpl : TheMDBRepoUseCace, NoteRepo {
         onSuccess: (List<ResultSearchMovie>) -> Unit,
         OnError: (Throwable) -> Unit
     ) {
-        api.getTopRated(apiKey, language).enqueue(object : Callback<ResultsParsing> {
+        api.getTopRated(TMDB_API_KEY, LANGUAGE).enqueue(object : Callback<ResultsParsing> {
             override fun onResponse(
                 call: Call<ResultsParsing>,
                 response: Response<ResultsParsing>
@@ -245,7 +238,7 @@ class RetrofitTheMdbRepoUsecaseImpl : TheMDBRepoUseCace, NoteRepo {
         onSuccess: (List<ResultSearchMovie>) -> Unit,
         OnError: (Throwable) -> Unit
     ) {
-        api.getUpcoming(apiKey, language).enqueue(object : Callback<ResultsParsing> {
+        api.getUpcoming(TMDB_API_KEY, LANGUAGE).enqueue(object : Callback<ResultsParsing> {
             override fun onResponse(
                 call: Call<ResultsParsing>,
                 response: Response<ResultsParsing>
@@ -301,9 +294,9 @@ class RetrofitTheMdbRepoUsecaseImpl : TheMDBRepoUseCace, NoteRepo {
         cacheNots.add(indexOfDelete,note)
     }
 
-    override fun clearNots(): List<NoteMovie> {
+    override fun clearNots() {
         cacheNots.clear()
-        return cacheNots
+
 
     }
 }

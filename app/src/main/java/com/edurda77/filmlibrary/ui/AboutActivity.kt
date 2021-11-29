@@ -7,7 +7,6 @@ import android.view.MenuItem
 import androidx.appcompat.widget.Toolbar
 import com.edurda77.filmlibrary.R
 import com.edurda77.filmlibrary.databinding.ActivityAboutBinding
-import com.edurda77.filmlibrary.databinding.ActivityMainBinding
 
 class AboutActivity : AppCompatActivity() {
     private var toolbar: Toolbar? = null
@@ -31,7 +30,7 @@ class AboutActivity : AppCompatActivity() {
                 startActivity(intent)
             }
             R.id.nots -> {
-                val intent = Intent(this, NotsActivity::class.java)
+                val intent = Intent(this, NotesActivity::class.java)
                 startActivity(intent)
             }
             R.id.custom -> {

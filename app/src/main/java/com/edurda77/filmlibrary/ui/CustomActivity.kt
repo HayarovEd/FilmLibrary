@@ -8,9 +8,9 @@ import android.os.Bundle
 import android.widget.Switch
 import com.edurda77.filmlibrary.R
 import com.edurda77.filmlibrary.databinding.ActivityCustomBinding
-import android.preference.PreferenceManager
 import android.view.MenuItem
 import androidx.appcompat.widget.Toolbar
+import com.edurda77.filmlibrary.domain.NoteDao
 import com.edurda77.filmlibrary.domain.NoteRepo
 
 
@@ -19,7 +19,7 @@ class CustomActivity : AppCompatActivity() {
     val APP_PREFERENCES  : String = "mysettings"
     lateinit var mSettings: SharedPreferences
     var adult: Boolean=false
-    private val noteRepo: NoteRepo by lazy { app.noteRepo }
+    private val noteDao: NoteDao by lazy { app.noteDao }
 
     private lateinit var binding: ActivityCustomBinding
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,7 +31,9 @@ class CustomActivity : AppCompatActivity() {
         SetPreferences()
         binding.checkAdult.setOnClickListener()
         binding.clearNots.setOnClickListener{
-            noteRepo.clearNots()
+            Thread {
+                noteDao.clearNots()
+            }.start()
         }
     }
     private fun Switch.setOnClickListener() {
@@ -55,7 +57,7 @@ class CustomActivity : AppCompatActivity() {
                 startActivity(intent)
             }
             R.id.nots -> {
-                val intent = Intent(this, NotsActivity::class.java)
+                val intent = Intent(this, NotesActivity::class.java)
                 startActivity(intent)
             }
             R.id.custom -> {

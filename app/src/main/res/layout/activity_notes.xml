@@ -7,7 +7,7 @@
     android:background="@color/purple_500"
     android:orientation="vertical"
     android:layout_margin="@dimen/margin_half"
-    tools:context=".ui.NotsActivity">
+    tools:context=".ui.NotesActivity">
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">

@@ -10,12 +10,13 @@ import androidx.appcompat.widget.Toolbar
 import com.edurda77.filmlibrary.R
 import com.edurda77.filmlibrary.data.NoteMovie
 import com.edurda77.filmlibrary.databinding.ActivityNoteBinding
+import com.edurda77.filmlibrary.domain.NoteDao
 import com.edurda77.filmlibrary.domain.NoteRepo
 
 class NoteActivity : AppCompatActivity() {
     private var toolbar: Toolbar? = null
     private lateinit var binding: ActivityNoteBinding
-    private val noteRepo: NoteRepo by lazy { app.noteRepo }
+    private val noteDao: NoteDao by lazy { app.noteDao }
     override fun onCreate(savedInstanceState: Bundle?) {
         binding = ActivityNoteBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
@@ -38,28 +39,42 @@ class NoteActivity : AppCompatActivity() {
             contentEditText?.setText(content)
             content = binding.noteChangeMovie.text.toString()
             binding.saveChangeNots.setOnClickListener {
-                note.copy(id,title,content)
-                noteRepo.update(id,note)
-                initStartActivity()
+
+                    note.copy(id, title, content)
+                Thread {
+                    noteDao.update(id, title, content)
+                    runOnUiThread {
+                        initStartActivity()
+                    }
+                }.start()
             }
             binding.deleteNote.setOnClickListener {
-                note.copy(id,title,content)
-                noteRepo.delete(id)
-                initStartActivity()
+
+                    note.copy(id, title, content)
+                Thread {
+                    noteDao.delete(id)
+                    runOnUiThread {
+                        initStartActivity()
+                    }
+
+                }.start()
             }
         }
 
 
     }
-    fun initStartActivity(){
-        val intent = Intent(this@NoteActivity, NotsActivity::class.java)
+
+    fun initStartActivity() {
+        val intent = Intent(this@NoteActivity, NotesActivity::class.java)
         startActivity(intent)
     }
+
     private fun setToolbar() {
         toolbar = binding.toolbar
         setSupportActionBar(toolbar)
 
     }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.action_search -> {
@@ -67,7 +82,7 @@ class NoteActivity : AppCompatActivity() {
                 startActivity(intent)
             }
             R.id.nots -> {
-                val intent = Intent(this, NotsActivity::class.java)
+                val intent = Intent(this, NotesActivity::class.java)
                 startActivity(intent)
             }
             R.id.custom -> {
