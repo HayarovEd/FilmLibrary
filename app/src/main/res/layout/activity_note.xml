@@ -8,6 +8,16 @@
     android:background="@color/purple_500"
     android:orientation="vertical"
     tools:context=".ui.NoteActivity">
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            style="@style/toolbar"
+            app:title="@string/film_finder"
+            app:titleTextColor="@color/green" />
+    </com.google.android.material.appbar.AppBarLayout>
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
