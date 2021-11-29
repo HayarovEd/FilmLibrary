@@ -7,6 +7,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import com.bumptech.glide.Glide
@@ -72,6 +73,7 @@ class FilmActivity : AppCompatActivity() {
                 Thread {
                     noteDao.add(note)
                 }.start()
+                Toast.makeText(this,"Заметка добавлена", Toast.LENGTH_SHORT).show()
             }
         }
 

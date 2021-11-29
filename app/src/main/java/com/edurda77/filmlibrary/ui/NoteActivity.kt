@@ -6,6 +6,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import com.edurda77.filmlibrary.R
@@ -38,16 +39,18 @@ class NoteActivity : AppCompatActivity() {
             val id = note.idNote
             titleText?.text = title
             contentEditText?.setText(content)
-            content = binding.noteChangeMovie.text.toString()
+
+
             binding.saveChangeNots.setOnClickListener {
-
-
+                content = binding.noteChangeMovie.text.toString()
+                Toast.makeText(this,content,Toast.LENGTH_LONG).show()
                 Thread {
-                    noteDao.update(id, title, content)
+                    noteDao.update(id,  content)
                     runOnUiThread {
                         initStartActivity()
                     }
                 }.start()
+                Toast.makeText(this,"Заметка обновлена",Toast.LENGTH_SHORT).show()
             }
             binding.deleteNote.setOnClickListener {
 
@@ -59,6 +62,7 @@ class NoteActivity : AppCompatActivity() {
                     }
 
                 }.start()
+                Toast.makeText(this,"Заметка удалена",Toast.LENGTH_SHORT).show()
             }
         }
 

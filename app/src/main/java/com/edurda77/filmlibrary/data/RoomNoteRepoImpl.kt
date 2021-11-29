@@ -25,13 +25,13 @@ class RoomNoteRepoImpl (context:Context): NoteDao{
     override fun delete(id: Int) {
 
         noteDao.delete(id)
-        TODO("Not yet implemented")
+
     }
 
 
 
-    override fun update(id: Int, title: String,content: String) {
-        noteDao.update(id,title, content)
+    override fun update(id: Int, content: String) {
+        noteDao.update(id,content)
     }
 
     override fun clearNots(){

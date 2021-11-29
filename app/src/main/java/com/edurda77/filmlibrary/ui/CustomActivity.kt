@@ -10,6 +10,7 @@ import android.widget.Switch
 import com.edurda77.filmlibrary.R
 import com.edurda77.filmlibrary.databinding.ActivityCustomBinding
 import android.view.MenuItem
+import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
 import com.edurda77.filmlibrary.domain.NoteDao
 import com.edurda77.filmlibrary.domain.NoteRepo
@@ -34,6 +35,7 @@ class CustomActivity : AppCompatActivity() {
             Thread {
                 noteDao.clearNots()
             }.start()
+            Toast.makeText(this,"Теперь заметок нет", Toast.LENGTH_SHORT).show()
         }
     }
 
