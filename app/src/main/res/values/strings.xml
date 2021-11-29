@@ -28,4 +28,5 @@
     <string name="save_nots">Сохранить заметку о фильме</string>
     <string name="content_note">Содержимое заметки</string>
     <string name="nots_movie">Заметки о фильмах</string>
+    <string name="delete_note">Удалить заметку</string>
 </resources>

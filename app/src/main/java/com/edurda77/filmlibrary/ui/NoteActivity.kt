@@ -5,11 +5,9 @@ import android.os.Bundle
 import android.widget.EditText
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import com.edurda77.filmlibrary.data.Movie
 import com.edurda77.filmlibrary.data.NoteMovie
 import com.edurda77.filmlibrary.databinding.ActivityNoteBinding
 import com.edurda77.filmlibrary.domain.NoteRepo
-import com.edurda77.filmlibrary.domain.TheMDBRepoUseCace
 
 class NoteActivity : AppCompatActivity() {
     private lateinit var binding: ActivityNoteBinding
@@ -37,12 +35,19 @@ class NoteActivity : AppCompatActivity() {
             binding.saveChangeNots.setOnClickListener {
                 note.copy(id,title,content)
                 noteRepo.update(id,note)
-                val intent = Intent(this@NoteActivity, NotsActivity::class.java)
-
-                startActivity(intent)
+                initStartActivity()
+            }
+            binding.deleteNote.setOnClickListener {
+                note.copy(id,title,content)
+                noteRepo.delete(id)
+                initStartActivity()
             }
         }
 
 
+    }
+    fun initStartActivity(){
+        val intent = Intent(this@NoteActivity, NotsActivity::class.java)
+        startActivity(intent)
     }
 }
