@@ -8,7 +8,6 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.edurda77.filmlibrary.R
-import com.edurda77.filmlibrary.data.Movie
 import com.edurda77.filmlibrary.data.ResultSearchMovie
 
 class MovieHolder (inflater: LayoutInflater, parent: ViewGroup) :

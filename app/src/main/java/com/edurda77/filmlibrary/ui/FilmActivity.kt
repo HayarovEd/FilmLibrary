@@ -59,7 +59,7 @@ class FilmActivity : AppCompatActivity() {
             summaryEditText?.text = summaryEditText?.text.toString() + movie.overview
             popularityEditText?.text =
                 popularityEditText?.text.toString() + movie.popularity.toString()
-            //val url: String  = beginURL+movie.posterPath
+
 
             Glide.with(this).load(beginURL + movie.posterPath)
                 .override(320, 480)

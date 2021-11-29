@@ -3,7 +3,6 @@ package com.edurda77.filmlibrary.ui
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.edurda77.filmlibrary.data.Movie
 import com.edurda77.filmlibrary.data.ResultSearchMovie
 
 

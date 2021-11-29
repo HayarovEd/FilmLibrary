@@ -3,7 +3,6 @@ package com.edurda77.filmlibrary.ui
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.edurda77.filmlibrary.R
@@ -35,6 +34,4 @@ class NoteHolder (inflater: LayoutInflater, parent: ViewGroup) :
 
 }
 
-private fun Button.setOnClickListener() {
-    TODO("Not yet implemented")
-}
+

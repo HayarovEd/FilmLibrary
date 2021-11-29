@@ -12,13 +12,12 @@ import com.edurda77.filmlibrary.R
 import com.edurda77.filmlibrary.data.NoteMovie
 import com.edurda77.filmlibrary.databinding.ActivityNotesBinding
 import com.edurda77.filmlibrary.domain.NoteDao
-import com.edurda77.filmlibrary.domain.NoteRepo
 
 class NotesActivity : AppCompatActivity() {
     private var toolbar: Toolbar? = null
     private lateinit var binding: ActivityNotesBinding
     private val noteDao: NoteDao by lazy { app.noteDao }
-    val notsOfMovie = emptyList<NoteMovie>().toMutableList()
+    private val notsOfMovie = emptyList<NoteMovie>().toMutableList()
     override fun onCreate(savedInstanceState: Bundle?) {
         binding = ActivityNotesBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)

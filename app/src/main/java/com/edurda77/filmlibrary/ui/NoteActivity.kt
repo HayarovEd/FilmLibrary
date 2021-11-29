@@ -13,7 +13,6 @@ import com.edurda77.filmlibrary.R
 import com.edurda77.filmlibrary.data.NoteMovie
 import com.edurda77.filmlibrary.databinding.ActivityNoteBinding
 import com.edurda77.filmlibrary.domain.NoteDao
-import com.edurda77.filmlibrary.domain.NoteRepo
 
 class NoteActivity : AppCompatActivity() {
     private var toolbar: Toolbar? = null
@@ -69,7 +68,7 @@ class NoteActivity : AppCompatActivity() {
 
     }
 
-    fun initStartActivity() {
+    private fun initStartActivity() {
         val intent = Intent(this@NoteActivity, NotesActivity::class.java)
         startActivity(intent)
     }
