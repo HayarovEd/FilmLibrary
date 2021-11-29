@@ -12,7 +12,7 @@ import com.edurda77.filmlibrary.data.FilmGenre
 class OutHolder(
     inflater: LayoutInflater,
     parent: ViewGroup,
-    val onClickListener: MovieSearchAdapter.OnStateClickListener
+    val onClickListener: MovieAdapter.OnStateClickListener
 ) :
     RecyclerView.ViewHolder(inflater.inflate(R.layout.layout_out_recycled_view, parent, false)) {
     private val ganreTitle: TextView = itemView.findViewById(R.id.ganre_movie)
@@ -28,7 +28,7 @@ class OutHolder(
         layoutManager.initialPrefetchItemCount = filmGanre.movieList.size
 
 
-        val subItemAdapter = MovieSearchAdapter(filmGanre.movieList,onClickListener)
+        val subItemAdapter = MovieAdapter(filmGanre.movieList,onClickListener)
         movieItem.layoutManager = layoutManager
         movieItem.adapter = subItemAdapter
 
