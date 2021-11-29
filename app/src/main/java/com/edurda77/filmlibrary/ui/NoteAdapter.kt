@@ -3,13 +3,13 @@ package com.edurda77.filmlibrary.ui
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.edurda77.filmlibrary.data.NotsMovie
+import com.edurda77.filmlibrary.data.NoteMovie
 
-class NoteAdapter (private val list: List<NotsMovie>, val onClickListener: OnStateClickListener) :
+class NoteAdapter (private val list: List<NoteMovie>, val onClickListener: OnStateClickListener) :
     RecyclerView.Adapter<NoteHolder>()
 {
     interface OnStateClickListener {
-        fun onStateClick(note: NotsMovie, position: Int)
+        fun onStateClick(note: NoteMovie, position: Int)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NoteHolder {
@@ -20,7 +20,7 @@ class NoteAdapter (private val list: List<NotsMovie>, val onClickListener: OnSta
     override fun onBindViewHolder(holder: NoteHolder, position: Int) {
 
 
-        val note: NotsMovie = list[position]
+        val note: NoteMovie = list[position]
         holder.bind(note)
 
         holder.itemView.setOnClickListener {

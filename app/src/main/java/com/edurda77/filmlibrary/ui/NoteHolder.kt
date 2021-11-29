@@ -7,7 +7,7 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.edurda77.filmlibrary.R
-import com.edurda77.filmlibrary.data.NotsMovie
+import com.edurda77.filmlibrary.data.NoteMovie
 
 class NoteHolder (inflater: LayoutInflater, parent: ViewGroup) :
     RecyclerView.ViewHolder(inflater.inflate(R.layout.item_note, parent, false)) {
@@ -25,7 +25,7 @@ class NoteHolder (inflater: LayoutInflater, parent: ViewGroup) :
 
     }
     @SuppressLint("SetTextI18n")
-    fun bind(note: NotsMovie) {
+    fun bind(note: NoteMovie) {
         titleNote?.text =  note.titleNote
         contentNote?.text = note.contentNote
 

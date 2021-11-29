@@ -14,12 +14,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.lang.IllegalStateException
 import android.preference.PreferenceManager
 import android.content.Context.MODE_PRIVATE
-
-
-
-
-
-
+import com.edurda77.filmlibrary.domain.NoteRepo
 
 
 private const val BASE_URL = "https://api.themoviedb.org/3/"
@@ -28,10 +23,10 @@ const val apiKey = TMDB_API_KEY
 //val includeAdult=false
 
 
-class RetrofitTheMdbRepoUsecaseImpl : TheMDBRepoUseCace {
+class RetrofitTheMdbRepoUsecaseImpl : TheMDBRepoUseCace, NoteRepo {
 
 
-
+    private val cacheNots : MutableList<NoteMovie> = mutableListOf()
     var retrofit: Retrofit = Retrofit.Builder()
         .baseUrl(BASE_URL)
         .addConverterFactory(GsonConverterFactory.create())
@@ -276,11 +271,38 @@ class RetrofitTheMdbRepoUsecaseImpl : TheMDBRepoUseCace {
     fun parsingForSync(resultsParsing: ResultsParsing?): List<ResultSearchMovie> {
         val resultSearch = emptyList<ResultSearchMovie>().toMutableList()
 
-        if (resultsParsing != null) {
-            resultsParsing.results.forEach {
-                resultSearch.add(it)
-            }
+        resultsParsing?.results?.forEach {
+            resultSearch.add(it)
         }
         return resultSearch
+    }
+
+    override fun add(note: NoteMovie) {
+        cacheNots.add(note)
+    }
+
+    override fun getNots(): List<NoteMovie> {
+            return ArrayList<NoteMovie>(cacheNots)
+    }
+
+    override fun delete(id: Int) {
+        val indexOfDelete = cacheNots.indexOfFirst {
+            it.idNote==id
+        }
+        cacheNots.removeAt(indexOfDelete)
+
+    }
+
+    override fun update(id: Int, note: NoteMovie) {
+        val indexOfDelete = cacheNots.indexOfFirst {
+            it.idNote==id
+        }
+        cacheNots.removeAt(indexOfDelete)
+        cacheNots.add(indexOfDelete,note)
+    }
+
+    override fun clearNots(notsList: List<NoteMovie>): List<NoteMovie> {
+        TODO("Not yet implemented")
+
     }
 }

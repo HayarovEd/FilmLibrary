@@ -1,14 +1,19 @@
 package com.edurda77.filmlibrary.ui
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.EditText
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import com.edurda77.filmlibrary.data.NotsMovie
+import com.edurda77.filmlibrary.data.Movie
+import com.edurda77.filmlibrary.data.NoteMovie
 import com.edurda77.filmlibrary.databinding.ActivityNoteBinding
+import com.edurda77.filmlibrary.domain.NoteRepo
+import com.edurda77.filmlibrary.domain.TheMDBRepoUseCace
 
 class NoteActivity : AppCompatActivity() {
     private lateinit var binding: ActivityNoteBinding
+    private val noteRepo: NoteRepo by lazy { app.noteRepo }
     override fun onCreate(savedInstanceState: Bundle?) {
         binding = ActivityNoteBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
@@ -18,10 +23,10 @@ class NoteActivity : AppCompatActivity() {
 
 
         val arguments = intent.extras
-        val note: NotsMovie
+        val note: NoteMovie
 
         if (arguments != null) {
-            note = arguments.getSerializable(NotsMovie::class.java.simpleName) as NotsMovie
+            note = arguments.getSerializable(NoteMovie::class.java.simpleName) as NoteMovie
 
             var content = note.contentNote
             val title = note.titleNote
@@ -31,6 +36,10 @@ class NoteActivity : AppCompatActivity() {
             content = binding.noteChangeMovie.text.toString()
             binding.saveChangeNots.setOnClickListener {
                 note.copy(id,title,content)
+                noteRepo.update(id,note)
+                val intent = Intent(this@NoteActivity, NotsActivity::class.java)
+
+                startActivity(intent)
             }
         }
 

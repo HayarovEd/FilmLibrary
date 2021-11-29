@@ -8,23 +8,25 @@ import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.edurda77.filmlibrary.R
 import com.edurda77.filmlibrary.data.Movie
-import com.edurda77.filmlibrary.data.NotsMovie
+import com.edurda77.filmlibrary.data.NoteMovie
 import com.edurda77.filmlibrary.databinding.ActivityFilmBinding
+import com.edurda77.filmlibrary.domain.NoteRepo
 
 class FilmActivity : AppCompatActivity() {
     private lateinit var binding: ActivityFilmBinding
     private var beginURL = "https://image.tmdb.org/t/p/w500"
+    private val noteRepo: NoteRepo by lazy { app.noteRepo }
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         binding = ActivityFilmBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
+
         val titlEditText: TextView = binding.titleMovie
         val idEditText: TextView? = binding.idMovie
         val ganreEditText: TextView? = binding.ganreMovie
         val durationEditText: TextView? = binding.durationMovie
-
         val yearEditText: TextView? = binding.yearMovie
         val budgetEditText: TextView? = binding.budgetMovie
         val revenueEditText: TextView? = binding.revenueMovie
@@ -57,7 +59,8 @@ class FilmActivity : AppCompatActivity() {
                 val id = movie.id
                 val title = movie.title
                 val contentNote = binding.noteMovie.text.toString()
-                val note = NotsMovie(id, title,contentNote)
+                val note = NoteMovie(id, title,contentNote)
+                noteRepo.add(note)
             }
         }
 
