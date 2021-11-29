@@ -1,19 +1,17 @@
 package com.edurda77.filmlibrary.ui
 
-import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
-import android.widget.Switch
 import com.edurda77.filmlibrary.R
 import com.edurda77.filmlibrary.databinding.ActivityCustomBinding
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
 import com.edurda77.filmlibrary.domain.NoteDao
-import com.edurda77.filmlibrary.domain.NoteRepo
+
 private const val DEFAUL_KEY = "DEFAUL_KEY"
 
 
@@ -42,7 +40,7 @@ class CustomActivity : AppCompatActivity() {
 
 
 
-    private fun SetPreferences() {
+    private fun setPreferences() {
         prefernces.edit().let {
             it.putBoolean(DEFAUL_KEY,binding.checkAdult.isChecked)
             it.commit()
@@ -88,7 +86,7 @@ class CustomActivity : AppCompatActivity() {
         binding.checkAdult.isChecked=prefernces.getBoolean(DEFAUL_KEY, false)
     }
     override fun onStop() {
-        SetPreferences()
+        setPreferences()
         super.onStop()
     }
 }

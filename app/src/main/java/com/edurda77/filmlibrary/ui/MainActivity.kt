@@ -76,8 +76,8 @@ class MainActivity : AppCompatActivity() {
         val goIDMovie: TheMDBRepoUseCace by lazy { app.theMDBRepoUseCace }
         recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
 
-        val stateClickListener: MovieSearchAdapter.OnStateClickListener =
-            object : MovieSearchAdapter.OnStateClickListener {
+        val stateClickListener: MovieAdapter.OnStateClickListener =
+            object : MovieAdapter.OnStateClickListener {
                 override fun onStateClick(movie: ResultSearchMovie, position: Int) {
                     Thread {
                         val iDMovie = goIDMovie.getReposForIDMovieSync(movie)
