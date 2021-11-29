@@ -83,6 +83,7 @@
             <EditText
                 android:id="@+id/note_movie"
                 style="@style/content_movie_view"
+                android:inputType="textCapSentences|textMultiLine"
                 android:text="@string/add_nots" />
 
             <Button

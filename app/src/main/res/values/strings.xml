@@ -30,4 +30,5 @@
     <string name="nots_movie">Заметки о фильмах</string>
     <string name="delete_note">Удалить заметку</string>
     <string name="delete_all_nots">Удалить все заметки</string>
+    <string name="base_activity">Главная страница</string>
 </resources>
