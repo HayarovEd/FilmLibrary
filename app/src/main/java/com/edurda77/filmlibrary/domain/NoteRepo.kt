@@ -7,5 +7,5 @@ interface NoteRepo {
     fun getNots(): List<NoteMovie>
     fun delete (id: Int)
     fun update (id: Int, note: NoteMovie)
-    fun clearNots(notsList: List<NoteMovie>): List<NoteMovie>
+    fun clearNots(): List<NoteMovie>
 }

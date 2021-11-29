@@ -1,10 +1,13 @@
 package com.edurda77.filmlibrary.ui
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
+import android.view.MenuItem
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import com.bumptech.glide.Glide
 import com.edurda77.filmlibrary.R
 import com.edurda77.filmlibrary.data.Movie
@@ -13,6 +16,7 @@ import com.edurda77.filmlibrary.databinding.ActivityFilmBinding
 import com.edurda77.filmlibrary.domain.NoteRepo
 
 class FilmActivity : AppCompatActivity() {
+    private var toolbar: Toolbar? = null
     private lateinit var binding: ActivityFilmBinding
     private var beginURL = "https://image.tmdb.org/t/p/w500"
     private val noteRepo: NoteRepo by lazy { app.noteRepo }
@@ -21,7 +25,7 @@ class FilmActivity : AppCompatActivity() {
         binding = ActivityFilmBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-
+        setToolbar()
 
         val titlEditText: TextView = binding.titleMovie
         val idEditText: TextView? = binding.idMovie
@@ -68,5 +72,31 @@ class FilmActivity : AppCompatActivity() {
 
 
 
+    }
+    private fun setToolbar() {
+        toolbar = binding.toolbar
+        setSupportActionBar(toolbar)
+
+    }
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.action_search -> {
+                val intent = Intent(this, SearchActivity::class.java)
+                startActivity(intent)
+            }
+            R.id.nots -> {
+                val intent = Intent(this, NotsActivity::class.java)
+                startActivity(intent)
+            }
+            R.id.custom -> {
+                val intent = Intent(this, CustomActivity::class.java)
+                startActivity(intent)
+            }
+            R.id.about -> {
+                val intent = Intent(this, AboutActivity::class.java)
+                startActivity(intent)
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 }

@@ -301,8 +301,9 @@ class RetrofitTheMdbRepoUsecaseImpl : TheMDBRepoUseCace, NoteRepo {
         cacheNots.add(indexOfDelete,note)
     }
 
-    override fun clearNots(notsList: List<NoteMovie>): List<NoteMovie> {
-        TODO("Not yet implemented")
+    override fun clearNots(): List<NoteMovie> {
+        cacheNots.clear()
+        return cacheNots
 
     }
 }

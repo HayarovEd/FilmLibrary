@@ -34,6 +34,13 @@
         android:layout_gravity="center"
         android:layout_margin="@dimen/margin_half"
         tools:ignore="UseSwitchCompatOrMaterialXml" />
+    <Button
+        android:id="@+id/clear_nots"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/delete_all_nots">
 
+    </Button>
 
 </LinearLayout>
