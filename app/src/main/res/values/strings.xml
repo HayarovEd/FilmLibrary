@@ -1,20 +1,24 @@
 <resources>
-    <string name="app_name">FilmLibrary</string>
+    <string name="app_name">Фильмотека Хаяроff</string>
     <string name="film_finder">Найти фильм</string>
     <string name="now_playing">Сейчас идут</string>
     <string name="upcoming">Предстоящие</string>
     <string name="ttile_movie">Название фильма</string>
-    <string name="year_movie">Год</string>
-    <string name="summary_movie">Краткое содержание фильма</string>
+    <string name="year_movie">Год: </string>
+    <string name="summary_movie">Краткое содержание фильма: </string>
     <string name="menu_search">Поиск</string>
     <string name="menu_custom">Настройки</string>
     <string name="menu_about">О приложении</string>
-    <string name="rang_movie">Рейтинг фильма</string>
-    <string name="summary">Краткое содержание</string>
-    <string name="revenue">Кассовые сборы</string>
-    <string name="budget">Бюджет</string>
-    <string name="duration">Продолжительность</string>
-    <string name="ganre">Жанр</string>
+    <string name="rang_movie">Рейтинг фильма: </string>
+    <string name="summary">Краткое содержание: </string>
+    <string name="revenue">Кассовые сборы: </string>
+    <string name="budget">Бюджет: </string>
+    <string name="duration">Продолжительность: </string>
+    <string name="ganre">Жанр: </string>
     <string name="search_words">название фильма или часть названия</string>
     <string name="search">Поиск</string>
+    <string name="id_movie">id: </string>
+    <string name="popularity">популярность: </string>
+    <string name="ganre_movie">жанр: </string>
+    <string name="popularity_movie">популярность: </string>
 </resources>

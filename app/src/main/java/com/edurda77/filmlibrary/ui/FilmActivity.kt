@@ -1,40 +1,58 @@
 package com.edurda77.filmlibrary.ui
 
-import androidx.appcompat.app.AppCompatActivity
+import android.annotation.SuppressLint
 import android.os.Bundle
-import android.widget.EditText
+import android.widget.ImageView
+import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
+import com.bumptech.glide.Glide
 import com.edurda77.filmlibrary.R
 import com.edurda77.filmlibrary.data.Movie
+import com.edurda77.filmlibrary.databinding.ActivityFilmBinding
 
 class FilmActivity : AppCompatActivity() {
-
+    private lateinit var binding: ActivityFilmBinding
+    private var beginURL = "https://image.tmdb.org/t/p/w500"
+    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
+        binding = ActivityFilmBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_film)
-        var titlEditText: EditText = findViewById(R.id.title_movie)
-        var ganreEditText: EditText = findViewById(R.id.ganre_movie)
-        var durationEditText: EditText = findViewById(R.id.duration_movie)
-        var rangEditText: EditText = findViewById(R.id.rang_movie)
-        var yearEditText: EditText = findViewById(R.id.year_movie)
-        var budgetEditText: EditText = findViewById(R.id.budget_movie)
-        var revenueEditText: EditText = findViewById(R.id.revenue_movie)
-        var summaryEditText: EditText = findViewById(R.id.summary_movie)
+        setContentView(binding.root)
+
+        val titlEditText: TextView = binding.titleMovie
+        val idEditText: TextView? = binding.idMovie
+        val ganreEditText: TextView? = binding.ganreMovie
+        val durationEditText: TextView? = binding.durationMovie
+        val rangEditText: TextView? = binding.rangMovie
+        val yearEditText: TextView? = binding.yearMovie
+        val budgetEditText: TextView? = binding.budgetMovie
+        val revenueEditText: TextView? = binding.revenueMovie
+        val summaryEditText: TextView? = binding.summaryMovie
+        val popularityEditText: TextView? = binding.populatityMovie
+        val picture : ImageView = binding.pictureMovie
         val arguments = intent.extras
+
 
         val movie: Movie
         if (arguments != null) {
-            movie = arguments.getSerializable(Movie::class.java.getSimpleName()) as Movie
-            titlEditText.setText(movie.movieTitle)
-            rangEditText.setText(movie.movieRang.toString())
-            ganreEditText.setText(movie.movieGanre)
-            yearEditText.setText(movie.movieYear.toString())
-            durationEditText.setText(movie.movieDuration)
-            budgetEditText.setText(movie.movieBudget.toString())
-            revenueEditText.setText(movie.movieRevenue.toString())
-            summaryEditText.setText(movie.movieSummary)
+            movie = arguments.getSerializable(Movie::class.java.simpleName) as Movie
+            titlEditText?.text = movie.title
+            idEditText?.text = idEditText?.text.toString() + movie.id.toString()
+            rangEditText?.text = rangEditText?.text.toString()+movie.popularity.toString()
+            ganreEditText?.text = ganreEditText?.text.toString() + movie.movieGanre
+            yearEditText?.text = yearEditText?.text.toString() + movie.releaseDate
+            durationEditText?.text =  durationEditText?.text.toString() + movie.runtime.toString()
+            budgetEditText?.text = budgetEditText?.text.toString() + movie.budget.toString()
+            revenueEditText?.text = revenueEditText?.text.toString() + movie.revenue.toString()
+            summaryEditText?.text = summaryEditText?.text.toString() + movie.overview
+            popularityEditText?.text = popularityEditText?.text.toString() + movie.popularity.toString()
+            //val url: String  = beginURL+movie.posterPath
 
-
+            Glide.with(this).load(beginURL+movie.posterPath)
+                .override(320, 480)
+                .placeholder(R.drawable.video).into(picture)
         }
+
 
 
     }

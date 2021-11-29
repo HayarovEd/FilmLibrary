@@ -2,53 +2,66 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_margin="@dimen/margin_half"
     android:background="@color/purple_500"
-    android:orientation="vertical"
-    android:layout_margin="@dimen/margin_half">
-    <EditText
-        style="@style/title_movie_view"
+    android:orientation="vertical">
+
+
+    <TextView
         android:id="@+id/title_movie"
-        android:text="@string/ttile_movie"
-        />
+        style="@style/title_movie_view"
+        android:text="@string/ttile_movie" />
+
+    <TextView
+        android:id="@+id/id_movie"
+        style="@style/content_movie_view"
+        android:text="@string/id_movie" />
+
     <ImageView
         android:id="@+id/picture_movie"
-        android:layout_width="@dimen/picture_size"
-        android:layout_height="@dimen/picture_size"
-        android:layout_gravity="center"/>
-    <EditText
-        style="@style/content_movie_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center" />
+
+    <TextView
         android:id="@+id/year_movie"
-        android:text="@string/year_movie"
-        />
-    <EditText
         style="@style/content_movie_view"
+        android:text="@string/year_movie" />
+
+    <TextView
         android:id="@+id/rang_movie"
-        android:text="@string/rang_movie"
-        />
-    <EditText
         style="@style/content_movie_view"
+        android:text="@string/rang_movie" />
+
+    <TextView
         android:id="@+id/ganre_movie"
-        android:text="@string/ganre"
-        />
-    <EditText
         style="@style/content_movie_view"
+        android:text="@string/ganre" />
+
+    <TextView
         android:id="@+id/duration_movie"
-        android:text="@string/duration"
-        />
-    <EditText
         style="@style/content_movie_view"
+        android:text="@string/duration" />
+
+    <TextView
         android:id="@+id/budget_movie"
-        android:text="@string/budget"
-        />
-    <EditText
         style="@style/content_movie_view"
+        android:text="@string/budget" />
+
+    <TextView
         android:id="@+id/revenue_movie"
-        android:text="@string/revenue"
-        />
-    <EditText
         style="@style/content_movie_view"
+        android:text="@string/revenue" />
+
+    <TextView
+        android:id="@+id/populatity_movie"
+        style="@style/content_movie_view"
+        android:text="@string/popularity" />
+
+    <TextView
         android:id="@+id/summary_movie"
-        android:text="@string/summary"
-        />
+        style="@style/content_movie_view"
+        android:text="@string/summary" />
+
 
 </LinearLayout>

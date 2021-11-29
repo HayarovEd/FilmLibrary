@@ -12,16 +12,12 @@ import com.edurda77.filmlibrary.data.FilmGenre
 class OutHolder(
     inflater: LayoutInflater,
     parent: ViewGroup,
-    val onClickListener: MovieAdapter.OnStateClickListener
+    val onClickListener: MovieSearchAdapter.OnStateClickListener
 ) :
     RecyclerView.ViewHolder(inflater.inflate(R.layout.layout_out_recycled_view, parent, false)) {
-    val ganreTitle: TextView
-    val movieItem: RecyclerView
+    private val ganreTitle: TextView = itemView.findViewById(R.id.ganre_movie)
+    val movieItem: RecyclerView = itemView.findViewById(R.id.item_movie)
 
-    init {
-        ganreTitle = itemView.findViewById(R.id.ganre_movie)
-        movieItem = itemView.findViewById(R.id.item_movie)
-    }
     fun bindGanre(filmGanre: FilmGenre) {
         ganreTitle.text = filmGanre.genreTitle
         val layoutManager = LinearLayoutManager(
@@ -32,7 +28,7 @@ class OutHolder(
         layoutManager.initialPrefetchItemCount = filmGanre.movieList.size
 
 
-        val subItemAdapter = MovieAdapter(filmGanre.movieList,onClickListener)
+        val subItemAdapter = MovieSearchAdapter(filmGanre.movieList,onClickListener)
         movieItem.layoutManager = layoutManager
         movieItem.adapter = subItemAdapter
 
