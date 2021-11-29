@@ -12,6 +12,10 @@
         android:title="@string/base_activity"
         app:showAsAction="never" />
     <item
+        android:id="@+id/people_search"
+        android:title="@string/search_peoples"
+        app:showAsAction="never" />
+    <item
         android:id="@+id/nots"
         android:title="@string/nots_movie"
         app:showAsAction="never" />

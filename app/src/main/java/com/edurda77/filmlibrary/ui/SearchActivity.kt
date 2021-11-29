@@ -98,6 +98,10 @@ class SearchActivity : AppCompatActivity() {
                 val intent = Intent(this, MainActivity::class.java)
                 startActivity(intent)
             }
+            R.id.people_search -> {
+                val intent = Intent(this, SearchPeopleActivity::class.java)
+                startActivity(intent)
+            }
             R.id.action_search -> {
                 val intent = Intent(this, SearchActivity::class.java)
                 startActivity(intent)

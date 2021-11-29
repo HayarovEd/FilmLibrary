@@ -114,6 +114,10 @@ class MainActivity : AppCompatActivity() {
                 val intent = Intent(this, SearchActivity::class.java)
                 startActivity(intent)
             }
+            R.id.people_search -> {
+                val intent = Intent(this, SearchPeopleActivity::class.java)
+                startActivity(intent)
+            }
             R.id.nots -> {
                 val intent = Intent(this, NotesActivity::class.java)
                 startActivity(intent)

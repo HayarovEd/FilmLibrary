@@ -15,12 +15,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FilmLibrary">
         <activity
+            android:name=".ui.SearchPeopleActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.NoteActivity"
             android:exported="false" />
         <activity
             android:name=".ui.NotesActivity"
             android:exported="false" />
-
         <activity
             android:name=".ui.FilmActivity"
             android:exported="false" />
