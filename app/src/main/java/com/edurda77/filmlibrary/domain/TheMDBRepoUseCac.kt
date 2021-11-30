@@ -1,9 +1,7 @@
 package com.edurda77.filmlibrary.domain
 
 import androidx.annotation.WorkerThread
-import com.edurda77.filmlibrary.data.Genres
-import com.edurda77.filmlibrary.data.Movie
-import com.edurda77.filmlibrary.data.ResultSearchMovie
+import com.edurda77.filmlibrary.data.*
 
 interface TheMDBRepoUseCace {
     @WorkerThread
@@ -15,6 +13,8 @@ interface TheMDBRepoUseCace {
     fun getReposForPopularMovieSync (): List<ResultSearchMovie>?
     fun getReposForTopRatedMovieSync (): List<ResultSearchMovie>?
     fun getReposForUpcomingMovieSync (): List<ResultSearchMovie>?
+    fun getReposForSearchPeopleSync (name:String): List<ResultSearchedPeople>?
+    fun getReposForIdPeopleSync (searchedPeople:ResultSearchedPeople): People?
 
 
     fun getReposForSearchMovieAsync (userName: String, adultKey:Boolean, onSuccess: (List<ResultSearchMovie>)->Unit,
@@ -32,7 +32,10 @@ interface TheMDBRepoUseCace {
                                      OnError: (Throwable) ->Unit)
     fun getReposForUpcomingMovieAsync (onSuccess: (List<ResultSearchMovie>)->Unit,
                                      OnError: (Throwable) ->Unit)
-
-
+    fun getReposForSearchPeopleAsync (name: String, onSuccess: (List<ResultSearchedPeople>)->Unit,
+                                     OnError: (Throwable) ->Unit)
+    fun getReposForIdPeopleAsync (searchedPeople:ResultSearchedPeople,
+                                 onSuccess: (People)->Unit,
+                                 OnError: (Throwable) ->Unit)
 
 }

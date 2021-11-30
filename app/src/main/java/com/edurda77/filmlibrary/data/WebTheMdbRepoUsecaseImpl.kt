@@ -144,6 +144,14 @@ class WebTheMdbRepoUsecaseImpl : TheMDBRepoUseCace {
         TODO("Not yet implemented")
     }
 
+    override fun getReposForSearchPeopleSync(name: String): List<ResultSearchedPeople>? {
+        TODO("Not yet implemented")
+    }
+
+    override fun getReposForIdPeopleSync(searchedPeople: ResultSearchedPeople): People? {
+        TODO("Not yet implemented")
+    }
+
     override fun getReposForGenresAsync(
         onSuccess: (List<Genres>) -> Unit,
         OnError: (Throwable) -> Unit
@@ -179,7 +187,21 @@ class WebTheMdbRepoUsecaseImpl : TheMDBRepoUseCace {
         TODO("Not yet implemented")
     }
 
+    override fun getReposForSearchPeopleAsync(
+        name: String,
+        onSuccess: (List<ResultSearchedPeople>) -> Unit,
+        OnError: (Throwable) -> Unit
+    ) {
+        TODO("Not yet implemented")
+    }
 
+    override fun getReposForIdPeopleAsync(
+        searchedPeople: ResultSearchedPeople,
+        onSuccess: (People) -> Unit,
+        OnError: (Throwable) -> Unit
+    ) {
+        TODO("Not yet implemented")
+    }
 
 
 }
