@@ -1,11 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
     <item
         android:id="@+id/action_search"
         app:showAsAction="ifRoom"
         android:icon="@drawable/baseline_search_24"
         android:title="@string/menu_search" />
+    <item
+        android:id="@+id/start"
+        android:title="@string/base_activity"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/nots"
+        android:title="@string/nots_movie"
+        app:showAsAction="never" />
     <item
         android:id="@+id/custom"
         android:title="@string/menu_custom"

@@ -8,7 +8,7 @@ import com.edurda77.filmlibrary.data.ResultSearchMovie
 interface TheMDBRepoUseCace {
     @WorkerThread
     @Throws(Throwable::class)
-    fun getReposForSearchMovieSync (userName: String): List<ResultSearchMovie>?
+    fun getReposForSearchMovieSync (userName: String, adultKey:Boolean): List<ResultSearchMovie>?
     fun getReposForIDMovieSync (searcheMovie: ResultSearchMovie): Movie?
     fun getReposForGenresSync():List<Genres>?
     fun getReposForNowPlayingMovieSync (): List<ResultSearchMovie>?
@@ -17,7 +17,7 @@ interface TheMDBRepoUseCace {
     fun getReposForUpcomingMovieSync (): List<ResultSearchMovie>?
 
 
-    fun getReposForSearchMovieAsync (userName: String, onSuccess: (List<ResultSearchMovie>)->Unit,
+    fun getReposForSearchMovieAsync (userName: String, adultKey:Boolean, onSuccess: (List<ResultSearchMovie>)->Unit,
                                      OnError: (Throwable) ->Unit)
     fun getReposForIDMovieAsync (searcheMovie: ResultSearchMovie,
                                  onSuccess: (Movie)->Unit,
@@ -32,6 +32,7 @@ interface TheMDBRepoUseCace {
                                      OnError: (Throwable) ->Unit)
     fun getReposForUpcomingMovieAsync (onSuccess: (List<ResultSearchMovie>)->Unit,
                                      OnError: (Throwable) ->Unit)
+
 
 
 }

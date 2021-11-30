@@ -9,7 +9,7 @@ import java.net.URL
 import javax.net.ssl.HttpsURLConnection
 
 class WebTheMdbRepoUsecaseImpl : TheMDBRepoUseCace {
-    override fun getReposForSearchMovieSync(userName: String): List<ResultSearchMovie> {
+    override fun getReposForSearchMovieSync(userName: String, adultKey:Boolean): List<ResultSearchMovie> {
         val gson by lazy { Gson() }
 
 
@@ -46,12 +46,13 @@ class WebTheMdbRepoUsecaseImpl : TheMDBRepoUseCace {
 
     override fun getReposForSearchMovieAsync(
         userName: String,
+        adultKey:Boolean,
         onSuccess: (List<ResultSearchMovie>) -> Unit,
         OnError: (Throwable) -> Unit
     ) {
         Thread {
             try {
-                val res = getReposForSearchMovieSync(userName)
+                val res = getReposForSearchMovieSync(userName, adultKey)
                 onSuccess.invoke(res)
             } catch (thr: Throwable) {
                 OnError (thr)
@@ -177,6 +178,8 @@ class WebTheMdbRepoUsecaseImpl : TheMDBRepoUseCace {
     ) {
         TODO("Not yet implemented")
     }
+
+
 
 
 }

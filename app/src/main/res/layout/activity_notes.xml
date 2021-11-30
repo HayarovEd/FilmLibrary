@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="@dimen/margin_half"
     android:background="@color/purple_500"
     android:orientation="vertical"
-    tools:context=".ui.AboutActivity">
+    android:layout_margin="@dimen/margin_half"
+    tools:context=".ui.NotesActivity">
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -18,9 +18,12 @@
             app:title="@string/film_finder"
             app:titleTextColor="@color/green" />
     </com.google.android.material.appbar.AppBarLayout>
-
-    <TextView
-        style="@style/content_movie_view"
-        android:text="@string/about_project" />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/nots_recycled_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        android:layout_margin="@dimen/margin_half"
+        />
 
 </LinearLayout>

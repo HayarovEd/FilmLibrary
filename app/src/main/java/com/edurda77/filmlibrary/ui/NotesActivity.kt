@@ -1,7 +1,6 @@
 package com.edurda77.filmlibrary.ui
 
 import android.content.Intent
-import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -10,78 +9,52 @@ import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.edurda77.filmlibrary.R
-import com.edurda77.filmlibrary.data.Movie
-import com.edurda77.filmlibrary.data.ResultSearchMovie
-import com.edurda77.filmlibrary.databinding.ActivitySearchBinding
-import com.edurda77.filmlibrary.domain.TheMDBRepoUseCace
+import com.edurda77.filmlibrary.data.NoteMovie
+import com.edurda77.filmlibrary.databinding.ActivityNotesBinding
+import com.edurda77.filmlibrary.domain.NoteDao
 
-private const val DEFAUL_KEY = "DEFAUL_KEY"
-class SearchActivity : AppCompatActivity() {
+class NotesActivity : AppCompatActivity() {
     private var toolbar: Toolbar? = null
-    private lateinit var binding: ActivitySearchBinding
-    private val goSearchMovie: TheMDBRepoUseCace by lazy { app.theMDBRepoUseCace }
-    private val resultSearch = emptyList<ResultSearchMovie>().toMutableList()
-    private val prefernces: SharedPreferences by lazy {app.sharedPrefernces}
-
-
-
+    private lateinit var binding: ActivityNotesBinding
+    private val noteDao: NoteDao by lazy { app.noteDao }
+    private val notsOfMovie = emptyList<NoteMovie>().toMutableList()
     override fun onCreate(savedInstanceState: Bundle?) {
-        binding = ActivitySearchBinding.inflate(layoutInflater)
+        binding = ActivityNotesBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         setToolbar()
-        val adult= prefernces.getBoolean(DEFAUL_KEY,false)
-
-        binding.goSearchMovie.setOnClickListener {
-            resultSearch.clear()
-            val searchString = binding.searchMovie.text.toString()
-            Thread {
-                goSearchMovie.getReposForSearchMovieSync(searchString, adult)?.forEach {
-                    resultSearch.add(it)
-                }
-                runOnUiThread {
-                    setOotRecycledView()
-
-                }
-            }.start()
-
-
-        }
-
-
+        setRecycledView()
     }
 
-
-    fun setOotRecycledView() {
-
-        val recyclerView: RecyclerView = binding.itemSearchMovie
-        val goIDMovie: TheMDBRepoUseCace by lazy { app.theMDBRepoUseCace }
+    private fun setRecycledView() {
+        val recyclerView: RecyclerView = binding.notsRecycledView
         recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-
-        val stateClickListener: MovieAdapter.OnStateClickListener =
-            object : MovieAdapter.OnStateClickListener {
-                override fun onStateClick(movie: ResultSearchMovie, position: Int) {
-
+        val notsOfMovie=initNots()
+        val stateClickListener: NoteAdapter.OnStateClickListener =
+            object : NoteAdapter.OnStateClickListener {
+                override fun onStateClick(note: NoteMovie, position: Int) {
                     Thread {
-                        val iDMovie = goIDMovie.getReposForIDMovieSync(movie)
+
+                        //val iDMovie = goIDMovie.getReposForIDMovieSync(movie)
                         runOnUiThread {
-                            val intent = Intent(this@SearchActivity, FilmActivity::class.java)
-                            intent.putExtra(Movie::class.java.simpleName, iDMovie)
+                            val intent = Intent(this@NotesActivity, NoteActivity::class.java)
+                            intent.putExtra(NoteMovie::class.java.simpleName, note)
 
                             startActivity(intent)
                         }
-
-
                     }.start()
-
-
                 }
             }
+        recyclerView.adapter = NoteAdapter(notsOfMovie,stateClickListener)
+    }
 
+    private fun initNots(): List<NoteMovie> {
+        Thread{
+        noteDao.getNots().forEach {
+            notsOfMovie.add(it)}
+        }.start()
 
-        recyclerView.adapter = MovieAdapter(resultSearch, stateClickListener)
-
-
+        return notsOfMovie
     }
     private fun setToolbar() {
         toolbar = binding.toolbar
@@ -117,5 +90,4 @@ class SearchActivity : AppCompatActivity() {
         }
         return super.onOptionsItemSelected(item)
     }
-
 }
