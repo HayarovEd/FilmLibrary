@@ -23,8 +23,8 @@ class NoteActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         setToolbar()
-        val titleText: TextView? = binding.titleMovieNote
-        val contentEditText: EditText? = binding.noteChangeMovie
+        val titleText: TextView = binding.titleMovieNote
+        val contentEditText: EditText = binding.noteChangeMovie
 
 
         val arguments = intent.extras
@@ -36,8 +36,8 @@ class NoteActivity : AppCompatActivity() {
             var content = note.contentNote
             val title = note.titleNote
             val id = note.idNote
-            titleText?.text = title
-            contentEditText?.setText(content)
+            titleText.text = title
+            contentEditText.setText(content)
 
 
             binding.saveChangeNots.setOnClickListener {

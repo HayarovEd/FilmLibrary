@@ -2,24 +2,16 @@ package com.edurda77.filmlibrary.ui
 
 import android.Manifest
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import androidx.appcompat.widget.Toolbar
-import com.edurda77.filmlibrary.R
-import com.edurda77.filmlibrary.databinding.ActivityMainBinding
-import com.edurda77.filmlibrary.databinding.ActivitySearchPeopleBinding
-import androidx.core.app.ActivityCompat
-
-import android.content.pm.PackageManager
-import android.os.Build
 import android.widget.Toast
-import androidx.annotation.NonNull
-
-import androidx.core.content.ContextCompat
-
-
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
+import androidx.core.app.ActivityCompat
+import com.edurda77.filmlibrary.R
+import com.edurda77.filmlibrary.databinding.ActivitySearchPeopleBinding
 
 
 class SearchPeopleActivity : AppCompatActivity() {
