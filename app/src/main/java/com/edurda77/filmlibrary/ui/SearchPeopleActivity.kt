@@ -1,5 +1,6 @@
 package com.edurda77.filmlibrary.ui
 
+import android.Manifest
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -9,6 +10,17 @@ import androidx.appcompat.widget.Toolbar
 import com.edurda77.filmlibrary.R
 import com.edurda77.filmlibrary.databinding.ActivityMainBinding
 import com.edurda77.filmlibrary.databinding.ActivitySearchPeopleBinding
+import androidx.core.app.ActivityCompat
+
+import android.content.pm.PackageManager
+import android.os.Build
+import android.widget.Toast
+import androidx.annotation.NonNull
+
+import androidx.core.content.ContextCompat
+
+
+
 
 class SearchPeopleActivity : AppCompatActivity() {
     private var toolbar: Toolbar? = null
@@ -18,7 +30,39 @@ class SearchPeopleActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         setToolbar()
+        binding.goSearchPeople.setOnClickListener {
+            checkPermission()
+        }
     }
+
+    private fun checkPermission(){
+        if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.
+            PERMISSION_GRANTED && checkSelfPermission(Manifest.permission.
+            ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            TODO()
+        } else {
+            ActivityCompat.requestPermissions(this, Array(2){
+                Manifest.permission.ACCESS_FINE_LOCATION
+                Manifest.permission.ACCESS_COARSE_LOCATION}, 1)
+        }
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == 1 && grantResults[0] == PackageManager.PERMISSION_GRANTED && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
+            //TODO
+
+
+        } else {
+            Toast.makeText(this,"Необходимо для определения места рождения актера на карте", Toast.LENGTH_LONG).show()
+            //checkPermission()
+        }
+    }
+
     private fun setToolbar() {
         toolbar = binding.toolbar
         setSupportActionBar(toolbar)
