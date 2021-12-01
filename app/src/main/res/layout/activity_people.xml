@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/margin_half"
+    android:background="@color/purple_500"
+    android:orientation="vertical">
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            style="@style/toolbar"
+            app:title="@string/film_finder"
+            app:titleTextColor="@color/green" />
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/purple_500"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/name_people"
+                style="@style/title_movie_view"
+                android:text="@string/name_people" />
+
+            <TextView
+                android:id="@+id/id_people"
+                style="@style/content_movie_view"
+                android:text="@string/id_movie" />
+
+            <ImageView
+                android:id="@+id/picture_people"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                tools:ignore="ContentDescription" />
+
+            <TextView
+                android:id="@+id/birthday_people"
+                style="@style/content_movie_view"
+                android:text="@string/birthday_people" />
+
+
+            <TextView
+                android:id="@+id/place_birth_people"
+                style="@style/content_movie_view"
+                android:text="@string/place_birth_people" />
+
+
+
+            <TextView
+                android:id="@+id/biography_people"
+                style="@style/content_movie_view"
+                android:text="@string/biography_people" />
+
+
+
+            <Button
+                android:id="@+id/request_geolocation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/geolocation">
+
+            </Button>
+        </LinearLayout>
+
+
+    </ScrollView>
+
+
+</LinearLayout>

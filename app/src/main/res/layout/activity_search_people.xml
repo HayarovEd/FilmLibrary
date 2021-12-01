@@ -31,24 +31,14 @@
         android:layout_height="wrap_content"
         android:text="@string/search" />
 
-    <!--<ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:scrollbars="vertical"
-        android:fillViewport="true">
-        <TextView
-            android:id="@+id/result_search_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/margin_half" />
-    </ScrollView>
+
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/item_search_movie"
+        android:id="@+id/item_search_people"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:layout_margin="@dimen/margin_half"
-        />-->
+        />
 
 
 

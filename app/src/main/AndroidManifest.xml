@@ -16,6 +16,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FilmLibrary">
         <activity
+            android:name=".ui.PeopleActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.SearchPeopleActivity"
             android:exported="false" />
         <activity

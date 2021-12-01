@@ -31,6 +31,11 @@
     <string name="delete_note">Удалить заметку</string>
     <string name="delete_all_nots">Удалить все заметки</string>
     <string name="base_activity">Главная страница</string>
-    <string name="search_people">Введите фамилию или имя актера (не реализовано)</string>
+    <string name="search_people">Введите фамилию или имя актера</string>
     <string name="search_peoples">Поиск актеров</string>
+    <string name="name_people">Имя актера</string>
+    <string name="birthday_people">Дата рождения:</string>
+    <string name="biography_people">Биография:</string>
+    <string name="place_birth_people">Место рождения:</string>
+    <string name="geolocation">Запросить геолокацию места рождения</string>
 </resources>
