@@ -13,7 +13,7 @@ import com.edurda77.filmlibrary.data.FilmGenre
 import com.edurda77.filmlibrary.data.Movie
 import com.edurda77.filmlibrary.data.ResultSearchMovie
 import com.edurda77.filmlibrary.databinding.ActivityMainBinding
-import com.edurda77.filmlibrary.domain.TheMDBRepoUseCace
+import com.edurda77.filmlibrary.domain.TheMDBRepoUseCaseSync
 
 
 
@@ -21,7 +21,7 @@ import com.edurda77.filmlibrary.domain.TheMDBRepoUseCace
 
 class MainActivity : AppCompatActivity() {
     private var toolbar: Toolbar? = null
-    private val goNowPlayingMovie: TheMDBRepoUseCace by lazy { app.theMDBRepoUseCace }
+    private val goNowPlayingMovie: TheMDBRepoUseCaseSync by lazy { app.theMDBRepoUseCaceSync }
     private val resultNowPlayingMovie = emptyList<ResultSearchMovie>().toMutableList()
     private val resultPopularMovie = emptyList<ResultSearchMovie>().toMutableList()
     private val resultTopRatedMovie = emptyList<ResultSearchMovie>().toMutableList()
@@ -73,7 +73,7 @@ class MainActivity : AppCompatActivity() {
     fun setOotRecycledView() {
 
         val recyclerView: RecyclerView = binding.outRecycledView
-        val goIDMovie: TheMDBRepoUseCace by lazy { app.theMDBRepoUseCace }
+        val goIDMovie: TheMDBRepoUseCaseSync by lazy { app.theMDBRepoUseCaceSync }
         recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
 
         val stateClickListener: MovieAdapter.OnStateClickListener =

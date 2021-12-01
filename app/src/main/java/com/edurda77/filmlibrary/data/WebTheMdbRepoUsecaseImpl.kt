@@ -1,14 +1,15 @@
 package com.edurda77.filmlibrary.data
 
 import com.edurda77.filmlibrary.BuildConfig
-import com.edurda77.filmlibrary.domain.TheMDBRepoUseCace
+import com.edurda77.filmlibrary.domain.TheMDBRepoUseCaseAsync
+import com.edurda77.filmlibrary.domain.TheMDBRepoUseCaseSync
 import com.google.gson.Gson
 import java.io.BufferedReader
 import java.io.InputStreamReader
 import java.net.URL
 import javax.net.ssl.HttpsURLConnection
 
-class WebTheMdbRepoUsecaseImpl : TheMDBRepoUseCace {
+class WebTheMdbRepoUsecaseImpl : TheMDBRepoUseCaseSync, TheMDBRepoUseCaseAsync {
     override fun getReposForSearchMovieSync(userName: String, adultKey:Boolean): List<ResultSearchMovie> {
         val gson by lazy { Gson() }
 

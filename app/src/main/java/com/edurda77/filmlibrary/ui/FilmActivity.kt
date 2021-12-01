@@ -31,9 +31,9 @@ class FilmActivity : AppCompatActivity() {
         setContentView(binding.root)
         setToolbar()
 
-        val titlEditText: TextView = binding.titleMovie
+        val titleEditText: TextView = binding.titleMovie
         val idEditText: TextView = binding.idMovie
-        val ganreEditText: TextView = binding.ganreMovie
+        val genreEditText: TextView = binding.ganreMovie
         val durationEditText: TextView = binding.durationMovie
         val yearEditText: TextView = binding.yearMovie
         val budgetEditText: TextView = binding.budgetMovie
@@ -48,10 +48,10 @@ class FilmActivity : AppCompatActivity() {
         val movie: Movie
         if (arguments != null) {
             movie = arguments.getSerializable(Movie::class.java.simpleName) as Movie
-            titlEditText.text = movie.title
+            titleEditText.text = movie.title
             idEditText.text = idEditText.text.toString() + movie.id.toString()
 
-            ganreEditText.text = ganreEditText.text.toString() + movie.movieGanre
+            genreEditText.text = genreEditText.text.toString() + movie.movieGanre
             yearEditText.text = yearEditText.text.toString() + movie.releaseDate
             durationEditText.text = durationEditText.text.toString() + movie.runtime.toString()
             budgetEditText.text = budgetEditText.text.toString() + movie.budget.toString()
