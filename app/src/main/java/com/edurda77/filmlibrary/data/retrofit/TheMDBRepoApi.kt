@@ -1,9 +1,6 @@
 package com.edurda77.filmlibrary.data.retrofit
 
-import com.edurda77.filmlibrary.data.Genres
-import com.edurda77.filmlibrary.data.Movie
-import com.edurda77.filmlibrary.data.ResultParsingPeople
-import com.edurda77.filmlibrary.data.ResultsParsing
+import com.edurda77.filmlibrary.data.*
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -60,15 +57,15 @@ interface TheMDBRepoApi {
         @Query("language") language: String
     ): Call<ResultsParsing>
     @GET("search/person")
-    fun getPeoples(
+    fun getSearshPeople(
         @Query("api_key") apiKey: String,
         @Query("language") language: String,
         @Query("query") searchString: String?,
     ): Call<ResultParsingPeople>
     @GET("person/{person_id}")
-    fun getPeopleId(
+    fun getIdPeople(
         @Path("person_id") searchedId: Int,
         @Query("api_key") apiKey: String,
         @Query("language") language: String
-    ): Call<ResultParsingPeople>
+    ): Call<People>
 }

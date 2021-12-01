@@ -15,22 +15,26 @@ private const val BASE_URL = "https://api.themoviedb.org/3/"
 const val LANGUAGE = "ru-RU"
 
 
+class RetrofitTheMdbRepoUseCaseImpl : TheMDBRepoUseCace, NoteRepo {
 
-class RetrofitTheMdbRepoUsecaseImpl : TheMDBRepoUseCace, NoteRepo {
 
+    private val cacheNotes: MutableList<NoteMovie> = mutableListOf()
 
-    private val cacheNots : MutableList<NoteMovie> = mutableListOf()
-    var retrofit: Retrofit = Retrofit.Builder()
+    private var retrofit: Retrofit = Retrofit.Builder()
         .baseUrl(BASE_URL)
         .addConverterFactory(GsonConverterFactory.create())
         .build()
-    var api: TheMDBRepoApi = retrofit.create(TheMDBRepoApi::class.java)
+    private var api: TheMDBRepoApi = retrofit.create(TheMDBRepoApi::class.java)
 
 
-    override fun getReposForSearchMovieSync(userName: String, adultKey:Boolean): List<ResultSearchMovie> {
+    override fun getReposForSearchMovieSync(
+        userName: String,
+        adultKey: Boolean
+    ): List<ResultSearchMovie> {
 
-        val resultsParsing: ResultsParsing? = api.getSearchMovie(TMDB_API_KEY, LANGUAGE, userName,adultKey)
-            .execute().body()
+        val resultsParsing: ResultsParsing? =
+            api.getSearchMovie(TMDB_API_KEY, LANGUAGE, userName, adultKey)
+                .execute().body()
         return parsingForSync(resultsParsing)
 
     }
@@ -49,70 +53,75 @@ class RetrofitTheMdbRepoUsecaseImpl : TheMDBRepoUseCace, NoteRepo {
 
     }
 
-    override fun getReposForNowPlayingMovieSync(): List<ResultSearchMovie>? {
+    override fun getReposForNowPlayingMovieSync(): List<ResultSearchMovie> {
         val resultsParsing: ResultsParsing? = api.getNowPlaying(TMDB_API_KEY, LANGUAGE)
             .execute().body()
 
         return parsingForSync(resultsParsing)
     }
 
-    override fun getReposForPopularMovieSync(): List<ResultSearchMovie>? {
+    override fun getReposForPopularMovieSync(): List<ResultSearchMovie> {
         val resultsParsing: ResultsParsing? = api.getPopular(TMDB_API_KEY, LANGUAGE)
             .execute().body()
 
         return parsingForSync(resultsParsing)
     }
 
-    override fun getReposForTopRatedMovieSync(): List<ResultSearchMovie>? {
+    override fun getReposForTopRatedMovieSync(): List<ResultSearchMovie> {
         val resultsParsing: ResultsParsing? = api.getTopRated(TMDB_API_KEY, LANGUAGE)
             .execute().body()
 
         return parsingForSync(resultsParsing)
     }
 
-    override fun getReposForUpcomingMovieSync(): List<ResultSearchMovie>? {
+    override fun getReposForUpcomingMovieSync(): List<ResultSearchMovie> {
         val resultsParsing: ResultsParsing? = api.getUpcoming(TMDB_API_KEY, LANGUAGE)
             .execute().body()
 
         return parsingForSync(resultsParsing)
     }
 
-    override fun getReposForSearchPeopleSync(name: String): List<ResultSearchedPeople>? {
-        TODO("Not yet implemented")
+    override fun getReposForSearchPeopleSync(name: String): List<ResultSearchedPeople> {
+        val resultsParsingPeople: ResultParsingPeople? =
+            api.getSearshPeople(TMDB_API_KEY, LANGUAGE, name)
+                .execute().body()
+        return parsingForPeopleSync(resultsParsingPeople)
     }
 
     override fun getReposForIdPeopleSync(searchedPeople: ResultSearchedPeople): People? {
-        TODO("Not yet implemented")
+        return api.getIdPeople(searchedPeople.idPeopleSearched, TMDB_API_KEY, LANGUAGE)
+            .execute().body()
     }
 
     override fun getReposForSearchMovieAsync(
         userName: String,
-        adultKey:Boolean,
+        adultKey: Boolean,
         onSuccess: (List<ResultSearchMovie>) -> Unit,
         OnError: (Throwable) -> Unit
     ) {
         api.getSearchMovie(TMDB_API_KEY, LANGUAGE, userName, adultKey)
             .enqueue(object : Callback<ResultsParsing> {
-            override fun onResponse(
-                call: Call<ResultsParsing>,
-                response: Response<ResultsParsing>
-            ) {
-                if (response.isSuccessful) {
-                    onSuccess(
-                        response.body()?.results ?: throw IllegalStateException("Нулевой результат")
-                    )
-                } else {
-                    OnError(Throwable("Неизвестная ошибка"))
+                override fun onResponse(
+                    call: Call<ResultsParsing>,
+                    response: Response<ResultsParsing>
+                ) {
+                    if (response.isSuccessful) {
+                        onSuccess(
+                            response.body()?.results
+                                ?: throw IllegalStateException("Нулевой результат")
+                        )
+                    } else {
+                        OnError(Throwable("Неизвестная ошибка"))
+                    }
+
                 }
 
-            }
-
-            override fun onFailure(call: Call<ResultsParsing>, t: Throwable) {
-                OnError(t)
-            }
+                override fun onFailure(call: Call<ResultsParsing>, t: Throwable) {
+                    OnError(t)
+                }
 
 
-        })
+            })
     }
 
     override fun getReposForIDMovieAsync(
@@ -274,7 +283,29 @@ class RetrofitTheMdbRepoUsecaseImpl : TheMDBRepoUseCace, NoteRepo {
         onSuccess: (List<ResultSearchedPeople>) -> Unit,
         OnError: (Throwable) -> Unit
     ) {
-        TODO("Not yet implemented")
+        api.getSearshPeople(TMDB_API_KEY, LANGUAGE, name)
+            .enqueue(object : Callback<ResultParsingPeople> {
+                override fun onResponse(
+                    call: Call<ResultParsingPeople>,
+                    response: Response<ResultParsingPeople>
+                ) {
+                    if (response.isSuccessful) {
+                        onSuccess(
+                            response.body()?.results
+                                ?: throw IllegalStateException("Нулевой результат")
+                        )
+                    } else {
+                        OnError(Throwable("Неизвестная ошибка"))
+                    }
+
+                }
+
+                override fun onFailure(call: Call<ResultParsingPeople>, t: Throwable) {
+                    OnError(t)
+                }
+
+
+            })
     }
 
     override fun getReposForIdPeopleAsync(
@@ -282,10 +313,29 @@ class RetrofitTheMdbRepoUsecaseImpl : TheMDBRepoUseCace, NoteRepo {
         onSuccess: (People) -> Unit,
         OnError: (Throwable) -> Unit
     ) {
-        TODO("Not yet implemented")
+        api.getIdPeople(searchedPeople.idPeopleSearched, TMDB_API_KEY, LANGUAGE)
+            .enqueue(object : Callback<People> {
+            override fun onResponse(
+                call: Call<People>,
+                response: Response<People>
+            ) {
+                if (response.isSuccessful) {
+                    onSuccess(response.body()!!)
+                } else {
+                    OnError(Throwable("Неизвестная ошибка"))
+                }
+
+            }
+
+            override fun onFailure(call: Call<People>, t: Throwable) {
+                OnError(t)
+            }
+
+
+        })
     }
 
-    fun parsingForSync(resultsParsing: ResultsParsing?): List<ResultSearchMovie> {
+    private fun parsingForSync(resultsParsing: ResultsParsing?): List<ResultSearchMovie> {
         val resultSearch = emptyList<ResultSearchMovie>().toMutableList()
 
         resultsParsing?.results?.forEach {
@@ -294,32 +344,41 @@ class RetrofitTheMdbRepoUsecaseImpl : TheMDBRepoUseCace, NoteRepo {
         return resultSearch
     }
 
+    private fun parsingForPeopleSync(resultsParsing: ResultParsingPeople?): List<ResultSearchedPeople> {
+        val resultSearch = emptyList<ResultSearchedPeople>().toMutableList()
+
+        resultsParsing?.results?.forEach {
+            resultSearch.add(it)
+        }
+        return resultSearch
+    }
+
     override fun add(note: NoteMovie) {
-        cacheNots.add(note)
+        cacheNotes.add(note)
     }
 
     override fun getNots(): List<NoteMovie> {
-            return ArrayList<NoteMovie>(cacheNots)
+        return ArrayList<NoteMovie>(cacheNotes)
     }
 
     override fun delete(id: Int) {
-        val indexOfDelete = cacheNots.indexOfFirst {
-            it.idNote==id
+        val indexOfDelete = cacheNotes.indexOfFirst {
+            it.idNote == id
         }
-        cacheNots.removeAt(indexOfDelete)
+        cacheNotes.removeAt(indexOfDelete)
 
     }
 
     override fun update(id: Int, note: NoteMovie) {
-        val indexOfDelete = cacheNots.indexOfFirst {
-            it.idNote==id
+        val indexOfDelete = cacheNotes.indexOfFirst {
+            it.idNote == id
         }
-        cacheNots.removeAt(indexOfDelete)
-        cacheNots.add(indexOfDelete,note)
+        cacheNotes.removeAt(indexOfDelete)
+        cacheNotes.add(indexOfDelete, note)
     }
 
     override fun clearNots() {
-        cacheNots.clear()
+        cacheNotes.clear()
 
 
     }
