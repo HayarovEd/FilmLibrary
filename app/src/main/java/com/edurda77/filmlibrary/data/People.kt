@@ -1,6 +1,7 @@
 package com.edurda77.filmlibrary.data
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 data class People(
     val birthdayPeople: String,
@@ -11,4 +12,4 @@ data class People(
     val placeBirthPeople: String,
     @SerializedName("profile_path")
     val profilePathPeople: String
-)
+): Serializable
