@@ -8,7 +8,7 @@ class NoteRepoImpl: NoteRepo {
         cacheNotes.add(note)
     }
 
-    override fun getNots(): List<NoteMovie> {
+    override fun getNotes(): List<NoteMovie> {
         return ArrayList<NoteMovie>(cacheNotes)
     }
 
@@ -28,7 +28,7 @@ class NoteRepoImpl: NoteRepo {
         cacheNotes.add(indexOfDelete, note)
     }
 
-    override fun clearNots() {
+    override fun clearNotes() {
         cacheNotes.clear()
 
 

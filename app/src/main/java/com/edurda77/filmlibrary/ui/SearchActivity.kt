@@ -15,13 +15,13 @@ import com.edurda77.filmlibrary.data.ResultSearchMovie
 import com.edurda77.filmlibrary.databinding.ActivitySearchBinding
 import com.edurda77.filmlibrary.domain.TheMDBRepoUseCaseSync
 
-private const val DEFAUL_KEY = "DEFAUL_KEY"
+private const val DEFAULT_KEY = "DEFAULT_KEY"
 class SearchActivity : AppCompatActivity() {
     private var toolbar: Toolbar? = null
     private lateinit var binding: ActivitySearchBinding
-    private val goSearchMovie: TheMDBRepoUseCaseSync by lazy { app.theMDBRepoUseCaceSync }
+    private val goSearchMovie: TheMDBRepoUseCaseSync by lazy { app.theMDBRepoUseCaseSync }
     private val resultSearch = emptyList<ResultSearchMovie>().toMutableList()
-    private val prefernces: SharedPreferences by lazy {app.sharedPrefernces}
+    private val preferences: SharedPreferences by lazy {app.sharedPreferences}
 
 
 
@@ -30,7 +30,7 @@ class SearchActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         setToolbar()
-        val adult= prefernces.getBoolean(DEFAUL_KEY,false)
+        val adult= preferences.getBoolean(DEFAULT_KEY,false)
 
         binding.goSearchMovie.setOnClickListener {
             resultSearch.clear()
@@ -52,10 +52,10 @@ class SearchActivity : AppCompatActivity() {
     }
 
 
-    fun setOotRecycledView() {
+    private fun setOotRecycledView() {
 
         val recyclerView: RecyclerView = binding.itemSearchMovie
-        val goIDMovie: TheMDBRepoUseCaseSync by lazy { app.theMDBRepoUseCaceSync }
+        val goIDMovie: TheMDBRepoUseCaseSync by lazy { app.theMDBRepoUseCaseSync }
         recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
 
         val stateClickListener: MovieAdapter.OnStateClickListener =

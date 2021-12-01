@@ -6,7 +6,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.edurda77.filmlibrary.data.ResultSearchMovie
 
 
-class MovieAdapter(private val list: List<ResultSearchMovie>, val onClickListener: OnStateClickListener) :
+class MovieAdapter(private val list: List<ResultSearchMovie>,
+                   private val onClickListener: OnStateClickListener) :
     RecyclerView.Adapter<MovieHolder>()
     {
     interface OnStateClickListener {

@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.edurda77.filmlibrary.R
@@ -24,7 +25,9 @@ class PeopleHolder (inflater: LayoutInflater, parent: ViewGroup) :
     }
     @SuppressLint("SetTextI18n")
     fun bind(people: ResultSearchedPeople) {
-        titlePeople?.text =   people.namePeopleSearched
+
+
+            titlePeople?.text =   people.namePeopleSearched
         Glide.with(this.itemView.context)
             .load(beginURL+people.profilePathPeopleSearched)
             .placeholder(R.drawable.video)

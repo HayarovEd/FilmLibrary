@@ -18,8 +18,8 @@ class RoomNoteRepoImpl (context:Context): NoteDao{
         noteDao.add(note)
     }
 
-    override fun getNots(): List<NoteMovie> {
-        return noteDao.getNots()
+    override fun getNotes(): List<NoteMovie> {
+        return noteDao.getNotes()
     }
 
     override fun delete(id: Int) {
@@ -34,8 +34,8 @@ class RoomNoteRepoImpl (context:Context): NoteDao{
         noteDao.update(id,content)
     }
 
-    override fun clearNots(){
-        noteDao.clearNots()
+    override fun clearNotes(){
+        noteDao.clearNotes()
 
     }
 }

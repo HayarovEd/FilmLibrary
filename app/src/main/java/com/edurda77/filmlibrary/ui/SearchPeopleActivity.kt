@@ -18,7 +18,7 @@ import com.edurda77.filmlibrary.domain.TheMDBRepoUseCaseSync
 class SearchPeopleActivity : AppCompatActivity() {
     private var toolbar: Toolbar? = null
     private lateinit var binding: ActivitySearchPeopleBinding
-    private val goSearchedPeople: TheMDBRepoUseCaseSync by lazy { app.theMDBRepoUseCaceSync }
+    private val goSearchedPeople: TheMDBRepoUseCaseSync by lazy { app.theMDBRepoUseCaseSync }
     private val resultSearch = emptyList<ResultSearchedPeople>().toMutableList()
     override fun onCreate(savedInstanceState: Bundle?) {
         binding = ActivitySearchPeopleBinding.inflate(layoutInflater)
@@ -43,7 +43,7 @@ class SearchPeopleActivity : AppCompatActivity() {
     private fun setOotRecycledView() {
 
         val recyclerView: RecyclerView = binding.itemSearchPeople
-        val goIDPeople: TheMDBRepoUseCaseSync by lazy { app.theMDBRepoUseCaceSync }
+        val goIDPeople: TheMDBRepoUseCaseSync by lazy { app.theMDBRepoUseCaseSync }
         recyclerView.layoutManager = LinearLayoutManager(
             this, LinearLayoutManager
                 .VERTICAL, false
@@ -56,7 +56,7 @@ class SearchPeopleActivity : AppCompatActivity() {
                     Thread {
                         val iDPeople = goIDPeople.getReposForIdPeopleSync(people)
                         runOnUiThread {
-                            val intent = Intent(this@SearchPeopleActivity, FilmActivity::class.java)
+                            val intent = Intent(this@SearchPeopleActivity, PeopleActivity::class.java)
                             intent.putExtra(People::class.java.simpleName, iDPeople)
 
                             startActivity(intent)

@@ -51,7 +51,7 @@ class FilmActivity : AppCompatActivity() {
             titleEditText.text = movie.title
             idEditText.text = idEditText.text.toString() + movie.id.toString()
 
-            genreEditText.text = genreEditText.text.toString() + movie.movieGanre
+            genreEditText.text = genreEditText.text.toString() + movie.movieGenre
             yearEditText.text = yearEditText.text.toString() + movie.releaseDate
             durationEditText.text = durationEditText.text.toString() + movie.runtime.toString()
             budgetEditText.text = budgetEditText.text.toString() + movie.budget.toString()

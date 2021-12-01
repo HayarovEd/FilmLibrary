@@ -12,7 +12,7 @@ import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
 import com.edurda77.filmlibrary.domain.NoteDao
 
-private const val DEFAUL_KEY = "DEFAUL_KEY"
+private const val DEFAULT_KEY = "DEFAULT_KEY"
 
 
 class CustomActivity : AppCompatActivity() {
@@ -20,7 +20,7 @@ class CustomActivity : AppCompatActivity() {
 
 
     private val noteDao: NoteDao by lazy { app.noteDao }
-    private val prefernces: SharedPreferences by lazy {app.sharedPrefernces}
+    private val preferences: SharedPreferences by lazy {app.sharedPreferences}
     private lateinit var binding: ActivityCustomBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         binding = ActivityCustomBinding.inflate(layoutInflater)
@@ -32,7 +32,7 @@ class CustomActivity : AppCompatActivity() {
 
         binding.clearNots.setOnClickListener {
             Thread {
-                noteDao.clearNots()
+                noteDao.clearNotes()
             }.start()
             Toast.makeText(this,"Теперь заметок нет", Toast.LENGTH_SHORT).show()
         }
@@ -41,8 +41,8 @@ class CustomActivity : AppCompatActivity() {
 
 
     private fun setPreferences() {
-        prefernces.edit().let {
-            it.putBoolean(DEFAUL_KEY,binding.checkAdult.isChecked)
+        preferences.edit().let {
+            it.putBoolean(DEFAULT_KEY,binding.checkAdult.isChecked)
             it.commit()
         }
     }
@@ -87,7 +87,7 @@ class CustomActivity : AppCompatActivity() {
     }
     override fun onStart() {
         super.onStart()
-        binding.checkAdult.isChecked=prefernces.getBoolean(DEFAUL_KEY, false)
+        binding.checkAdult.isChecked=preferences.getBoolean(DEFAULT_KEY, false)
     }
     override fun onStop() {
         setPreferences()

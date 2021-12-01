@@ -21,14 +21,14 @@ import com.edurda77.filmlibrary.domain.TheMDBRepoUseCaseSync
 
 class MainActivity : AppCompatActivity() {
     private var toolbar: Toolbar? = null
-    private val goNowPlayingMovie: TheMDBRepoUseCaseSync by lazy { app.theMDBRepoUseCaceSync }
+    private val goNowPlayingMovie: TheMDBRepoUseCaseSync by lazy { app.theMDBRepoUseCaseSync }
     private val resultNowPlayingMovie = emptyList<ResultSearchMovie>().toMutableList()
     private val resultPopularMovie = emptyList<ResultSearchMovie>().toMutableList()
     private val resultTopRatedMovie = emptyList<ResultSearchMovie>().toMutableList()
     private val resultUpcomingMovie = emptyList<ResultSearchMovie>().toMutableList()
 
 
-    private var ganre = emptyList<FilmGenre>().toMutableList()
+    private var genre = emptyList<FilmGenre>().toMutableList()
     private lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -46,34 +46,34 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
 
     }
-    fun getGroupMovies () {
+    private fun getGroupMovies () {
         Thread {
             goNowPlayingMovie.getReposForNowPlayingMovieSync()?.forEach {
                 resultNowPlayingMovie.add(it)
             }
-            ganre.add(FilmGenre("Сейчас в кинотеатрах", resultNowPlayingMovie))
+            genre.add(FilmGenre("Сейчас в кинотеатрах", resultNowPlayingMovie))
             goNowPlayingMovie.getReposForPopularMovieSync()?.forEach {
                 resultPopularMovie.add(it)
             }
-            ganre.add(FilmGenre("Популярные фильмы", resultPopularMovie))
+            genre.add(FilmGenre("Популярные фильмы", resultPopularMovie))
             goNowPlayingMovie.getReposForTopRatedMovieSync()?.forEach {
                 resultTopRatedMovie.add(it)
             }
-            ganre.add(FilmGenre("Высокий рейтинг", resultTopRatedMovie))
+            genre.add(FilmGenre("Высокий рейтинг", resultTopRatedMovie))
             goNowPlayingMovie.getReposForUpcomingMovieSync()?.forEach {
                 resultUpcomingMovie.add(it)
             }
-            ganre.add(FilmGenre("Скоро в прокате", resultUpcomingMovie))
+            genre.add(FilmGenre("Скоро в прокате", resultUpcomingMovie))
             runOnUiThread {
                 setOotRecycledView()
 
             }
         }.start()
     }
-    fun setOotRecycledView() {
+    private fun setOotRecycledView() {
 
         val recyclerView: RecyclerView = binding.outRecycledView
-        val goIDMovie: TheMDBRepoUseCaseSync by lazy { app.theMDBRepoUseCaceSync }
+        val goIDMovie: TheMDBRepoUseCaseSync by lazy { app.theMDBRepoUseCaseSync }
         recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
 
         val stateClickListener: MovieAdapter.OnStateClickListener =
@@ -93,7 +93,7 @@ class MainActivity : AppCompatActivity() {
             }
 
 
-        recyclerView.adapter = OutAdapter(ganre, stateClickListener)
+        recyclerView.adapter = OutAdapter(genre, stateClickListener)
 
 
     }

@@ -8,12 +8,12 @@ import com.edurda77.filmlibrary.data.RoomNoteRepoImpl
 import com.edurda77.filmlibrary.domain.NoteDao
 
 import com.edurda77.filmlibrary.domain.TheMDBRepoUseCaseSync
-private const val DEFAUL_SHARED_KEY = "DEFAUL_SHARED_KEY"
+private const val DEFAULT_SHARED_KEY = "DEFAULT_SHARED_KEY"
 class App : Application() {
-    val theMDBRepoUseCaceSync: TheMDBRepoUseCaseSync by lazy { RetrofitTheMdbRepoUseCaseImpl() }
+    val theMDBRepoUseCaseSync: TheMDBRepoUseCaseSync by lazy { RetrofitTheMdbRepoUseCaseImpl() }
     val noteDao: NoteDao by lazy { RoomNoteRepoImpl(this) }
-    val sharedPrefernces: SharedPreferences
-            by lazy {getSharedPreferences(DEFAUL_SHARED_KEY, MODE_PRIVATE)}
+    val sharedPreferences: SharedPreferences
+            by lazy {getSharedPreferences(DEFAULT_SHARED_KEY, MODE_PRIVATE)}
     //val noteRepoSync: NoteRepo by lazy { NoteRepoImpl() }
 
 }

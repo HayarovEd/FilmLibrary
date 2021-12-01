@@ -14,7 +14,7 @@
     <ImageView
         android:id="@+id/picture_people_view"
         android:layout_width="@dimen/picture_size"
-        android:layout_height="@dimen/picture_size"
+        android:layout_height="@dimen/double_picture_size"
         android:layout_gravity="center"/>
 
 

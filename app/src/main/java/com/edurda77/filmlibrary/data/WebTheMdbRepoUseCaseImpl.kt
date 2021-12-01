@@ -9,7 +9,7 @@ import java.io.InputStreamReader
 import java.net.URL
 import javax.net.ssl.HttpsURLConnection
 
-class WebTheMdbRepoUsecaseImpl : TheMDBRepoUseCaseSync, TheMDBRepoUseCaseAsync {
+class WebTheMdbRepoUseCaseImpl : TheMDBRepoUseCaseSync, TheMDBRepoUseCaseAsync {
     override fun getReposForSearchMovieSync(userName: String, adultKey:Boolean): List<ResultSearchMovie> {
         val gson by lazy { Gson() }
 
@@ -88,12 +88,12 @@ class WebTheMdbRepoUsecaseImpl : TheMDBRepoUseCaseSync, TheMDBRepoUseCaseAsync {
             val movieBudget = resJson.budget
             val movieRevenue = resJson.revenue
             val movieOverview = resJson.overview
-            val movieGanre = "released last"
+            val movieGenre = "released last"
             val moviePathPicture = resJson.posterPath
             return Movie(
                 movieId,
                 movieTitle,
-                movieGanre,
+                movieGenre,
                 movieRuntime,
                 moviePopularity,
                 movieReleaseDate,
