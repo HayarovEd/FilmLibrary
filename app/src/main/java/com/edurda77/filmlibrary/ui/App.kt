@@ -3,8 +3,10 @@ package com.edurda77.filmlibrary.ui
 import android.app.Application
 import android.content.Context
 import android.content.SharedPreferences
+import com.edurda77.filmlibrary.data.LocationRepoImpl
 import com.edurda77.filmlibrary.data.RetrofitTheMdbRepoUseCaseImpl
 import com.edurda77.filmlibrary.data.RoomNoteRepoImpl
+import com.edurda77.filmlibrary.domain.LocationRepo
 import com.edurda77.filmlibrary.domain.NoteDao
 
 import com.edurda77.filmlibrary.domain.TheMDBRepoUseCaseSync
@@ -15,6 +17,7 @@ class App : Application() {
     val sharedPreferences: SharedPreferences
             by lazy {getSharedPreferences(DEFAULT_SHARED_KEY, MODE_PRIVATE)}
     //val noteRepoSync: NoteRepo by lazy { NoteRepoImpl() }
+    val locationRepo: LocationRepo by lazy { LocationRepoImpl() }
 
 }
 

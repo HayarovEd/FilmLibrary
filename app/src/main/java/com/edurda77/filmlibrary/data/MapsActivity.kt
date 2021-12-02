@@ -14,11 +14,14 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 
 import com.edurda77.filmlibrary.databinding.ActivityMapsBinding
+import com.edurda77.filmlibrary.domain.LocationRepo
+import com.edurda77.filmlibrary.ui.app
 
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private lateinit var mMap: GoogleMap
     private lateinit var binding: ActivityMapsBinding
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,24 +37,16 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
 
     override fun onMapReady(googleMap: GoogleMap) {
-        mMap = googleMap
+
         val arguments = intent.extras
         val placeOfBirth: String
         if (arguments != null) {
+            val locationRepo: LocationRepo by lazy { app.locationRepo }
             placeOfBirth = arguments.getSerializable(String::class.java.simpleName) as String
+            locationRepo.setLocation(placeOfBirth, this,googleMap)
 
-            val addresses :List<Address> = Geocoder(this)
-                .getFromLocationName(placeOfBirth, 1)
-            if (addresses.isNotEmpty()) {
-                val latitude = addresses[0].latitude
-                val longitude = addresses[0].longitude
-                val place = LatLng(latitude, longitude)
-                mMap.addMarker(MarkerOptions().position(place).title(placeOfBirth))
-                mMap.moveCamera(CameraUpdateFactory.newLatLng(place))
-                val zoom  = CameraUpdateFactory.zoomTo(7F)
-                mMap.animateCamera(zoom)
-            }
 
         }
     }
+
 }
