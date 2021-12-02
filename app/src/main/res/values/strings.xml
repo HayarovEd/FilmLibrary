@@ -36,7 +36,7 @@
     <string name="name_people">Имя актера</string>
     <string name="birthday_people">Дата рождения:</string>
     <string name="biography_people">Биография:</string>
-    <string name="place_birth_people">Место рождения:</string>
+    <string name="place_birth_people">Место рождения (для просмотра, нажать) :</string>
     <string name="geolocation">Запросить геолокацию места рождения</string>
     <string name="title_activity_maps">MapsActivity</string>
 </resources>

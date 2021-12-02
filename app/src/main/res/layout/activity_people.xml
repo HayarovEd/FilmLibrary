@@ -53,6 +53,7 @@
             <TextView
                 android:id="@+id/place_birth_people"
                 style="@style/content_movie_view"
+                android:layout_height="@dimen/place_birth"
                 android:text="@string/place_birth_people" />
 
 
