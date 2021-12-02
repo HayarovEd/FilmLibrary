@@ -1,25 +1,17 @@
-package com.edurda77.filmlibrary.data
+package com.edurda77.filmlibrary.ui
 
-import android.location.Address
-import android.location.Geocoder
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.edurda77.filmlibrary.R
-
-import com.google.android.gms.maps.CameraUpdateFactory
+import com.edurda77.filmlibrary.databinding.ActivityMapsBinding
+import com.edurda77.filmlibrary.domain.LocationRepo
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.MarkerOptions
-
-import com.edurda77.filmlibrary.databinding.ActivityMapsBinding
-import com.edurda77.filmlibrary.domain.LocationRepo
-import com.edurda77.filmlibrary.ui.app
 
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
-    private lateinit var mMap: GoogleMap
+
     private lateinit var binding: ActivityMapsBinding
 
 

@@ -15,7 +15,6 @@ import androidx.appcompat.widget.Toolbar
 import androidx.core.app.ActivityCompat
 import com.bumptech.glide.Glide
 import com.edurda77.filmlibrary.R
-import com.edurda77.filmlibrary.data.MapsActivity
 import com.edurda77.filmlibrary.data.People
 import com.edurda77.filmlibrary.databinding.ActivityPeopleBinding
 
@@ -49,7 +48,7 @@ class PeopleActivity : AppCompatActivity() {
 
 
             Glide.with(this).load(beginURL + people.profilePathPeople)
-                //.override(320, 480)
+
                 .placeholder(R.drawable.video).into(picture)
             binding.placeBirthPeople.setOnClickListener{
                 checkPermission()
@@ -66,7 +65,7 @@ class PeopleActivity : AppCompatActivity() {
         }
 
     }
-    //binding.requestGeolocation.setOnClickListener
+
     private fun setToolbar() {
         toolbar = binding.toolbar
         setSupportActionBar(toolbar)
@@ -79,33 +78,8 @@ class PeopleActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.start -> {
-                val intent = Intent(this, MainActivity::class.java)
-                startActivity(intent)
-            }
-            R.id.people_search -> {
-                val intent = Intent(this, SearchPeopleActivity::class.java)
-                startActivity(intent)
-            }
-            R.id.action_search -> {
-                val intent = Intent(this, SearchActivity::class.java)
-                startActivity(intent)
-            }
-            R.id.nots -> {
-                val intent = Intent(this, NotesActivity::class.java)
-                startActivity(intent)
-            }
-            R.id.custom -> {
-                val intent = Intent(this, CustomActivity::class.java)
-                startActivity(intent)
-            }
-            R.id.about -> {
-                val intent = Intent(this, AboutActivity::class.java)
-                startActivity(intent)
-            }
-
-        }
+        val itemMenu = MenuDelegate(item)
+        itemMenu.setMenu(this,item)
         return super.onOptionsItemSelected(item)
     }
 
