@@ -64,14 +64,14 @@
 
 
 
-            <Button
+           <!-- <Button
                 android:id="@+id/request_geolocation"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="@string/geolocation">
 
-            </Button>
+            </Button>-->
         </LinearLayout>
 
 

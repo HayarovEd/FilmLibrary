@@ -15,6 +15,7 @@ import androidx.appcompat.widget.Toolbar
 import androidx.core.app.ActivityCompat
 import com.bumptech.glide.Glide
 import com.edurda77.filmlibrary.R
+import com.edurda77.filmlibrary.data.MapsActivity
 import com.edurda77.filmlibrary.data.People
 import com.edurda77.filmlibrary.databinding.ActivityPeopleBinding
 
@@ -50,12 +51,22 @@ class PeopleActivity : AppCompatActivity() {
             Glide.with(this).load(beginURL + people.profilePathPeople)
                 //.override(320, 480)
                 .placeholder(R.drawable.video).into(picture)
-        }
-        binding.requestGeolocation.setOnClickListener {
-            checkPermission()
-        }
-    }
+            binding.placeBirthPeople.setOnClickListener{
+                checkPermission()
+                if (people.placeBirthPeople!=null) {
+                    val place = people.placeBirthPeople
+                    runOnUiThread {
+                        val intent = Intent(this@PeopleActivity, MapsActivity::class.java)
+                        intent.putExtra(String::class.java.simpleName, place)
 
+                        startActivity(intent)
+                    }
+                }
+            }
+        }
+
+    }
+    //binding.requestGeolocation.setOnClickListener
     private fun setToolbar() {
         toolbar = binding.toolbar
         setSupportActionBar(toolbar)
@@ -103,7 +114,7 @@ class PeopleActivity : AppCompatActivity() {
                 Manifest.permission.ACCESS_COARSE_LOCATION
             ) == PackageManager.PERMISSION_GRANTED
         ) {
-            TODO()
+            //TODO
         } else {
             ActivityCompat.requestPermissions(this, Array(2) {
                 Manifest.permission.ACCESS_FINE_LOCATION

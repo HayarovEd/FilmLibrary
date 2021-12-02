@@ -13,7 +13,7 @@ data class People(
     @SerializedName("biography")
     val biographyPeople: String,
     @SerializedName("place_of_birth")
-    val placeBirthPeople: String,
+    val placeBirthPeople: String?,
     @SerializedName("profile_path")
     val profilePathPeople: String
 ): Serializable

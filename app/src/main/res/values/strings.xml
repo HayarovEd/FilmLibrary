@@ -6,7 +6,7 @@
     <string name="ttile_movie">Название фильма</string>
     <string name="year_movie">Год: </string>
     <string name="summary_movie">Краткое содержание фильма: </string>
-    <string name="menu_search">Поиск</string>
+    <string name="menu_search">Поиск фильмов</string>
     <string name="menu_custom">Настройки</string>
     <string name="menu_about">О приложении</string>
     <string name="rang_movie">Рейтинг фильма: </string>
@@ -38,4 +38,5 @@
     <string name="biography_people">Биография:</string>
     <string name="place_birth_people">Место рождения:</string>
     <string name="geolocation">Запросить геолокацию места рождения</string>
+    <string name="title_activity_maps">MapsActivity</string>
 </resources>

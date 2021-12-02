@@ -110,10 +110,12 @@ class SearchPeopleActivity : AppCompatActivity() {
                 startActivity(intent)
             }
             R.id.about -> {
+
                 val intent = Intent(this, AboutActivity::class.java)
                 startActivity(intent)
             }
         }
         return super.onOptionsItemSelected(item)
     }
+
 }
