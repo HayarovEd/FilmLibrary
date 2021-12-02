@@ -1,5 +1,7 @@
 package com.edurda77.filmlibrary.data
 
+import android.location.Address
+import android.location.Geocoder
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.edurda77.filmlibrary.R
@@ -33,10 +35,23 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
+        val arguments = intent.extras
+        val placeOfBirth: String
+        if (arguments != null) {
+            placeOfBirth = arguments.getSerializable(String::class.java.simpleName) as String
 
+            val addresses :List<Address> = Geocoder(this)
+                .getFromLocationName(placeOfBirth, 1)
+            if (addresses.isNotEmpty()) {
+                val latitude = addresses[0].latitude
+                val longitude = addresses[0].longitude
+                val place = LatLng(latitude, longitude)
+                mMap.addMarker(MarkerOptions().position(place).title(placeOfBirth))
+                mMap.moveCamera(CameraUpdateFactory.newLatLng(place))
+                val zoom  = CameraUpdateFactory.zoomTo(7F)
+                mMap.animateCamera(zoom)
+            }
 
-        val sydney = LatLng(-34.0, 151.0)
-        mMap.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
+        }
     }
 }
