@@ -22,12 +22,14 @@ class RetrofitTheMdbRepoUseCaseImpl : TheMDBRepoUseCaseSync {
 
     override fun getReposForSearchMovieSync(
         userName: String,
-        adultKey: Boolean
+        adultKey: Boolean,
+
     ): List<ResultSearchMovie> {
 
         val resultsParsing: ResultsParsing? =
-            api.getSearchMovie(TMDB_API_KEY, LANGUAGE, userName, adultKey)
+            api.getSearchMovie(TMDB_API_KEY, LANGUAGE, userName,  adultKey)
                 .execute().body()
+
         return parsingForSync(resultsParsing)
 
     }
