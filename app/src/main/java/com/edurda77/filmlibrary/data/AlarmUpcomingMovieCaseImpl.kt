@@ -13,7 +13,7 @@ import com.edurda77.filmlibrary.ui.MainActivity
 import java.text.SimpleDateFormat
 import java.util.*
 
-class AlarmUpcomingMovieCaseImpl: AlarmUpcomingMovieCase {
+class AlarmUpcomingMovieCaseImpl : AlarmUpcomingMovieCase {
     @SuppressLint("SimpleDateFormat")
     override fun setAlarm(upcomingMovie: ResultSearchMovie, context: Context) {
         val notificationManager = NotificationManagerCompat.from(context)
@@ -24,10 +24,13 @@ class AlarmUpcomingMovieCaseImpl: AlarmUpcomingMovieCase {
         val sdf = SimpleDateFormat("yyyy-MM-dd")
         val dateOfMovie = sdf.parse(upcomingMovie.releaseDate)
         val currentDate = sdf.format(Date())
-        if (dateOfMovie.equals(currentDate)) {
-            notificationManager.notify(1, createNotification(upcomingMovie,context))
+        if (dateOfMovie != null) {
+            if (dateOfMovie.equals(currentDate)) {
+                notificationManager.notify(1, createNotification(upcomingMovie, context))
+            }
         }
     }
+
     private fun createChannelsOnStart(notificationManager: NotificationManagerCompat) {
         val channel = NotificationChannelCompat.Builder(
             "1",
@@ -37,8 +40,12 @@ class AlarmUpcomingMovieCaseImpl: AlarmUpcomingMovieCase {
             .build()
         notificationManager.createNotificationChannel(channel)
     }
+
     @SuppressLint("UnspecifiedImmutableFlag")
-    private fun createNotification(upcomingMovie: ResultSearchMovie, context: Context): Notification {
+    private fun createNotification(
+        upcomingMovie: ResultSearchMovie,
+        context: Context
+    ): Notification {
 
         val intent = Intent(context, MainActivity::class.java)
         val pendingIntent: PendingIntent = PendingIntent.getActivity(context, 0, intent, 0)
