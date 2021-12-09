@@ -39,16 +39,11 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         setContentView(binding.root)
-            //setToolbar()
+
         getGroupMovies ()
 
     }
 
-    /*private fun setToolbar() {
-        toolbar = binding.toolbar
-        setSupportActionBar(toolbar)
-
-    }*/
     @SuppressLint("SimpleDateFormat")
     private fun getGroupMovies () {
         Thread {
@@ -80,20 +75,17 @@ class MainActivity : AppCompatActivity() {
     private fun setOotRecycledView() {
 
         val recyclerView: RecyclerView = binding.outRecycledView
-        //val goIDMovie: TheMDBRepoUseCaseSync by lazy { app.theMDBRepoUseCaseSync }
+
         recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
 
         val stateClickListener: MovieAdapter.OnStateClickListener =
             object : MovieAdapter.OnStateClickListener {
                 override fun onStateClick(movie: ResultSearchMovie, position: Int) {
                     Thread {
-                        //val iDMovie = goIDMovie.getReposForIDMovieSync(movie)
+
 
                         runOnUiThread {
-                           /* val intent = Intent(this@MainActivity, FilmActivity::class.java)
-                            intent.putExtra(Movie::class.java.simpleName, iDMovie)
 
-                            startActivity(intent)*/
                             Toast.makeText(this@MainActivity,"Только в платной версии)))",Toast.LENGTH_LONG).show()
                         }
                     }.start()
@@ -107,17 +99,7 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    /*override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.menu, menu)
-        return super.onCreateOptionsMenu(menu)
-    }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        val itemMenu = MenuDelegate(item)
-        itemMenu.setMenu(this,item)
-
-        return super.onOptionsItemSelected(item)
-    }*/
 
 
 }

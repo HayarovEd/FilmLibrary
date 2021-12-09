@@ -1,0 +1,20 @@
+{
+  "version": 3,
+  "artifactType": {
+    "type": "APK",
+    "kind": "Directory"
+  },
+  "applicationId": "com.edurda77.filmlibrary",
+  "variantName": "freeRelease",
+  "elements": [
+    {
+      "type": "SINGLE",
+      "filters": [],
+      "attributes": [],
+      "versionCode": 1,
+      "versionName": "1.0.free",
+      "outputFile": "app-free-release.apk"
+    }
+  ],
+  "elementType": "File"
+}
