@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/start"
+        android:icon="@drawable/icon_start"
+        android:title="@string/base_activity"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_search"
+        android:icon="@drawable/baseline_search_24"
+        android:title="@string/menu_search"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/people_search"
+        android:icon="@drawable/icon_searching_people"
+        android:title="@string/search_peoples"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/nots"
+        android:icon="@drawable/icon_notes"
+        android:title="@string/nots_movie"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/custom"
+        android:icon="@drawable/icon_custom"
+        android:title="@string/menu_custom"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/about"
+        android:icon="@drawable/icon_about"
+        android:title="@string/menu_about"
+        app:showAsAction="never" />
+</menu>

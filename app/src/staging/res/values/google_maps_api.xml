@@ -1,0 +1,24 @@
+<resources>
+    <!--
+    TODO: Before you run your application, you need a Google Maps API key.
+
+    To get one, follow this link, follow the directions and press "Create" at the end:
+
+    https://console.developers.google.com/flows/enableapi?apiid=maps_android_backend&keyType=CLIENT_SIDE_ANDROID&r=A8:4C:1C:53:1A:C6:C2:1A:16:4A:DF:A8:6B:7F:5B:64:6E:C9:9F:32%3Bcom.edurda77.filmlibrary.data
+
+    You can also add your credentials to an existing key, using these values:
+
+    Package name:
+    com.edurda77.filmlibrary.data
+
+    SHA-1 certificate fingerprint:
+    A8:4C:1C:53:1A:C6:C2:1A:16:4A:DF:A8:6B:7F:5B:64:6E:C9:9F:32
+
+    Alternatively, follow the directions here:
+    https://developers.google.com/maps/documentation/android/start#get-key
+
+    Once you have your key (it starts with "AIza"), replace the "google_maps_key"
+    string in this file.
+    -->
+    <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">AIzaSyCm4knhoVQXULwqZzori82R-PT3dxGrj0E</string>
+</resources>

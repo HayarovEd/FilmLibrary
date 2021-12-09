@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="ttile_movie">Название фильма</string>
+    <string name="year_movie">Год</string>
+    <string name="summary_movie">Краткое содержание фильма</string>
+    <string name="menu_search">Поиск</string>
+    <string name="menu_custom">Настройки</string>
+    <string name="menu_about">О приложении</string>
+    <string name="rang_movie">Рейтинг фильма</string>
+    <string name="revenue">Кассовые сборы</string>
+    <string name="budget">Бюджет</string>
+    <string name="duration">Продолжительность</string>
+    <string name="ganre">Жанр</string>
+    <string name="search_words">название фильма или часть названия</string>
+    <string name="id_movie">id</string>
+    <string name="popularity">популярность</string>
+    <string name="ganre_movie">жанр</string>
+    <string name="popularity_movie">популярность</string>
+    <string name="custom">Настройки</string>
+    <string name="adult">Взрослый контент</string>
+    <string name="about_project">Фильмотека Хаярова Э.В., edurda77@gmail.com</string>
+    <string name="add_nots">Добавить заметку</string>
+    <string name="nots_movie">Заметки о фильмах</string>
+    <string name="search_people">Введите фамилию или имя актера</string>
+    <string name="search_peoples">Поиск актеров</string>
+    <string name="birthday_people">Дата рождения:</string>
+    <string name="place_birth_people">Место рождения:</string>
+</resources>
