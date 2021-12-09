@@ -8,7 +8,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-
+const val TMDB_API_KEY="2513408bca2d22ed908b2b3badf57939"
 class RetrofitTheMdbRepoUseCaseImplAsync : TheMDBRepoUseCaseAsync{
 
 
@@ -23,7 +23,7 @@ class RetrofitTheMdbRepoUseCaseImplAsync : TheMDBRepoUseCaseAsync{
         onSuccess: (List<ResultSearchMovie>) -> Unit,
         OnError: (Throwable) -> Unit
     ) {
-        api.getSearchMovie(BuildConfig.TMDB_API_KEY, LANGUAGE, userName, adultKey)
+        api.getSearchMovie(TMDB_API_KEY, LANGUAGE, userName, adultKey)
             .enqueue(object : Callback<ResultsParsing> {
                 override fun onResponse(
                     call: Call<ResultsParsing>,
@@ -53,7 +53,7 @@ class RetrofitTheMdbRepoUseCaseImplAsync : TheMDBRepoUseCaseAsync{
         onSuccess: (Movie) -> Unit,
         OnError: (Throwable) -> Unit
     ) {
-        api.getIDMovie(searcheMovie.id, BuildConfig.TMDB_API_KEY, LANGUAGE).enqueue(object :
+        api.getIDMovie(searcheMovie.id, TMDB_API_KEY, LANGUAGE).enqueue(object :
             Callback<Movie> {
             override fun onResponse(
                 call: Call<Movie>,
@@ -79,7 +79,7 @@ class RetrofitTheMdbRepoUseCaseImplAsync : TheMDBRepoUseCaseAsync{
         onSuccess: (List<Genres>) -> Unit,
         OnError: (Throwable) -> Unit
     ) {
-        api.getGenres(BuildConfig.TMDB_API_KEY).enqueue(object : Callback<List<Genres>> {
+        api.getGenres(TMDB_API_KEY).enqueue(object : Callback<List<Genres>> {
             override fun onResponse(call: Call<List<Genres>>, response: Response<List<Genres>>) {
                 if (response.isSuccessful) {
                     onSuccess(response.body() ?: throw IllegalStateException("Нулевой результат"))
@@ -99,7 +99,7 @@ class RetrofitTheMdbRepoUseCaseImplAsync : TheMDBRepoUseCaseAsync{
         onSuccess: (List<ResultSearchMovie>) -> Unit,
         OnError: (Throwable) -> Unit
     ) {
-        api.getNowPlaying(BuildConfig.TMDB_API_KEY, LANGUAGE).enqueue(object :
+        api.getNowPlaying(TMDB_API_KEY, LANGUAGE).enqueue(object :
             Callback<ResultsParsing> {
             override fun onResponse(
                 call: Call<ResultsParsing>,
@@ -127,7 +127,7 @@ class RetrofitTheMdbRepoUseCaseImplAsync : TheMDBRepoUseCaseAsync{
         onSuccess: (List<ResultSearchMovie>) -> Unit,
         OnError: (Throwable) -> Unit
     ) {
-        api.getPopular(BuildConfig.TMDB_API_KEY, LANGUAGE).enqueue(object :
+        api.getPopular(TMDB_API_KEY, LANGUAGE).enqueue(object :
             Callback<ResultsParsing> {
             override fun onResponse(
                 call: Call<ResultsParsing>,
@@ -155,7 +155,7 @@ class RetrofitTheMdbRepoUseCaseImplAsync : TheMDBRepoUseCaseAsync{
         onSuccess: (List<ResultSearchMovie>) -> Unit,
         OnError: (Throwable) -> Unit
     ) {
-        api.getTopRated(BuildConfig.TMDB_API_KEY, LANGUAGE).enqueue(object :
+        api.getTopRated(TMDB_API_KEY, LANGUAGE).enqueue(object :
             Callback<ResultsParsing> {
             override fun onResponse(
                 call: Call<ResultsParsing>,
@@ -183,7 +183,7 @@ class RetrofitTheMdbRepoUseCaseImplAsync : TheMDBRepoUseCaseAsync{
         onSuccess: (List<ResultSearchMovie>) -> Unit,
         OnError: (Throwable) -> Unit
     ) {
-        api.getUpcoming(BuildConfig.TMDB_API_KEY, LANGUAGE).enqueue(object :
+        api.getUpcoming(TMDB_API_KEY, LANGUAGE).enqueue(object :
             Callback<ResultsParsing> {
             override fun onResponse(
                 call: Call<ResultsParsing>,
@@ -212,7 +212,7 @@ class RetrofitTheMdbRepoUseCaseImplAsync : TheMDBRepoUseCaseAsync{
         onSuccess: (List<ResultSearchedPeople>) -> Unit,
         OnError: (Throwable) -> Unit
     ) {
-        api.getSearshPeople(BuildConfig.TMDB_API_KEY, LANGUAGE, name)
+        api.getSearshPeople(TMDB_API_KEY, LANGUAGE, name)
             .enqueue(object : Callback<ResultParsingPeople> {
                 override fun onResponse(
                     call: Call<ResultParsingPeople>,
@@ -242,7 +242,7 @@ class RetrofitTheMdbRepoUseCaseImplAsync : TheMDBRepoUseCaseAsync{
         onSuccess: (People) -> Unit,
         OnError: (Throwable) -> Unit
     ) {
-        api.getIdPeople(searchedPeople.idPeopleSearched, BuildConfig.TMDB_API_KEY, LANGUAGE)
+        api.getIdPeople(searchedPeople.idPeopleSearched, TMDB_API_KEY, LANGUAGE)
             .enqueue(object : Callback<People> {
                 override fun onResponse(
                     call: Call<People>,

@@ -1,6 +1,6 @@
 package com.edurda77.filmlibrary.data
 
-import com.edurda77.filmlibrary.BuildConfig.TMDB_API_KEY
+
 import com.edurda77.filmlibrary.data.retrofit.TheMDBRepoApi
 import com.edurda77.filmlibrary.domain.TheMDBRepoUseCaseSync
 import retrofit2.Retrofit
