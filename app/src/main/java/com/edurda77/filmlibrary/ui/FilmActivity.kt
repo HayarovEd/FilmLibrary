@@ -1,7 +1,6 @@
 package com.edurda77.filmlibrary.ui
 
 import android.annotation.SuppressLint
-import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -50,8 +49,12 @@ class FilmActivity : AppCompatActivity() {
             movie = arguments.getSerializable(Movie::class.java.simpleName) as Movie
             titleEditText.text = movie.title
             idEditText.text = idEditText.text.toString() + movie.id.toString()
+            val genre = StringBuilder(" ")
+            movie.movieGenre.forEach {
+                genre.append(it.name).append(", ")
+            }
 
-            genreEditText.text = genreEditText.text.toString() + movie.movieGenre
+            genreEditText.text = genreEditText.text.toString() + genre
             yearEditText.text = yearEditText.text.toString() + movie.releaseDate
             durationEditText.text = durationEditText.text.toString() + movie.runtime.toString()
             budgetEditText.text = budgetEditText.text.toString() + movie.budget.toString()

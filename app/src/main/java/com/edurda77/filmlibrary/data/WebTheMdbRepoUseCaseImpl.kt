@@ -88,7 +88,7 @@ class WebTheMdbRepoUseCaseImpl : TheMDBRepoUseCaseSync, TheMDBRepoUseCaseAsync {
             val movieBudget = resJson.budget
             val movieRevenue = resJson.revenue
             val movieOverview = resJson.overview
-            val movieGenre = "released last"
+            val movieGenre = resJson.movieGenre
             val moviePathPicture = resJson.posterPath
             return Movie(
                 movieId,

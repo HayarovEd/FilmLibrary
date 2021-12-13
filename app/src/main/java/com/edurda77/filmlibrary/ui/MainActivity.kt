@@ -1,5 +1,6 @@
 package com.edurda77.filmlibrary.ui
 
+import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
@@ -13,15 +14,16 @@ import com.edurda77.filmlibrary.data.FilmGenre
 import com.edurda77.filmlibrary.data.Movie
 import com.edurda77.filmlibrary.data.ResultSearchMovie
 import com.edurda77.filmlibrary.databinding.ActivityMainBinding
+import com.edurda77.filmlibrary.domain.AlarmUpcomingMovieCase
 import com.edurda77.filmlibrary.domain.TheMDBRepoUseCaseSync
 
-
-
+import java.util.*
 
 
 class MainActivity : AppCompatActivity() {
     private var toolbar: Toolbar? = null
     private val goNowPlayingMovie: TheMDBRepoUseCaseSync by lazy { app.theMDBRepoUseCaseSync }
+    private val goReleaseMovieToday: AlarmUpcomingMovieCase by lazy {app.alarmUpcomingMovieCase}
     private val resultNowPlayingMovie = emptyList<ResultSearchMovie>().toMutableList()
     private val resultPopularMovie = emptyList<ResultSearchMovie>().toMutableList()
     private val resultTopRatedMovie = emptyList<ResultSearchMovie>().toMutableList()
@@ -46,6 +48,7 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
 
     }
+    @SuppressLint("SimpleDateFormat")
     private fun getGroupMovies () {
         Thread {
             goNowPlayingMovie.getReposForNowPlayingMovieSync()?.forEach {
@@ -62,6 +65,9 @@ class MainActivity : AppCompatActivity() {
             genre.add(FilmGenre("Высокий рейтинг", resultTopRatedMovie))
             goNowPlayingMovie.getReposForUpcomingMovieSync()?.forEach {
                 resultUpcomingMovie.add(it)
+            }
+            resultUpcomingMovie.forEach{
+                goReleaseMovieToday.setAlarm(it,this)
             }
             genre.add(FilmGenre("Скоро в прокате", resultUpcomingMovie))
             runOnUiThread {
