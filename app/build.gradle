@@ -18,6 +18,16 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
+    signingConfigs {
+        release {
+            Properties properties = new Properties()
+            properties.load(project.rootProject.file('apikey.properties').newDataInputStream())
+            storeFile file("keystore.jks")
+            storePassword properties.getProperty('keyPassword')
+            keyAlias properties.getProperty('keyAlias')
+            keyPassword properties.getProperty('storePassword')
+        }
+    }
     buildTypes.each {
         Properties properties = new Properties()
         properties.load(project.rootProject.file("apikey.properties").newDataInputStream())
@@ -26,8 +36,19 @@ android {
     }
     buildTypes {
         release {
+            signingConfig signingConfigs.release
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField "String", "TYPE", '"RELEASE"'
+        }
+        debug {
+            versionNameSuffix "-debug"
+            buildConfigField "String", "TYPE", '"DEBUG"'
+        }
+        staging {
+            signingConfig signingConfigs.debug
+            versionNameSuffix "-staging"
+            buildConfigField "String", "TYPE", '"STAGING"'
         }
     }
     compileOptions {
@@ -40,13 +61,24 @@ android {
     buildFeatures {
         viewBinding = true
     }
+    flavorDimensions 'version'
+    productFlavors {
+        free {
+            dimension 'version'
+            versionNameSuffix '.free'
+        }
+        paid {
+            dimension 'version'
+            versionNameSuffix '.paid'
+        }
+    }
 
 }
 
 dependencies {
     implementation 'com.github.bumptech.glide:glide:4.12.0'
     implementation 'com.google.android.gms:play-services-maps:18.0.0'
-    implementation 'com.google.firebase:firebase-messaging:20.1.0'
+    implementation 'com.google.firebase:firebase-messaging:23.0.0'
     implementation 'com.google.firebase:firebase-messaging-ktx:23.0.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'
     implementation 'com.google.code.gson:gson:2.8.6'
@@ -65,7 +97,7 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.4.0'
     implementation 'com.google.android.material:material:1.4.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.2'
-    testImplementation 'junit:junit:'
+    //testImplementation 'junit:junit:'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 

@@ -8,7 +8,7 @@ import com.edurda77.filmlibrary.domain.LocationRepo
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
-
+const val TMDB_API_KEY="2513408bca2d22ed908b2b3badf57939"
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
 

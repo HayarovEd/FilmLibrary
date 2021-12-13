@@ -53,15 +53,7 @@ class AlarmUpcomingMovieCaseImpl : AlarmUpcomingMovieCase {
         return NotificationCompat.Builder(context, "1")
             .setContentTitle("Сегодня премьера")
             .setContentText(upcomingMovie.title)
-            //.addAction(R.drawable.ic_test_notification, "Нажми меня", pendingIntent)
-            /*.setStyle(
-                NotificationCompat.InboxStyle()
-                    .addLine("ololo")
-                    .addLine("lalala")
-                    .setBigContentTitle("FKFKFKFK")
-            )*/
             .setContentIntent(pendingIntent)
-            //.setSmallIcon(R.drawable.ic_test_notification)
             .build()
     }
 }

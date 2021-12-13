@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="margin_full">16sp</dimen>
+    <dimen name="margin_half">8sp</dimen>
+    <dimen name="margin_twin">32sp</dimen>
+    <dimen name="picture_size">64sp</dimen>
+    <dimen name="place_birth">48sp</dimen>
+    <dimen name="double_picture_size">128sp</dimen>
+</resources>

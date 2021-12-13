@@ -2,12 +2,12 @@
 .gradle
 /local.properties
 .idea
-
+.app/keystore.jks
 .DS_Store
 /build
 /captures
 .externalNativeBuild
 .cxx
-local.properties
-project.properties
-apikey.properties
+.local.properties
+.project.properties
+.apikey.properties

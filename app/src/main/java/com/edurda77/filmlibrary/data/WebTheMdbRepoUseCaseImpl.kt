@@ -15,7 +15,7 @@ class WebTheMdbRepoUseCaseImpl : TheMDBRepoUseCaseSync, TheMDBRepoUseCaseAsync {
 
 
         fun getUrl(search: String) = URL(
-            "https://api.themoviedb.org/3/search/movie?api_key=${BuildConfig.TMDB_API_KEY}&language=ru-RU&query=$search"
+            "https://api.themoviedb.org/3/search/movie?api_key=${TMDB_API_KEY}&language=ru-RU&query=$search"
         )
 
         val resultSearch = emptyList<ResultSearchMovie>().toMutableList()
@@ -66,7 +66,7 @@ class WebTheMdbRepoUseCaseImpl : TheMDBRepoUseCaseSync, TheMDBRepoUseCaseAsync {
         val gson by lazy { Gson() }
         fun getUrl() = URL(
             "https://api.themoviedb.org/3/movie/" + searcheMovie.id +
-                    "?api_key=${BuildConfig.TMDB_API_KEY}&language=ru-RU"
+                    "?api_key=${TMDB_API_KEY}&language=ru-RU"
         )
 
         var urlConnection: HttpsURLConnection? = null

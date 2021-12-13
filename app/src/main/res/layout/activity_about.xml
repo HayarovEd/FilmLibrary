@@ -20,6 +20,7 @@
     </com.google.android.material.appbar.AppBarLayout>
 
     <TextView
+        android:id="@+id/about"
         style="@style/content_movie_view"
         android:text="@string/about_project" />
 

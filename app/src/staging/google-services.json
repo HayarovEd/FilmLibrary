@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "598401830145",
+    "project_id": "filmlibrary-17a54",
+    "storage_bucket": "filmlibrary-17a54.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:598401830145:android:37532a1896f8ba96001f00",
+        "android_client_info": {
+          "package_name": "com.edurda77.filmlibrary"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "598401830145-j40ot97ikneae4nh8r00eujss3nisr0f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAneNLVxRSnCeTxreu64jeYN6XZXV5hu-I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "598401830145-j40ot97ikneae4nh8r00eujss3nisr0f.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
