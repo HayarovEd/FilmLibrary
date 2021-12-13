@@ -8,23 +8,14 @@
     android:layout_margin="@dimen/margin_half">
     <TextView
         style="@style/title_movie_view"
-        android:id="@+id/title_movie"
-        android:text="@string/ttile_movie"
+        android:id="@+id/name_people_view"
+        android:text="@string/name_people"
         />
     <ImageView
-        android:id="@+id/picture_movie_view"
-        android:layout_width="@dimen/double_picture_size"
+        android:id="@+id/picture_people_view"
+        android:layout_width="@dimen/picture_size"
         android:layout_height="@dimen/double_picture_size"
         android:layout_gravity="center"/>
-    <TextView
-        style="@style/content_movie_view"
-        android:id="@+id/id_movie"
-        android:text="@string/id_movie"
-        />
-    <TextView
-        style="@style/content_movie_view"
-        android:id="@+id/popularity_movie"
-        android:text="@string/popularity_movie"
-        />
+
 
 </LinearLayout>

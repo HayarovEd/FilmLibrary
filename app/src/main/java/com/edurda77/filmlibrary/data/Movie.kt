@@ -6,7 +6,7 @@ import java.io.Serializable
 data class Movie(
     val id: Int,
     val title: String,
-    val movieGanre: String,
+    val movieGenre: String,
     val runtime: Int,
     val popularity: Double,
     @SerializedName("release_date")

@@ -17,7 +17,7 @@ class NotesActivity : AppCompatActivity() {
     private var toolbar: Toolbar? = null
     private lateinit var binding: ActivityNotesBinding
     private val noteDao: NoteDao by lazy { app.noteDao }
-    private val notsOfMovie = emptyList<NoteMovie>().toMutableList()
+    private val notesOfMovie = emptyList<NoteMovie>().toMutableList()
     override fun onCreate(savedInstanceState: Bundle?) {
         binding = ActivityNotesBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
@@ -29,7 +29,7 @@ class NotesActivity : AppCompatActivity() {
     private fun setRecycledView() {
         val recyclerView: RecyclerView = binding.notsRecycledView
         recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-        val notsOfMovie=initNots()
+        val notesOfMovie=initNotes()
         val stateClickListener: NoteAdapter.OnStateClickListener =
             object : NoteAdapter.OnStateClickListener {
                 override fun onStateClick(note: NoteMovie, position: Int) {
@@ -45,16 +45,16 @@ class NotesActivity : AppCompatActivity() {
                     }.start()
                 }
             }
-        recyclerView.adapter = NoteAdapter(notsOfMovie,stateClickListener)
+        recyclerView.adapter = NoteAdapter(notesOfMovie,stateClickListener)
     }
 
-    private fun initNots(): List<NoteMovie> {
+    private fun initNotes(): List<NoteMovie> {
         Thread{
-        noteDao.getNots().forEach {
-            notsOfMovie.add(it)}
+        noteDao.getNotes().forEach {
+            notesOfMovie.add(it)}
         }.start()
 
-        return notsOfMovie
+        return notesOfMovie
     }
     private fun setToolbar() {
         toolbar = binding.toolbar
@@ -66,32 +66,8 @@ class NotesActivity : AppCompatActivity() {
         return super.onCreateOptionsMenu(menu)
     }
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.start -> {
-                val intent = Intent(this, MainActivity::class.java)
-                startActivity(intent)
-            }
-            R.id.action_search -> {
-                val intent = Intent(this, SearchActivity::class.java)
-                startActivity(intent)
-            }
-            R.id.nots -> {
-                val intent = Intent(this, NotesActivity::class.java)
-                startActivity(intent)
-            }
-            R.id.custom -> {
-                val intent = Intent(this, CustomActivity::class.java)
-                startActivity(intent)
-            }
-            R.id.about -> {
-                val intent = Intent(this, AboutActivity::class.java)
-                startActivity(intent)
-            }
-            R.id.people_search -> {
-                val intent = Intent(this, SearchPeopleActivity::class.java)
-                startActivity(intent)
-            }
-        }
+        val itemMenu = MenuDelegate(item)
+        itemMenu.setMenu(this,item)
         return super.onOptionsItemSelected(item)
     }
 }

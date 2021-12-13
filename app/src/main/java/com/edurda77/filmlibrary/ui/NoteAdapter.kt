@@ -5,7 +5,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.edurda77.filmlibrary.data.NoteMovie
 
-class NoteAdapter (private val list: List<NoteMovie>, val onClickListener: OnStateClickListener) :
+class NoteAdapter (private val list: List<NoteMovie>,
+                   private val onClickListener: OnStateClickListener) :
     RecyclerView.Adapter<NoteHolder>()
 {
     interface OnStateClickListener {

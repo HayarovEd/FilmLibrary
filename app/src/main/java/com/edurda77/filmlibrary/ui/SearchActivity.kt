@@ -13,15 +13,15 @@ import com.edurda77.filmlibrary.R
 import com.edurda77.filmlibrary.data.Movie
 import com.edurda77.filmlibrary.data.ResultSearchMovie
 import com.edurda77.filmlibrary.databinding.ActivitySearchBinding
-import com.edurda77.filmlibrary.domain.TheMDBRepoUseCace
+import com.edurda77.filmlibrary.domain.TheMDBRepoUseCaseSync
 
-private const val DEFAUL_KEY = "DEFAUL_KEY"
+private const val DEFAULT_KEY = "DEFAULT_KEY"
 class SearchActivity : AppCompatActivity() {
     private var toolbar: Toolbar? = null
     private lateinit var binding: ActivitySearchBinding
-    private val goSearchMovie: TheMDBRepoUseCace by lazy { app.theMDBRepoUseCace }
+    private val goSearchMovie: TheMDBRepoUseCaseSync by lazy { app.theMDBRepoUseCaseSync }
     private val resultSearch = emptyList<ResultSearchMovie>().toMutableList()
-    private val prefernces: SharedPreferences by lazy {app.sharedPrefernces}
+    private val preferences: SharedPreferences by lazy {app.sharedPreferences}
 
 
 
@@ -30,7 +30,7 @@ class SearchActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         setToolbar()
-        val adult= prefernces.getBoolean(DEFAUL_KEY,false)
+        val adult= preferences.getBoolean(DEFAULT_KEY,false)
 
         binding.goSearchMovie.setOnClickListener {
             resultSearch.clear()
@@ -52,10 +52,10 @@ class SearchActivity : AppCompatActivity() {
     }
 
 
-    fun setOotRecycledView() {
+    private fun setOotRecycledView() {
 
         val recyclerView: RecyclerView = binding.itemSearchMovie
-        val goIDMovie: TheMDBRepoUseCace by lazy { app.theMDBRepoUseCace }
+        val goIDMovie: TheMDBRepoUseCaseSync by lazy { app.theMDBRepoUseCaseSync }
         recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
 
         val stateClickListener: MovieAdapter.OnStateClickListener =
@@ -93,32 +93,8 @@ class SearchActivity : AppCompatActivity() {
         return super.onCreateOptionsMenu(menu)
     }
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.start -> {
-                val intent = Intent(this, MainActivity::class.java)
-                startActivity(intent)
-            }
-            R.id.people_search -> {
-                val intent = Intent(this, SearchPeopleActivity::class.java)
-                startActivity(intent)
-            }
-            R.id.action_search -> {
-                val intent = Intent(this, SearchActivity::class.java)
-                startActivity(intent)
-            }
-            R.id.nots -> {
-                val intent = Intent(this, NotesActivity::class.java)
-                startActivity(intent)
-            }
-            R.id.custom -> {
-                val intent = Intent(this, CustomActivity::class.java)
-                startActivity(intent)
-            }
-            R.id.about -> {
-                val intent = Intent(this, AboutActivity::class.java)
-                startActivity(intent)
-            }
-        }
+        val itemMenu = MenuDelegate(item)
+        itemMenu.setMenu(this,item)
         return super.onOptionsItemSelected(item)
     }
 

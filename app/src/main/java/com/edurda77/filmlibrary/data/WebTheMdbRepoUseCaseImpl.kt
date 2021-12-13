@@ -1,14 +1,15 @@
 package com.edurda77.filmlibrary.data
 
 import com.edurda77.filmlibrary.BuildConfig
-import com.edurda77.filmlibrary.domain.TheMDBRepoUseCace
+import com.edurda77.filmlibrary.domain.TheMDBRepoUseCaseAsync
+import com.edurda77.filmlibrary.domain.TheMDBRepoUseCaseSync
 import com.google.gson.Gson
 import java.io.BufferedReader
 import java.io.InputStreamReader
 import java.net.URL
 import javax.net.ssl.HttpsURLConnection
 
-class WebTheMdbRepoUsecaseImpl : TheMDBRepoUseCace {
+class WebTheMdbRepoUseCaseImpl : TheMDBRepoUseCaseSync, TheMDBRepoUseCaseAsync {
     override fun getReposForSearchMovieSync(userName: String, adultKey:Boolean): List<ResultSearchMovie> {
         val gson by lazy { Gson() }
 
@@ -87,12 +88,12 @@ class WebTheMdbRepoUsecaseImpl : TheMDBRepoUseCace {
             val movieBudget = resJson.budget
             val movieRevenue = resJson.revenue
             val movieOverview = resJson.overview
-            val movieGanre = "released last"
+            val movieGenre = "released last"
             val moviePathPicture = resJson.posterPath
             return Movie(
                 movieId,
                 movieTitle,
-                movieGanre,
+                movieGenre,
                 movieRuntime,
                 moviePopularity,
                 movieReleaseDate,
@@ -144,6 +145,14 @@ class WebTheMdbRepoUsecaseImpl : TheMDBRepoUseCace {
         TODO("Not yet implemented")
     }
 
+    override fun getReposForSearchPeopleSync(name: String): List<ResultSearchedPeople>? {
+        TODO("Not yet implemented")
+    }
+
+    override fun getReposForIdPeopleSync(searchedPeople: ResultSearchedPeople): People? {
+        TODO("Not yet implemented")
+    }
+
     override fun getReposForGenresAsync(
         onSuccess: (List<Genres>) -> Unit,
         OnError: (Throwable) -> Unit
@@ -179,7 +188,21 @@ class WebTheMdbRepoUsecaseImpl : TheMDBRepoUseCace {
         TODO("Not yet implemented")
     }
 
+    override fun getReposForSearchPeopleAsync(
+        name: String,
+        onSuccess: (List<ResultSearchedPeople>) -> Unit,
+        OnError: (Throwable) -> Unit
+    ) {
+        TODO("Not yet implemented")
+    }
 
+    override fun getReposForIdPeopleAsync(
+        searchedPeople: ResultSearchedPeople,
+        onSuccess: (People) -> Unit,
+        OnError: (Throwable) -> Unit
+    ) {
+        TODO("Not yet implemented")
+    }
 
 
 }

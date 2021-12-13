@@ -8,7 +8,8 @@ import androidx.recyclerview.widget.RecyclerView.RecycledViewPool
 import com.edurda77.filmlibrary.data.FilmGenre
 
 
-class OutAdapter (private val itemList: List<FilmGenre>, val onClickListener: MovieAdapter.OnStateClickListener) :
+class OutAdapter (private val itemList: List<FilmGenre>,
+                  private val onClickListener: MovieAdapter.OnStateClickListener) :
     RecyclerView.Adapter<OutHolder>() {
     private val viewPool = RecycledViewPool()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): OutHolder {
@@ -19,7 +20,7 @@ class OutAdapter (private val itemList: List<FilmGenre>, val onClickListener: Mo
     override fun onBindViewHolder(ganreViewHolder: OutHolder, position: Int) {
         val itemHolder = itemList[position]
 
-        ganreViewHolder.bindGanre(itemHolder)
+        ganreViewHolder.bindGenre(itemHolder)
 
         ganreViewHolder.movieItem.setRecycledViewPool(viewPool)
     }

@@ -6,8 +6,7 @@
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/margin_half"
     android:background="@color/purple_500"
-    android:orientation="vertical"
-    tools:context=".ui.NoteActivity">
+    android:orientation="vertical">
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -18,6 +17,7 @@
             app:title="@string/app_name"
             app:titleTextColor="@color/green" />
     </com.google.android.material.appbar.AppBarLayout>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -28,35 +28,55 @@
             android:background="@color/purple_500"
             android:orientation="vertical">
             <TextView
-                android:id="@+id/title_movie_note"
+                android:id="@+id/name_people"
                 style="@style/title_movie_view"
-                android:text="@string/ttile_movie" />
+                android:text="@string/name_people" />
 
-
-            <EditText
-                android:id="@+id/note_change_movie"
+            <TextView
+                android:id="@+id/id_people"
                 style="@style/content_movie_view"
-                android:text="@string/add_nots" />
+                android:text="@string/id_movie" />
 
-            <Button
-                android:id="@+id/save_change_nots"
+            <ImageView
+                android:id="@+id/picture_people"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                tools:ignore="ContentDescription" />
+
+            <TextView
+                android:id="@+id/birthday_people"
+                style="@style/content_movie_view"
+                android:text="@string/birthday_people" />
+
+
+            <TextView
+                android:id="@+id/place_birth_people"
+                style="@style/content_movie_view"
+                android:layout_height="@dimen/place_birth"
+                android:text="@string/place_birth_people" />
+
+
+
+            <TextView
+                android:id="@+id/biography_people"
+                style="@style/content_movie_view"
+                android:text="@string/biography_people" />
+
+
+
+           <!-- <Button
+                android:id="@+id/request_geolocation"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="@string/save_nots">
+                android:text="@string/geolocation">
 
-            </Button>
-            <Button
-                android:id="@+id/delete_note"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="@string/delete_note">
-
-            </Button>
+            </Button>-->
         </LinearLayout>
 
 
     </ScrollView>
+
 
 </LinearLayout>

@@ -13,7 +13,7 @@ import com.edurda77.filmlibrary.data.FilmGenre
 import com.edurda77.filmlibrary.data.Movie
 import com.edurda77.filmlibrary.data.ResultSearchMovie
 import com.edurda77.filmlibrary.databinding.ActivityMainBinding
-import com.edurda77.filmlibrary.domain.TheMDBRepoUseCace
+import com.edurda77.filmlibrary.domain.TheMDBRepoUseCaseSync
 
 
 
@@ -21,14 +21,14 @@ import com.edurda77.filmlibrary.domain.TheMDBRepoUseCace
 
 class MainActivity : AppCompatActivity() {
     private var toolbar: Toolbar? = null
-    private val goNowPlayingMovie: TheMDBRepoUseCace by lazy { app.theMDBRepoUseCace }
+    private val goNowPlayingMovie: TheMDBRepoUseCaseSync by lazy { app.theMDBRepoUseCaseSync }
     private val resultNowPlayingMovie = emptyList<ResultSearchMovie>().toMutableList()
     private val resultPopularMovie = emptyList<ResultSearchMovie>().toMutableList()
     private val resultTopRatedMovie = emptyList<ResultSearchMovie>().toMutableList()
     private val resultUpcomingMovie = emptyList<ResultSearchMovie>().toMutableList()
 
 
-    private var ganre = emptyList<FilmGenre>().toMutableList()
+    private var genre = emptyList<FilmGenre>().toMutableList()
     private lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -46,34 +46,34 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
 
     }
-    fun getGroupMovies () {
+    private fun getGroupMovies () {
         Thread {
             goNowPlayingMovie.getReposForNowPlayingMovieSync()?.forEach {
                 resultNowPlayingMovie.add(it)
             }
-            ganre.add(FilmGenre("Сейчас в кинотеатрах", resultNowPlayingMovie))
+            genre.add(FilmGenre("Сейчас в кинотеатрах", resultNowPlayingMovie))
             goNowPlayingMovie.getReposForPopularMovieSync()?.forEach {
                 resultPopularMovie.add(it)
             }
-            ganre.add(FilmGenre("Популярные фильмы", resultPopularMovie))
+            genre.add(FilmGenre("Популярные фильмы", resultPopularMovie))
             goNowPlayingMovie.getReposForTopRatedMovieSync()?.forEach {
                 resultTopRatedMovie.add(it)
             }
-            ganre.add(FilmGenre("Высокий рейтинг", resultTopRatedMovie))
+            genre.add(FilmGenre("Высокий рейтинг", resultTopRatedMovie))
             goNowPlayingMovie.getReposForUpcomingMovieSync()?.forEach {
                 resultUpcomingMovie.add(it)
             }
-            ganre.add(FilmGenre("Скоро в прокате", resultUpcomingMovie))
+            genre.add(FilmGenre("Скоро в прокате", resultUpcomingMovie))
             runOnUiThread {
                 setOotRecycledView()
 
             }
         }.start()
     }
-    fun setOotRecycledView() {
+    private fun setOotRecycledView() {
 
         val recyclerView: RecyclerView = binding.outRecycledView
-        val goIDMovie: TheMDBRepoUseCace by lazy { app.theMDBRepoUseCace }
+        val goIDMovie: TheMDBRepoUseCaseSync by lazy { app.theMDBRepoUseCaseSync }
         recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
 
         val stateClickListener: MovieAdapter.OnStateClickListener =
@@ -93,7 +93,7 @@ class MainActivity : AppCompatActivity() {
             }
 
 
-        recyclerView.adapter = OutAdapter(ganre, stateClickListener)
+        recyclerView.adapter = OutAdapter(genre, stateClickListener)
 
 
     }
@@ -105,32 +105,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.start -> {
-                val intent = Intent(this, MainActivity::class.java)
-                startActivity(intent)
-            }
-            R.id.action_search -> {
-                val intent = Intent(this, SearchActivity::class.java)
-                startActivity(intent)
-            }
-            R.id.people_search -> {
-                val intent = Intent(this, SearchPeopleActivity::class.java)
-                startActivity(intent)
-            }
-            R.id.nots -> {
-                val intent = Intent(this, NotesActivity::class.java)
-                startActivity(intent)
-            }
-            R.id.custom -> {
-                val intent = Intent(this, CustomActivity::class.java)
-                startActivity(intent)
-            }
-            R.id.about -> {
-                val intent = Intent(this, AboutActivity::class.java)
-                startActivity(intent)
-            }
-        }
+        val itemMenu = MenuDelegate(item)
+        itemMenu.setMenu(this,item)
+
         return super.onOptionsItemSelected(item)
     }
 

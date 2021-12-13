@@ -12,7 +12,7 @@ import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
 import com.edurda77.filmlibrary.domain.NoteDao
 
-private const val DEFAUL_KEY = "DEFAUL_KEY"
+private const val DEFAULT_KEY = "DEFAULT_KEY"
 
 
 class CustomActivity : AppCompatActivity() {
@@ -20,7 +20,7 @@ class CustomActivity : AppCompatActivity() {
 
 
     private val noteDao: NoteDao by lazy { app.noteDao }
-    private val prefernces: SharedPreferences by lazy {app.sharedPrefernces}
+    private val preferences: SharedPreferences by lazy {app.sharedPreferences}
     private lateinit var binding: ActivityCustomBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         binding = ActivityCustomBinding.inflate(layoutInflater)
@@ -32,7 +32,7 @@ class CustomActivity : AppCompatActivity() {
 
         binding.clearNots.setOnClickListener {
             Thread {
-                noteDao.clearNots()
+                noteDao.clearNotes()
             }.start()
             Toast.makeText(this,"Теперь заметок нет", Toast.LENGTH_SHORT).show()
         }
@@ -41,8 +41,8 @@ class CustomActivity : AppCompatActivity() {
 
 
     private fun setPreferences() {
-        prefernces.edit().let {
-            it.putBoolean(DEFAUL_KEY,binding.checkAdult.isChecked)
+        preferences.edit().let {
+            it.putBoolean(DEFAULT_KEY,binding.checkAdult.isChecked)
             it.commit()
         }
     }
@@ -57,37 +57,13 @@ class CustomActivity : AppCompatActivity() {
         return super.onCreateOptionsMenu(menu)
     }
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.start -> {
-                val intent = Intent(this, MainActivity::class.java)
-                startActivity(intent)
-            }
-            R.id.action_search -> {
-                val intent = Intent(this, SearchActivity::class.java)
-                startActivity(intent)
-            }
-            R.id.people_search -> {
-                val intent = Intent(this, SearchPeopleActivity::class.java)
-                startActivity(intent)
-            }
-            R.id.nots -> {
-                val intent = Intent(this, NotesActivity::class.java)
-                startActivity(intent)
-            }
-            R.id.custom -> {
-                val intent = Intent(this, CustomActivity::class.java)
-                startActivity(intent)
-            }
-            R.id.about -> {
-                val intent = Intent(this, AboutActivity::class.java)
-                startActivity(intent)
-            }
-        }
+        val itemMenu = MenuDelegate(item)
+        itemMenu.setMenu(this,item)
         return super.onOptionsItemSelected(item)
     }
     override fun onStart() {
         super.onStart()
-        binding.checkAdult.isChecked=prefernces.getBoolean(DEFAUL_KEY, false)
+        binding.checkAdult.isChecked=preferences.getBoolean(DEFAULT_KEY, false)
     }
     override fun onStop() {
         setPreferences()
