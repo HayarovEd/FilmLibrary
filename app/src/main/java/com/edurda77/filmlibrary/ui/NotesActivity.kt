@@ -87,6 +87,10 @@ class NotesActivity : AppCompatActivity() {
                 val intent = Intent(this, AboutActivity::class.java)
                 startActivity(intent)
             }
+            R.id.people_search -> {
+                val intent = Intent(this, SearchPeopleActivity::class.java)
+                startActivity(intent)
+            }
         }
         return super.onOptionsItemSelected(item)
     }

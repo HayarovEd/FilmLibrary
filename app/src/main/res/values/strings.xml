@@ -31,4 +31,6 @@
     <string name="delete_note">Удалить заметку</string>
     <string name="delete_all_nots">Удалить все заметки</string>
     <string name="base_activity">Главная страница</string>
+    <string name="search_people">Введите фамилию или имя актера (не реализовано)</string>
+    <string name="search_peoples">Поиск актеров</string>
 </resources>

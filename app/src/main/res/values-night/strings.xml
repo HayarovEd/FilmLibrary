@@ -21,4 +21,6 @@
     <string name="about_project">Фильмотека Хаярова Э.В., edurda77@gmail.com</string>
     <string name="add_nots">Добавить заметку</string>
     <string name="nots_movie">Заметки о фильмах</string>
+    <string name="search_people">Введите фамилию или имя актера (не реализовано)</string>
+    <string name="search_peoples">Поиск актеров</string>
 </resources>

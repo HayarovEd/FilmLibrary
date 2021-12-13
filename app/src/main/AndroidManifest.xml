@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     package="com.edurda77.filmlibrary">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
         android:name=".ui.App"
@@ -15,10 +16,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FilmLibrary">
         <activity
-            android:name=".ui.NoteActivity"
+            android:name=".ui.SearchPeopleActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.NotesActivity"
+            android:name=".ui.NoteActivity"
             android:exported="false" />
 
         <activity

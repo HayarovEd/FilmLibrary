@@ -16,7 +16,7 @@ import com.edurda77.filmlibrary.data.Movie
 import com.edurda77.filmlibrary.data.NoteMovie
 import com.edurda77.filmlibrary.databinding.ActivityFilmBinding
 import com.edurda77.filmlibrary.domain.NoteDao
-import com.edurda77.filmlibrary.domain.NoteRepo
+
 
 class FilmActivity : AppCompatActivity() {
     private var toolbar: Toolbar? = null
@@ -32,14 +32,14 @@ class FilmActivity : AppCompatActivity() {
         setToolbar()
 
         val titlEditText: TextView = binding.titleMovie
-        val idEditText: TextView? = binding.idMovie
-        val ganreEditText: TextView? = binding.ganreMovie
-        val durationEditText: TextView? = binding.durationMovie
-        val yearEditText: TextView? = binding.yearMovie
-        val budgetEditText: TextView? = binding.budgetMovie
-        val revenueEditText: TextView? = binding.revenueMovie
-        val summaryEditText: TextView? = binding.summaryMovie
-        val popularityEditText: TextView? = binding.populatityMovie
+        val idEditText: TextView = binding.idMovie
+        val ganreEditText: TextView = binding.ganreMovie
+        val durationEditText: TextView = binding.durationMovie
+        val yearEditText: TextView = binding.yearMovie
+        val budgetEditText: TextView = binding.budgetMovie
+        val revenueEditText: TextView = binding.revenueMovie
+        val summaryEditText: TextView = binding.summaryMovie
+        val popularityEditText: TextView = binding.populatityMovie
         val picture: ImageView = binding.pictureMovie
 
         val arguments = intent.extras
@@ -49,16 +49,16 @@ class FilmActivity : AppCompatActivity() {
         if (arguments != null) {
             movie = arguments.getSerializable(Movie::class.java.simpleName) as Movie
             titlEditText.text = movie.title
-            idEditText?.text = idEditText?.text.toString() + movie.id.toString()
+            idEditText.text = idEditText.text.toString() + movie.id.toString()
 
-            ganreEditText?.text = ganreEditText?.text.toString() + movie.movieGanre
-            yearEditText?.text = yearEditText?.text.toString() + movie.releaseDate
-            durationEditText?.text = durationEditText?.text.toString() + movie.runtime.toString()
-            budgetEditText?.text = budgetEditText?.text.toString() + movie.budget.toString()
-            revenueEditText?.text = revenueEditText?.text.toString() + movie.revenue.toString()
-            summaryEditText?.text = summaryEditText?.text.toString() + movie.overview
-            popularityEditText?.text =
-                popularityEditText?.text.toString() + movie.popularity.toString()
+            ganreEditText.text = ganreEditText.text.toString() + movie.movieGanre
+            yearEditText.text = yearEditText.text.toString() + movie.releaseDate
+            durationEditText.text = durationEditText.text.toString() + movie.runtime.toString()
+            budgetEditText.text = budgetEditText.text.toString() + movie.budget.toString()
+            revenueEditText.text = revenueEditText.text.toString() + movie.revenue.toString()
+            summaryEditText.text = summaryEditText.text.toString() + movie.overview
+            popularityEditText.text =
+                popularityEditText.text.toString() + movie.popularity.toString()
 
 
             Glide.with(this).load(beginURL + movie.posterPath)
@@ -93,6 +93,10 @@ class FilmActivity : AppCompatActivity() {
         when (item.itemId) {
             R.id.start -> {
                 val intent = Intent(this, MainActivity::class.java)
+                startActivity(intent)
+            }
+            R.id.people_search -> {
+                val intent = Intent(this, SearchPeopleActivity::class.java)
                 startActivity(intent)
             }
             R.id.action_search -> {
