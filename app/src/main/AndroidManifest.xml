@@ -21,9 +21,7 @@
         <activity
             android:name=".ui.NoteActivity"
             android:exported="false" />
-        <activity
-            android:name=".ui.NotesActivity"
-            android:exported="false" />
+
         <activity
             android:name=".ui.FilmActivity"
             android:exported="false" />
